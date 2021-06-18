@@ -1,32 +1,40 @@
 import styled from "styled-components";
 
 export const Transaction = styled.div`
+    grid-template-columns: 1fr;
     width: 100vw;
-    height: 200vh;
-    padding: 0 3rem;
+    padding: 0 3em 3em;
 
     & .transaction-header {
         grid-template-columns: repeat(3, 1fr);
         width: 50%;
-        // background: red;
+        height: 55px;
         place-items: start;
         margin: 0;
-        transition: var(--mainTransition);
 
         & .tabs {
             width: 100%;
+            height: 100%;
             place-self: start;
-            // background: green;
             border: 1px solid var(--darkGrey);
             border-top: none;
-            padding: 1rem;
+            border-right: transparent;
             text-align: center;
+            align-items: center;
             cursor: pointer;
-            transition: all 1.5s ease-in-out;
+            border-collapse: collapse;
+            transition: all 1.25s ease-in-out;
+            letter-spacing: var(--mainSpacing);
+            word-spacing: var(--wordSpacing);
         }
 
-        & .active {
-            background: green;
-        }
+        & .active { background: green; }
+        & .refferal { border-right: 1px solid var(--darkGrey); }
+    }
+
+    & .transaction-body {
+        background: red;
+        width: 100%;
+        height: 500px;
     }
 `;

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
+import { web3Context } from "../Context";
 import './navbar.css';
 
 import { NavbarContainer } from './styles'
@@ -8,6 +9,9 @@ import user from '../../assets/login/userLogin.jpeg';
 
 export function Navbar({ theme }) {
     const [navOpen, setNavOpen] = useState(false);
+    const context = useContext(web3Context);
+
+    const { loading, connectDapp } = context;
 
     const _active = {
         'padding': '.75rem',
@@ -40,9 +44,9 @@ export function Navbar({ theme }) {
             <div className={ navOpen ? 'grid nav-list nav-list-mobile' : 'grid nav-list' }>
                 <ul>{Navlist}</ul>
             </div>
-            <div className="grid nav-icons">
+            <div className="grid nav-icons" onClick={loading ? connectDapp : undefined}>
                 <span className='grid'>
-                    <img src={user} alt="user" className="online"  />
+                    <img src={user} alt="user" className={!loading && "online"}  />
                 </span>
             </div>
             <div className="toggle">

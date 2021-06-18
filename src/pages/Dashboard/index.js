@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { IoMdSwap } from "react-icons/io";
+import { NormalTransaction } from "../../components/NormalTransaction";
 import { DashboardContainer } from "./styles.js";
 import { Transaction } from "./transaction.styles.js";
-import { IoMdSwap } from "react-icons/io";
+
 
 const Dashboard =  () => {
     const [activeTab, setActiveTab] = useState("Transaction History");
+
     return (
         <DashboardContainer className="grid"> 
             <div className="grid dashboard-wrapper">
@@ -110,9 +113,15 @@ const Dashboard =  () => {
                     <div className={activeTab === "Cashback History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Cashback History")}>
                         <h2>Cashback History</h2>
                     </div>
+
+                    <div className={activeTab === "Refferal History" ? "grid tabs refferal active" : "grid tabs refferal"} onClick={() => setActiveTab("Refferal History")}>
+                        <h2>Refferal History</h2>
+                    </div>
                 </section>
 
-                
+                <section className="grid transaction-body">
+                    <NormalTransaction />
+                </section>
             </Transaction>
         </DashboardContainer>
     );
