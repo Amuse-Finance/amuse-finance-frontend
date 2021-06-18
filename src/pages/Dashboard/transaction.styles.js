@@ -11,14 +11,16 @@ export const Transaction = styled.div`
         height: 55px;
         place-items: start;
         margin: 0;
+        background: var(--white);
+
 
         & .tabs {
             width: 100%;
             height: 100%;
             place-self: start;
-            border: 1px solid var(--darkGrey);
-            border-top: none;
-            border-right: transparent;
+            border: none;
+            border-right: 1px solid var(--darkGrey);
+            border-bottom: 1px solid var(--darkGrey);
             text-align: center;
             align-items: center;
             cursor: pointer;
@@ -33,8 +35,8 @@ export const Transaction = styled.div`
     }
 
     & .transaction-body {
-        background: red;
         width: 100%;
-        height: 500px;
+        // border: 1.5px solid var(--darkGrey);
+        background: var(--white);
     }
 `;

@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer";
 
 import { handleEffect } from "./components/Helper/handleEffect";
 import { ScrollTop } from "./components/ScrollTop";
+require('dotenv/config');
 
 function App() {
   return (

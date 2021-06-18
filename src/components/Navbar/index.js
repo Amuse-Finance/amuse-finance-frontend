@@ -46,7 +46,7 @@ export function Navbar({ theme }) {
             </div>
             <div className="grid nav-icons" onClick={loading ? connectDapp : undefined}>
                 <span className='grid'>
-                    <img src={user} alt="user" className={!loading && "online"}  />
+                    <img src={user} alt="user" className={!loading ? "online" : ""}  />
                 </span>
             </div>
             <div className="toggle">
