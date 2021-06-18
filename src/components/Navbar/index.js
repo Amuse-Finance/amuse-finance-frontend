@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { NavLink, Link } from "react-router-dom";
-import { FaAlignRight } from "react-icons/fa";
+import { AiOutlineMenu } from "react-icons/ai";
 import './navbar.css';
 
-import { NavbarContainer } from './navbar.styled'
+import { NavbarContainer } from './styles'
 import user from '../../assets/login/userLogin.jpeg';
 
 export function Navbar({ theme }) {
@@ -13,7 +13,7 @@ export function Navbar({ theme }) {
         'padding': '.75rem',
     }
 
-    let Navlist = ['', 'Dashboard', 'Farm', 'Whitepaper', 'FAQ'];
+    let Navlist = ['', 'Dashboard', 'Vault', 'Whitepaper', 'FAQ'];
     Navlist = Navlist.map((item, i) => {
         return (
             <NavLink 
@@ -29,24 +29,24 @@ export function Navbar({ theme }) {
     });
 
     return (
-        <NavbarContainer className='center navbar' theme={theme}>
-            <div className="center nav-brand">
+        <NavbarContainer className='grid navbar' theme={theme}>
+            <div className="grid nav-brand">
                 <Link to='/'>
                     <h2 className='mainSpacing'>
-                        Crankcoin
+                        Amused.Finance
                     </h2>
                 </Link>
             </div>
-            <div className={ navOpen ? 'center nav-list nav-list-mobile' : 'center nav-list' }>
+            <div className={ navOpen ? 'grid nav-list nav-list-mobile' : 'grid nav-list' }>
                 <ul>{Navlist}</ul>
             </div>
-            <div className="center nav-icons">
-                <span className='center'>
+            <div className="grid nav-icons">
+                <span className='grid'>
                     <img src={user} alt="user" className="online"  />
                 </span>
             </div>
             <div className="toggle">
-                <FaAlignRight className='icon' onClick={() => setNavOpen(!navOpen)} />
+                <AiOutlineMenu className='icon' onClick={() => setNavOpen(!navOpen)} />
             </div>
         </NavbarContainer>
     )

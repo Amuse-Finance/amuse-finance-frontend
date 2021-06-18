@@ -8,29 +8,31 @@ export const FooterContainer = styled.div`
     color: var(--white);
     padding: 3rem;
     border-top: 1px solid var(--white);
-
+    
     & .center {
         line-height: 2.5;
         height: 100px;
-        width: 100%;
-    }
-    & .center h3 { text-transform: capitalize; }
-    /* & .center small { color: var(--lightGrey); } */
 
-    & .form-control { margin: 1rem 0 0; }
-    & .form-control input {
-        color: var(--darkGrey);
-        height: 50px;
-        padding: 1rem;
-        letter-spacing: var(--letterSpacing);
-        font-family: cursive;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: .25rem;
-        border-bottom-left-radius: .25rem;
-        border-bottom-right-radius: 1rem;
+        & h3 { text-transform: capitalize; }
     }
-    & .form-control input { width: 80%; }
-    & .form-control input::placeholder { text-transform: capitalize; }
+
+    & .form-control { 
+        margin: 1rem 0 0;
+
+        & input {
+            color: var(--darkGrey);
+            width: 100%;
+            height: 50px;
+            padding: 1rem;
+            letter-spacing: var(--letterSpacing);
+            font-family: cursive;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+            border-bottom-right-radius: 1rem;
+        }
+    }
+
 
 
     & .social-icons { 

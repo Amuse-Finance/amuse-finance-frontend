@@ -1,6 +1,6 @@
 import React from "react";
-import CustomButton from "../components/CustomButton";
-import logo1 from "../images/logo1.jpg";
+import CustomButton from "../../components/CustomButton";
+import logo1 from "../../images/logo1.jpg";
 
 function Home() {
   return (

@@ -11,7 +11,7 @@
   --yellow: #ffc107;
   --orange: #fe8c39;
   --darkGrey: #333;
-  --lightGrey: #5c5c5cb6;
+  --lightGrey: #e2dddd;
   --mainGreen: #29ca8e;
   --mainSpacing: .1rem;
   --wordSpacing: .25rem;
@@ -38,14 +38,13 @@ button { cursor: pointer; }
   font-family: 'Recursive', sans-serif;
 }
 
-.center {
+.grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   margin: 0 auto;
 }
 
-.white { 
-  background: var(--white) !important;
-  color: var(--darkGrey) !important;
+body {
+  background: var(--lightGrey);
 }

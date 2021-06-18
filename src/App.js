@@ -1,5 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard"
+import { Switch, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar";
 import { Navbar } from "./components/Navbar/";
 import { Footer } from "./components/Footer";
@@ -11,7 +13,10 @@ function App() {
   return (
     <div className="w-full App">
       <Navbar />
-      <Home />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/dashboard" component={Dashboard} />
+      </Switch>
       <ScrollTop />
       <Footer />
     </div>
