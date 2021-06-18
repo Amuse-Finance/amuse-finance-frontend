@@ -13,7 +13,7 @@
   --yellow: #ffc107;
   --orange: #fe8c39;
   --darkGrey: #333;
-  --lightGrey: #5c5c5cb6;
+  --lightGrey: #e2dddd;
   --mainGreen: #29ca8e;
   --mainSpacing: 0.1rem;
   --wordSpacing: 0.25rem;
@@ -44,7 +44,7 @@ button {
   font-family: "Recursive", sans-serif;
 }
 
-.center {
+.grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
@@ -57,17 +57,8 @@ button {
 }
 
 .skeyArt {
-  /* border-bottom-right-radius: 250px;
-  border-bottom-left-radius: 250px; */
   clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
-  /* clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 30%,
-    100% 100%,
-    78% 81%,
-    21% 82%,
-    0 100%,
-    0% 30%
-  ); */
+}
+body {
+  background: var(--lightGrey);
 }

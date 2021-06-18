@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaLinkedin, FaGithub, FaTelegram, FaTwitter } from "react-icons/fa";
-import { FooterContainer } from "./footer.styled";
+import { FooterContainer } from "./styles";
 
 export function Footer() {
     const [email, setEmail] = useState('');
@@ -17,9 +17,9 @@ export function Footer() {
     })
     
     return (
-        <FooterContainer className='center footer'>
-            <section className="center">
-                <h3>about me</h3>
+        <FooterContainer className='grid footer'>
+            <section className="grid">
+                <h3>About me</h3>
                 <small>
                     We have tested a number of registry fix and clean utilities and present our top 3 list on our site for your convenience.
                 </small>
@@ -28,8 +28,8 @@ export function Footer() {
                     Designed & built with 💖 by DragonLord
                 </small>
             </section>
-            <section className="center">
-                <h3>newsletter</h3>
+            <section className="grid">
+                <h3>Newsletter</h3>
                 <small>
                     Stay up to date with our latest trends
                 </small>
@@ -41,8 +41,8 @@ export function Footer() {
                     />
                 </form>
             </section>
-            <section className="center">
-                <h3>follow me</h3>
+            <section className="grid">
+                <h3>Follow me</h3>
                 <small>Let us be social</small>
                 <div className="social-icons">{socialIcon}</div>
             </section>

@@ -1,9 +1,14 @@
 import React from "react";
+<<<<<<< HEAD:src/pages/Home.js
 import Typewriter from "typewriter-effect";
 import CustomButton from "../components/CustomButton";
 import logo1 from "../images/logo1.jpg";
 import Particles from "react-particles-js";
 import particlesoptions from "./particleOptions";
+=======
+import CustomButton from "../../components/CustomButton";
+import logo1 from "../../images/logo1.jpg";
+>>>>>>> a97cf220df75568cfd968f25d31cdb3f818418ea:src/pages/Home/index.js
 
 function Home() {
   return (

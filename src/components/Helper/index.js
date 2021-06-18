@@ -1,6 +1,7 @@
 require('dotenv/config');
 
-const etherscanApiKey = process.env.etherscanApiKey;
+const etherscanApiKey = process.env.REACT_APP_etherscanAPi;
+const startBlock = 12634523;
 
 const toFixed = _amount => Number(_amount).toFixed(2);
 
@@ -16,75 +17,35 @@ const walletShortner = (_data, _start, _end) => {
     return result.join('');
 }
 
-const balanceOf = async (_token, _account) => {
-    return await _token.methods.balanceOf(_account).call();
+
+const getNormalTransactionLists = async (web3, user) => {
+    try {
+        let tempData = [];
+        let _currentBlock = 0;
+        const _endBlock = await web3.eth.getBlockNumber();
+        for(_currentBlock = startBlock; _currentBlock <= _endBlock; _currentBlock += 10000) {
+            const _step = _currentBlock + 10000;
+            const result = await (await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${user}&startblock=${_currentBlock}&endblock=${_step}&sort=desc&apikey=${etherscanApiKey}`)).json();
+            tempData = [...tempData, ...result.result];
+        }
+        return formatTransactionLists(web3, tempData);
+    } catch (error) { return error.message; }
 }
 
-const getCurrentPrice= async (token) => {
+const formatTransactionLists = async (web3, _data) => {
     try {
-        const result = await (await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=USD`)).json();
-        return result[token].usd;
-    } catch (error) {
-        return error;
-    }
-}
-
-const gasOracle = async () => {
-    try {
-        const _data = await (await fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${etherscanApiKey}`)).json();
-        return _data.result;
-    } catch (error) {
-        return error;
-    }
-}
-
-const getNormalTransactions = async (web3, _user) => {
-    try {
-        const _etherPrice = await getCurrentPrice('ethereum');
-        // const _startBlock = "12005372";
-        const _startBlock = "0";
-
-        const _latestBlock = await web3.eth.getBlockNumber();
-        const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${_user}&startblock=${_startBlock}&endblock=${_latestBlock}&sort=desc&apikey=${etherscanApiKey}`
-        let result = await (await fetch(url)).json();
-        result = result.result;
-
-        let nonce = result.length;
-        result = result.map(item => {
-            const {
+        let result = await _data.map(item => {
+            const { hash, from, to, gasPrice, gasUsed, nonce, value, blockNumber } = item;
+            return {
                 hash,
-                blockNumber,
                 from,
                 to,
                 gasPrice,
                 gasUsed,
-                timeStamp,
-                value
-            } = item;
-            
-            let ethGasUsed = fromWei(web3, (gasPrice * gasUsed).toString(), 'ether');
-            ethGasUsed = toFixed(ethGasUsed * _etherPrice);
-            const _cashbackPercent = 5;
-            const cashBackEarned = (ethGasUsed * _cashbackPercent) / 100;
-
-            const _isUser = web3.utils.toChecksumAddress(from) === web3.utils.toChecksumAddress(_user);
-
-            const data = { 
-                hash, 
-                blockNumber, 
-                from, 
-                to, 
-                gasPrice, 
-                gasUsed, 
-                timeStamp, 
-                value, 
-                nonce, 
-                ethGasUsed, 
-                cashBackEarned: _isUser ? cashBackEarned : "0",
-                cashbackPercent: _isUser ? _cashbackPercent : "0"
-            };
-            nonce--;
-            return data;
+                nonce,
+                blockNumber,
+                value: fromWei(web3, value, "ether")
+            }
         })
         return result;
     } catch (error) {
@@ -92,16 +53,13 @@ const getNormalTransactions = async (web3, _user) => {
     }
 }
 
-const shortener = (_data, isHash) => {
-    const tempItems = _data.split('');
-    let result = [];
+const shortener = (_data) => {
+    const _splited = _data.split('');
+    const _length = _splited.length;
 
-    if(isHash) {
-        for(let i = 60;  i < tempItems.length; i++) result = [...result, tempItems[i]];
-        return result.join('');
-    }
-    for(let i = 37;  i < tempItems.length; i++) result = [...result, tempItems[i]];
-    return result.join('');
+    const firstPart = `${_splited[0]}${_splited[1]}${_splited[2]}${_splited[3]}${_splited[4]}${_splited[5]}${_splited[6]}`;
+    const secondPart = `${_splited[_length - 7]}${_splited[_length - 6]}${_splited[_length - 5]}${_splited[_length - 4]}${_splited[_length -3]}${_splited[_length - 2]}${_splited[_length - 1]}`;
+    return `${firstPart}...${secondPart}`;
 }
 
 export { 
@@ -110,9 +68,6 @@ export {
     toWei,
     formatNumber,
     walletShortner,
-    getCurrentPrice,
-    balanceOf,
-    gasOracle,
-    getNormalTransactions,
+    getNormalTransactionLists,
     shortener
 }
