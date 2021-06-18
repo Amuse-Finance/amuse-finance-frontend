@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./pages/Home";
-// import Navbar from "./components/Navbar";
 import { Navbar } from "./components/Navbar/";
 import { Footer } from "./components/Footer";
 
@@ -17,5 +16,5 @@ function App() {
     </div>
   );
 }
-document.addEventListener('scroll', handleEffect);
+document.addEventListener("scroll", handleEffect);
 export default App;
