@@ -37,12 +37,10 @@ export const DashboardContainer = styled.div`
                     grid-template-columns: 2fr 1fr 2fr;
                     place-items: center;
                     grid-gap: 0 .25em;
-                    font-size: 1em;
+                    font-size: .75em;
                     font-weight: 900;
     
-                    & .icon {
-                        font-size: 2em;
-                    }
+                    & .icon { font-size: 2em; }
                 }
             }
         }
