@@ -1,6 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Vault from "./pages/Vault";
 import { Switch, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar/";
 import { Footer } from "./components/Footer";
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path='/vault' component={Vault} />
       </Switch>
       <ScrollTop />
       <Footer />

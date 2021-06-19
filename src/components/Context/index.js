@@ -1,5 +1,6 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
+import { getNormalTransactionLists } from "../Helper";
 
 const web3Context = createContext();
 
@@ -10,7 +11,8 @@ class Web3Provider extends Component {
         this.state = {
             loading: true,
             web3: null,
-            user: ""
+            user: "",
+            transactionHistory: []
         }
     }
 
@@ -19,8 +21,12 @@ class Web3Provider extends Component {
     }
 
     connectDapp = async () => {
-        await this.loadWeb3();
-        await this.loadBlockchainData();
+        try {
+            await this.loadWeb3();
+            await this.loadBlockchainData();
+        } catch (error) {
+            return error;
+        }
     }
 
     loadWeb3 = async () => {
@@ -38,7 +44,6 @@ class Web3Provider extends Component {
             ethereum.autoRefreshOnNetworkChange = false;
 
             this.setState({
-                loading: false,
                 web3,
                 user,
             })
@@ -49,12 +54,28 @@ class Web3Provider extends Component {
     }
 
     // load blockchain data
-    loadBlockchainData = async ({ web3 } = this.state) => {
+    loadBlockchainData = async ({ web3, user } = this.state) => {
         try {
             if(!web3) return;
+            const _transactionHistory = await getNormalTransactionLists(web3, user);
+            console.log(_transactionHistory);
+            this.setState({
+                loading: false,
+                transactionHistory: _transactionHistory
+            })
         } catch (error) {
             console.log(error.message);
             return error.message;
+        }
+    }
+
+    getNormalTransactionLists = async (web3, user) => {
+        try {
+            const _data = await getNormalTransactionLists(web3, user);
+            return _data;
+        } catch (error) {
+            console.log(error);
+            return error;
         }
     }
 

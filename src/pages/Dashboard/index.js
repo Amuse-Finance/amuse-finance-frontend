@@ -7,7 +7,7 @@ import { Transaction } from "./transaction.styles.js";
 
 const Dashboard =  () => {
     const [activeTab, setActiveTab] = useState("Transaction History");
-
+    const isValidWidth = parseFloat(window.innerWidth) >= 1024;
     return (
         <DashboardContainer className="grid"> 
             <div className="grid dashboard-wrapper">
@@ -104,9 +104,9 @@ const Dashboard =  () => {
                 </div>
             </div>
 
-            <Transaction className="grid">
+            <Transaction className={isValidWidth ? "grid" : "hide"}>
                 <section className="grid transaction-header">
-                    <div className={activeTab === "Transaction History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Transaction History")}>
+                    <div id="transaction_history" className={activeTab === "Transaction History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Transaction History")}>
                         <h2>Transaction History</h2>
                     </div>
 
@@ -118,9 +118,13 @@ const Dashboard =  () => {
                         <h2>Refferal History</h2>
                     </div>
                 </section>
-
                 <section className="grid transaction-body">
-                    <NormalTransaction />
+                    {
+                        activeTab === "Transaction History"
+                            ? <NormalTransaction />
+                            : ""
+                    }
+                    
                 </section>
             </Transaction>
         </DashboardContainer>

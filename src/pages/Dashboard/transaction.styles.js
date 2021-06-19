@@ -12,7 +12,7 @@ export const Transaction = styled.div`
         place-items: start;
         margin: 0;
         background: var(--white);
-
+        border-top-left-radius: .75em;
 
         & .tabs {
             width: 100%;
@@ -28,15 +28,22 @@ export const Transaction = styled.div`
             transition: all 1.25s ease-in-out;
             letter-spacing: var(--mainSpacing);
             word-spacing: var(--wordSpacing);
+            outline: none;
         }
 
-        & .active { background: green; }
-        & .refferal { border-right: 1px solid var(--darkGrey); }
+        & #transaction_history { border-top-left-radius: .75em; }
+
+        & .active { 
+            background: green; outline: none;
+            color: var(--white);
+        }
+        & .refferal { border-right: none; }
     }
 
     & .transaction-body {
         width: 100%;
-        // border: 1.5px solid var(--darkGrey);
         background: var(--white);
+        padding: 1rem 0;
+        line-height: 2;
     }
 `;

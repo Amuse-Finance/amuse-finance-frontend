@@ -47,6 +47,8 @@ const formatTransactionLists = async (web3, _data) => {
                 value: fromWei(web3, value, "ether")
             }
         })
+
+        result = result.reverse();
         return result;
     } catch (error) {
         return error.message;

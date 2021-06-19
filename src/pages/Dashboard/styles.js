@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const DashboardContainer = styled.div`
+export const DashboardContainer = styled.div`    
     & .dashboard-wrapper {
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
         grid-gap: 2em;
-        padding: 2.5em 3em;
+        padding: 4em 3em;
 
 
         & .card-container {
@@ -48,13 +48,23 @@ export const DashboardContainer = styled.div`
         }
     }
 
+    & .hide { display: none; }
+
     @media(max-width: 1591px) {
-        & .dashboard-wrapper { grid-template-columns: 1fr; }
+        & .dashboard-wrapper { 
+            grid-template-columns: 1fr;
+            padding: 2.5em 3em;
+        }
 
         @media(max-width: 425px) {
+            & .dashboard-wrapper { 
+                padding: 2.5em 0; 
+                grid-gap: 0 2em;
+            }
             & .card-container {
                 grid-template-columns: 1fr;
-                padding: 2.5em 1em;
+                padding: 2.5em .5em ;
+
             }
         }
     }
