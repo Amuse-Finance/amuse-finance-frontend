@@ -52,8 +52,9 @@
 
 .navbar .nav-icons .online { border: 2px solid green; }
 
-@media (max-width: 991px) {
-    .navbar .nav-brand { padding: 2rem 1.5rem 2rem 1rem; }
+/* max-width: 991px */
+@media (max-width: 1023px) {
+    .navbar .nav-brand { padding: 1rem 1.5rem 1rem 1rem; }
 
     .navbar .toggle { padding: 2rem; }
 

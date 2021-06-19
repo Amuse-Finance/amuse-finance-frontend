@@ -16,8 +16,6 @@ const Dashboard =  () => {
     const context = useContext(web3Context);
     const { loading, amdPrice, balance, stakes, dailyCashback } = context;
 
-
-    console.log(stakes);
     useEffect(() => {
         if(loading) return;
         (async () => {
