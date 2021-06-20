@@ -36,7 +36,7 @@ class Web3Provider extends Component {
             
             // Get Network / chainId
             const _chainId = await ethereum.request({ method: 'eth_chainId' });
-            if(parseInt(_chainId, 16) !== 1) return alert("Connect wallet to a Kovan network");
+            if(parseInt(_chainId, 16) !== 4) return alert("Connect wallet to a Rinkeby network");
 
             const _accounts = await ethereum.request({ method: 'eth_accounts' });
             const web3 = new Web3(ethereum);
