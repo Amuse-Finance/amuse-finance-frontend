@@ -133,7 +133,6 @@ class Web3Provider extends Component {
             const { stakes: _stakes, timestamp } = await amusedVault.stakes(user).call();
             const stakes = this.fromWei(_stakes);
             const stakesRewads = await this.getStakeRewards();
-            console.log(stakesRewads);
             return { user, stakes, timestamp, ...stakesRewads };
         } catch (error) {
             console.log(error);
@@ -154,13 +153,8 @@ class Web3Provider extends Component {
     parseErrorMessage = _error => {
         try {
             const _errArr = _error.message.split(':');
-            const _err = ((_errArr[_errArr.length - 1]).split(`"`))[0];
-            console.log(_err);
-            return _err;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
+            return ((_errArr[_errArr.length - 1]).split(`"`))[0];
+        } catch (error) {  return error; }
     }
 
     getDailyCashback = async ({ user, amusedToken } = this.state) => {
@@ -194,9 +188,15 @@ class Web3Provider extends Component {
                 // gasPrice,
             });
             console.log(_response);
-            return _response;
+            return {
+                status: true,
+                data: _response
+            };
         } catch (error) {
-            alert(this.parseErrorMessage(error));
+            return {
+                status: false,
+                data: this.parseErrorMessage(error)
+            }
         }
     }
 
@@ -211,8 +211,15 @@ class Web3Provider extends Component {
                 // gasPrice,
             });
             console.log(_response);
+            return {
+                status: true,
+                data: _response
+            }
         } catch (error) {
-            alert(`Error: ${this.parseErrorMessage(error)}`);
+            return {
+                status: false,
+                data: this.parseErrorMessage(error)
+            }
         }
     }
 

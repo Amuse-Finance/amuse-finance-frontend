@@ -2,6 +2,8 @@ require('dotenv/config');
 
 const etherscanApiKey = process.env.REACT_APP_etherscanAPi;
 const startBlock = 12634523;
+// const startBlock = 0;
+
 
 const toFixed = _amount => Number(_amount).toFixed(2);
 
