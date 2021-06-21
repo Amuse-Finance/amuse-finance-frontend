@@ -51,6 +51,8 @@ button {
   margin: 0 auto;
 }
 
+.hidden { display: none; }
+
 .white {
   background: var(--white) !important;
   color: var(--darkGrey) !important;

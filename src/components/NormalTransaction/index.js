@@ -1,39 +1,28 @@
-import {useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { web3Context } from "../Context";
-import { fromWei, getNormalTransactionLists, shortener } from "../Helper";
+import { fromWei, shortener } from "../Helper";
 import Loading from "../Loading";
 import { NormalTransactionWrapper } from "./styles";
 require('dotenv/config');
 
 export const NormalTransaction = () => {
-    const [transactionData, setTransactionData] = useState([]);
     const context = useContext(web3Context);
-    const { loading, web3, user } = context;
-    useEffect(() => {
-        if(loading) return false;
-        (async () => {
-                try {
-                    const _result = await getNormalTransactionLists(web3, user);
-                    setTransactionData(() => _result);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-        )();
-
-    }, [loading, web3, user]);
-
+    const { loading, web3, transactionHistory } = context;
     if(loading) return <Loading />;
+
     let _txnItems = [];
 
-    if(transactionData.length > 0) {
-        _txnItems = transactionData.map((item, i) => {
+    if(transactionHistory.length > 0) {
+        let _index = transactionHistory.length;
+        _txnItems = transactionHistory.map(item => {
             const { hash, from, to, value, gasPrice, gasUsed } = item;
             const gasFee = (fromWei(web3, gasPrice, "ether") * gasUsed) * 2400;
+            const _currentIndex = _index;
+            _index--;
             return (
-                <div className="grid card" key={i}>
+                <div className="grid card" key={_currentIndex}>
                     <div className="grid">
-                        <h2>{i}</h2>
+                        <h2>{_currentIndex}</h2>
                     </div>
                     <div className="grid">
                         <h2>
@@ -74,7 +63,7 @@ export const NormalTransaction = () => {
             );
         })
     }
-    console.log(transactionData);
+
     return(
         <NormalTransactionWrapper className="grid">
             <header className="grid header">
