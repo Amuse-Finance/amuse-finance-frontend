@@ -1,5 +1,6 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
+import { IoMdSwap } from "react-icons/io";
 import CustomButton from "../../components/CustomButton";
 import logo1 from "../../images/logo1.jpg";
 import Particles from "react-particles-js";
@@ -8,7 +9,10 @@ import particlesoptions from "../particleOptions";
 function Home() {
   return (
     <div>
-      <section className="h-auto relative bg-blue-700 mb-10 skeyArt">
+      <section
+        style={{ height: "80vh" }}
+        className="relative bg-blue-300 mb-10 skeyArt"
+      >
         <div>
           <Particles
             style={{ position: "absolute", zIndex: -1 }}
@@ -32,10 +36,11 @@ function Home() {
                 From the Dev of UniDexBot.com
               </p>
               <div>
-                <CustomButton styles="bg-gray-700 p-5 mr-3 text-white rounded">
+                <CustomButton styles="shadow border-blue-600 hover:bg-blue-600 border-3 border-solid p-5 mr-3 text-blue-600 hover:text-white rounded">
+                  {/* BE8DA4 */}
                   LAUNCH APP
                 </CustomButton>
-                <CustomButton styles="bg-gray-700 p-5 text-white rounded">
+                <CustomButton styles="shadow border-blue-600 border-3 border-solid bg-blue-600 p-5 text-white rounded">
                   DOWNLOAD WHITE PAPER
                 </CustomButton>
               </div>
@@ -90,6 +95,44 @@ function Home() {
               Elitr et vero elitr diam et voluptua justo at accusam, vero eos
               sit sadipscing dolor lorem amet consetetur diam.
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-2/3 mx-auto bg-gray-500 p-7 rounded block md:flex justify-between items-center">
+        <div>
+          <h5>Convert COIN to USD</h5>
+          <div className="flex ">
+            <div className="mr-3 bg-gray-500 rounded w-1/2 md:w-full">
+              <input
+                className="w-full outline-none p-3 bg-gray-400 rounded"
+                placeholder="Enter amount..."
+              />
+            </div>
+            <select className="outline-none p-3 px-4 bg-black text-white rounded">
+              <option>ETH</option>
+              <option>BTC</option>
+              <option>BNB</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <IoMdSwap className="icon text-5xl" />
+        </div>
+        <div>
+          <p>Convert COIN to USD</p>
+          <div className="flex ">
+            <div className="mr-3 bg-gray-500 rounded w-1/2 md:w-full">
+              <input
+                className="w-full outline-none p-3 bg-gray-400 rounded"
+                placeholder="Enter amount..."
+              />
+            </div>
+            <select className="outline-none p-3 px-4 bg-black text-white rounded">
+              <option>ETH</option>
+              <option>BTC</option>
+              <option>BNB</option>
+            </select>
           </div>
         </div>
       </section>
