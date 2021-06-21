@@ -2,7 +2,7 @@ import { createContext, Component } from "react";
 import Web3 from "web3";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { getNormalTransactionLists } from "../Helper";
+import { getNormalTransactionLists, getRefferalHistory } from "../Helper";
 
 const web3Context = createContext();
 
@@ -28,7 +28,8 @@ class Web3Provider extends Component {
             },
             dailyCashback: 0,
             amdPrice: 0,
-            transactionHistory: []
+            transactionHistory: [],
+            referralHistory: []
         }
     }
 
@@ -61,8 +62,8 @@ class Web3Provider extends Component {
             const web3 = new Web3(ethereum);
             const user = web3.utils.toChecksumAddress(_accounts[0]);            
 
-            const amusedToken = (new web3.eth.Contract(amusedTokenABI, amuseTokenAddress)).methods;
-            const amusedVault = (new web3.eth.Contract(amusedVaultABI, amusedVaultAddress)).methods;
+            const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
+            const amusedVault = new web3.eth.Contract(amusedVaultABI, amusedVaultAddress);
 
             this.setState({
                 loading: false,
@@ -89,13 +90,15 @@ class Web3Provider extends Component {
             const stakes = await this.stakes();
             const dailyCashback = await this.getDailyCashback();
             const _transactionHistory = await getNormalTransactionLists(web3, user);
-            
+            const _refferalHistory = await this.getRefferalHistory();
+
             this.setState({
                 amdPrice,
                 balance,
                 dailyCashback,
                 stakes,
-                transactionHistory: _transactionHistory
+                transactionHistory: _transactionHistory,
+                referralHistory: _refferalHistory
             });
         } catch (error) {
             console.log(error.message);
@@ -104,35 +107,26 @@ class Web3Provider extends Component {
     }
 
     fromWei = (_amount, { web3 } = this.state) => web3.utils.fromWei(_amount.toString(), "ether");
-    toWei = (_amount, { web3 } = this.state) => web3.utils.toWei(_amount.toString(), "ether");
 
-    getNormalTransactionLists = async (web3, user) => {
-        try {
-            const _data = await getNormalTransactionLists(web3, user);
-            return _data;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-    }
+    toWei = (_amount, { web3 } = this.state) => web3.utils.toWei(_amount.toString(), "ether");
 
     balanceOf = async (_account, { loading, user, amusedToken } = this.state) => {
         try {
             if(loading) return;
-            const _balance = await amusedToken.balanceOf(_account ? _account : user).call();
+            const _balance = await amusedToken.methods.balanceOf(_account ? _account : user).call();
             return this.fromWei(_balance);
         } catch (error) {
             return error.message;
         }
     }
 
-
     stakes = async ({ loading, user, amusedVault } = this.state) => {
         try {
             if(loading) return;
-            const { stakes: _stakes, timestamp } = await amusedVault.stakes(user).call();
+            const { stakes: _stakes, timestamp } = await amusedVault.methods.stakes(user).call();
             const stakes = this.fromWei(_stakes);
-            const stakesRewads = await this.getStakeRewards();
+            const stakesRewads = await this.getStakeRewards(_stakes);
+
             return { user, stakes, timestamp, ...stakesRewads };
         } catch (error) {
             console.log(error);
@@ -143,7 +137,7 @@ class Web3Provider extends Component {
     allowance = async ({ loading, user, amuseTokenAddress, amusedToken } = this.state) => {
         try {
             if(loading) return;
-            const _allowance = await amusedToken.allowance(user, amuseTokenAddress).call();
+            const _allowance = await amusedToken.methods.allowance(user, amuseTokenAddress).call();
             return this.fromWei(_allowance);
         } catch (error) {
             return error;
@@ -159,23 +153,23 @@ class Web3Provider extends Component {
 
     getDailyCashback = async ({ user, amusedToken } = this.state) => {
         try {
-            const _dailyCashback = await amusedToken.calculateDailyCashback(user).call();
+            const _dailyCashback = await amusedToken.methods.calculateDailyCashback(user).call();
             return this.fromWei(_dailyCashback);
-        } catch (error) {
-            return error;
-        }
+        } catch (error) { return error; }
     }
 
-    getStakeRewards = async ({ loading, user, amusedVault } = this.state) => {
-        if(loading) return;
+    getStakeRewards = async (_stakes, { loading, user, amusedVault } = this.state) => {
         try {
-            const { _tokenValueEarned, _ethValueEarned } = await amusedVault.calculateRewards(user).call();
-            const tokenValueEarned = this.fromWei(_tokenValueEarned);
-            const ethValueEarned = this.fromWei(_ethValueEarned);
+            let tokenValueEarned = 0;
+            let ethValueEarned = 0;
+
+            if(loading || parseFloat(_stakes) <= 0) return { tokenValueEarned, ethValueEarned };
+
+            const { _tokenValueEarned, _ethValueEarned } = await amusedVault.methods.calculateRewards(user).call();
+            tokenValueEarned = this.fromWei(_tokenValueEarned);
+            ethValueEarned = this.fromWei(_ethValueEarned);
             return { tokenValueEarned, ethValueEarned };
-        } catch (error) {
-            return error;
-        }
+        } catch (error) { return error; }
     }
 
     approve = async (_amount, { loading, web3, user, amusedVaultAddress, amusedToken } = this.state) => {
@@ -183,7 +177,7 @@ class Web3Provider extends Component {
             if(loading || _amount < 0) return;
             // const gasPrice = await web3.eth.getGasPrice();
             const _formattedStakeAmount = this.toWei(_amount);
-            const _response = await amusedToken.approve(amusedVaultAddress, _formattedStakeAmount).send({
+            const _response = await amusedToken.methods.approve(amusedVaultAddress, _formattedStakeAmount).send({
                 from: user,
                 // gasPrice,
             });
@@ -205,8 +199,8 @@ class Web3Provider extends Component {
             if(loading || _amount < 0) return;
             // const gasPrice = await web3.eth.getGasPrice();
             const _formattedStakeAmount = this.toWei(_amount);
-            await amusedVault.stake(_formattedStakeAmount).call({ from: user });
-            const _response = await amusedVault.stake(_formattedStakeAmount).send({
+            await amusedVault.methods.stake(_formattedStakeAmount).call({ from: user });
+            const _response = await amusedVault.methods.stake(_formattedStakeAmount).send({
                 from: user,
                 // gasPrice,
             });
@@ -223,6 +217,24 @@ class Web3Provider extends Component {
         }
     }
 
+    getNormalTransactionLists = async (web3, user) => {
+        try {
+            const _data = await getNormalTransactionLists(web3, user);
+            return _data;
+        } catch (error) { return error; }
+    }
+
+    getRefferalHistory = async ({ loading, web3, user, amusedToken } = this.state) => {
+        try {
+            if(loading) return;
+            const _result = await getRefferalHistory(amusedToken, web3, user);
+            return _result;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    }
+
     render() {
         return (
             <web3Context.Provider value={{
@@ -230,7 +242,7 @@ class Web3Provider extends Component {
                 connectDapp: this.connectDapp,
                 allowance: this.allowance,
                 approve: this.approve,
-                stake: this.stake
+                stake: this.stake,
             }}>
                 {this.props.children}
             </web3Context.Provider>

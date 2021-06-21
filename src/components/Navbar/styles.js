@@ -7,15 +7,11 @@ export const NavbarContainer = styled.div`
     border-bottom: ${props => props.theme !== 'dark' && '1px solid var(--darkGrey)'};
     width: 100vw;
     height: auto;
-    padding: 2rem;
+    // padding: 2rem;
     z-index: 1;
 
     & .nav-list ul a,
     & .toggle {
         color: var(--white);
-    }
-
-    @media (max-width: 991px) {
-        & { padding: 0; }
     }
 `

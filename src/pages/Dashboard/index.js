@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { IoMdSwap } from "react-icons/io";
+import { ReferralHistory } from "../../components/ReferralHistory";
 import { web3Context } from "../../components/Context";
 import { NormalTransaction } from "../../components/NormalTransaction";
 import { DashboardContainer } from "./styles.js";
@@ -20,13 +21,14 @@ const Dashboard =  () => {
         if(loading) return;
         (async () => {
             const { stakes: _stakes, ethValueEarned, tokenValueEarned } = stakes;
+
             setWeeklyCashback(() => parseFloat(dailyCashback) * 7);
             setStakedBalance(() => _stakes);
             setEstimatedEthRewards(() => ethValueEarned);
             setEstimatedAmdRewards(() => tokenValueEarned);
         })()
     }, [loading, stakes, dailyCashback]);
-
+    
     const isValidWidth = parseFloat(window.innerWidth) >= 1024;
     return (
         <DashboardContainer className="grid"> 
@@ -130,21 +132,16 @@ const Dashboard =  () => {
                         <h2>Transaction History</h2>
                     </div>
 
-                    <div className={activeTab === "Cashback History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Cashback History")}>
-                        <h2>Cashback History</h2>
-                    </div>
-
                     <div className={activeTab === "Refferal History" ? "grid tabs refferal active" : "grid tabs refferal"} onClick={() => setActiveTab("Refferal History")}>
                         <h2>Refferal History</h2>
                     </div>
                 </section>
                 <section className="grid transaction-body">
                     {
-                        activeTab === "Transaction History"
-                            ? <NormalTransaction />
-                            : ""
+                        activeTab === "Refferal History"
+                            ? <ReferralHistory />
+                            : <NormalTransaction />
                     }
-                    
                 </section>
             </Transaction>
         </DashboardContainer>

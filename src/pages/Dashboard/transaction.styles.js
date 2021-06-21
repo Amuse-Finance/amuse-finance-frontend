@@ -6,7 +6,7 @@ export const Transaction = styled.div`
     padding: 0 3em 3em;
 
     & .transaction-header {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         width: 50%;
         height: 55px;
         place-items: start;
