@@ -118,7 +118,13 @@ const Dashboard =  () => {
                             <h3>Estimated ETH Rewards</h3>
                         </div>
                         <div className="grid sub-card">
-                            <h1>{parseFloat(estimatedEthRewards).toFixed(3)} ETH</h1>
+                            <h1>
+                                {   
+                                    parseFloat(estimatedEthRewards) < 0.01 && parseFloat(estimatedEthRewards) !== 0
+                                        ? parseFloat(estimatedEthRewards).toFixed(9)
+                                        : parseFloat(estimatedEthRewards).toFixed(2)
+                                } ETH
+                            </h1>
                             <IoMdSwap className="icon" />
                             <h1>{parseFloat(estimatedAmdRewards).toFixed(2)} AMD</h1>
                         </div>

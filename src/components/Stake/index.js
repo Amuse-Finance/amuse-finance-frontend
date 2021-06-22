@@ -32,7 +32,7 @@ export const Stake = () => {
         setStakeInput(() => "");
         if(!status) {
             setErrorMessage(() => data);
-            setTimeout(() => window.location.reload(), 5000);
+            setTimeout(() => window.location.reload(), 10000);
         }
     }
 

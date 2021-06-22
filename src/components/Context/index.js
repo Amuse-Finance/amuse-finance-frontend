@@ -1,8 +1,9 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
+import axios from "axios";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { getNormalTransactionLists, getRefferalHistory } from "../Helper";
+import { fixedDataArray, getRefferalHistory } from "../Helper";
 
 const web3Context = createContext();
 
@@ -48,8 +49,8 @@ class Web3Provider extends Component {
 
     loadWeb3 = async () => {
         try {
-            const amuseTokenAddress = "0xAb3074455A4b2735D0a6cb1dac76B59decd71e93";
-            const amusedVaultAddress = "0x8b97C9B4a4414F6031D6587b0fbeF343AEB122Ca";
+            const amuseTokenAddress = "0x68A753059A2d1D5A64358Ff985AC5Edbf54C7De4";
+            const amusedVaultAddress = "0xe04064D1deC63456B4696Db1995F37ce7C21a92E";
 
             const ethereum = window.ethereum;
             await ethereum.enable();
@@ -89,8 +90,8 @@ class Web3Provider extends Component {
             const balance = await this.balanceOf();
             const stakes = await this.stakes();
             const dailyCashback = await this.getDailyCashback();
-            const _transactionHistory = await getNormalTransactionLists(web3, user);
-            const _refferalHistory = await this.getRefferalHistory();
+            const _transactionHistory = await fixedDataArray((await axios.get(`https://amused-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`)).data);
+            const _refferalHistory = await fixedDataArray(await this.getRefferalHistory());
 
             this.setState({
                 amdPrice,
@@ -146,8 +147,11 @@ class Web3Provider extends Component {
 
     parseErrorMessage = _error => {
         try {
+            const _unparsed = "while converting number to string, invalid number value '', should be a number matching (^-?[0-9.]+).";
             const _errArr = _error.message.split(':');
-            return ((_errArr[_errArr.length - 1]).split(`"`))[0];
+            const _errorMessage = ((_errArr[_errArr.length - 1]).split(`"`))[0];
+            if(_errorMessage === _unparsed) return `Unable to parse argument. Do click the right button ("Approve" / "Lock")?`;
+            return _errorMessage;
         } catch (error) {  return error; }
     }
 
@@ -163,11 +167,12 @@ class Web3Provider extends Component {
             let tokenValueEarned = 0;
             let ethValueEarned = 0;
 
-            if(loading || parseFloat(_stakes) <= 0) return { tokenValueEarned, ethValueEarned };
+            if(loading || parseFloat(_stakes) < 1) return { tokenValueEarned, ethValueEarned };
 
             const { _tokenValueEarned, _ethValueEarned } = await amusedVault.methods.calculateRewards(user).call();
             tokenValueEarned = this.fromWei(_tokenValueEarned);
             ethValueEarned = this.fromWei(_ethValueEarned);
+
             return { tokenValueEarned, ethValueEarned };
         } catch (error) { return error; }
     }
@@ -215,13 +220,6 @@ class Web3Provider extends Component {
                 data: this.parseErrorMessage(error)
             }
         }
-    }
-
-    getNormalTransactionLists = async (web3, user) => {
-        try {
-            const _data = await getNormalTransactionLists(web3, user);
-            return _data;
-        } catch (error) { return error; }
     }
 
     getRefferalHistory = async ({ loading, web3, user, amusedToken } = this.state) => {
