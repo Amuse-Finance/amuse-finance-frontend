@@ -36,8 +36,8 @@ function Home() {
                 From the Dev of UniDexBot.com
               </p>
               <div>
-                <CustomButton styles="shadow border-blue-600 hover:bg-blue-600 border-3 border-solid p-5 mr-3 text-blue-600 hover:text-white rounded">
-                  {/* BE8DA4 */}
+                <CustomButton styles="ring-8 ring-inset ring-offset-2 ring-offset-blue-600 hover:bg-blue-600 p-5 mr-3 text-blue-600 hover:text-white rounded">
+                  {/* BE8DA4 shadow border-blue-600 hover:bg-blue-600 border-3 border-solid */}
                   LAUNCH APP
                 </CustomButton>
                 <CustomButton styles="shadow border-blue-600 border-3 border-solid bg-blue-600 p-5 text-white rounded">
@@ -50,11 +50,11 @@ function Home() {
       </section>
 
       <section
-        className=" bg-gray-300 text-center z-50"
+        className="bg-gray-300 text-center z-50"
         style={{ marginTop: "-150px" }}
       >
         <h1 className="pt-24 text-5xl font-semibold pb-5">FEATURES</h1>
-        <p className="text-xl lg:mx-32 md:mx-10 sm:mx-2">
+        <p className="text-xl lg:mx-32 md:mx-10 sm:mx-2 leading-relaxed">
           Duo no sed et elitr tempor dolor et ipsum. Et amet clita invidunt sit
           magna sed ut ut. Sit eos. Elitr et vero elitr diam et voluptua justo
           at accusam, vero eos sit sadipscing dolor lorem amet consetetur diam.
