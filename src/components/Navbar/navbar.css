@@ -17,7 +17,7 @@
 }
 /* Nav brand */
 .navbar .nav-brand {
-    grid-column: 1/3;
+    grid-column: 1/2;
     width: 100%;
     /* margin-left: 1.5rem; */
     letter-spacing: var(--mainSpacing);
@@ -27,7 +27,7 @@
 
 /* Nav list */
 .navbar .nav-list {
-    grid-column: 3/12;
+    grid-column: 2/12;
     text-transform: capitalize;
 }
 .navbar .nav-list ul a {

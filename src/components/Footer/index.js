@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { FaLinkedin, FaGithub, FaTelegram, FaTwitter } from "react-icons/fa";
 import { FooterContainer } from "./styles";
+import { ErrorBoundary } from "../ErrorBoundary";
 
-export function Footer() {
+const Footer = () => {
     const [email, setEmail] = useState('');
     const getYear = new Date().getFullYear();
 
@@ -49,3 +50,5 @@ export function Footer() {
         </FooterContainer>
     )
 }
+
+export default ErrorBoundary(Footer);

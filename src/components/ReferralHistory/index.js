@@ -3,8 +3,9 @@ import moment from "moment";
 import { web3Context } from "../Context";
 import { shortener } from "../Helper";
 import { CashbackTransactionWrapper } from "./styles";
+import { ErrorBoundary } from "../ErrorBoundary";
 
-export const ReferralHistory = () => {
+const ReferralHistory = () => {
     const [referralCashbackHistory, setReferralCashbackHistory] = useState([]);
     const { loading, amuseTokenAddress, referralHistory } = useContext(web3Context);
     useEffect(() => {
@@ -94,3 +95,6 @@ export const ReferralHistory = () => {
         </CashbackTransactionWrapper>
     )
 }
+
+
+export default ErrorBoundary(ReferralHistory);

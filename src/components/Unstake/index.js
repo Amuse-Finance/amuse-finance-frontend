@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { web3Context } from "../Context";
 import Error from "../Error";
+import { ErrorBoundary } from "../ErrorBoundary";
 
-export const Unstake = () => {
+const Unstake = () => {
     const [unstakeInput, setUnstakeInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -40,3 +41,5 @@ export const Unstake = () => {
         </form>
     )
 }
+
+export default ErrorBoundary(Unstake)

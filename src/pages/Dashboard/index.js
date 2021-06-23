@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { IoMdSwap } from "react-icons/io";
-import { ReferralHistory } from "../../components/ReferralHistory";
 import { web3Context } from "../../components/Context";
-import { NormalTransaction } from "../../components/NormalTransaction";
 import { DashboardContainer } from "./styles.js";
 import { Transaction } from "./transaction.styles.js";
+import ReferralHistory from "../../components/ReferralHistory";
+import NormalTransaction from "../../components/NormalTransaction";
 
 
 const Dashboard =  () => {
@@ -58,30 +58,6 @@ const Dashboard =  () => {
 
                     <section className="grid card">
                         <div className="grid">
-                            <h3>Daily Rewards</h3>
-                        </div>
-                        <div className="grid sub-card">
-                            <h1>{parseFloat(dailyCashback).toFixed(2)} AMD</h1>
-                            <IoMdSwap className="icon" />
-                            <h1>${(parseFloat(dailyCashback) * parseFloat(amdPrice)).toFixed(2)}</h1>
-                        </div>
-                    </section>
-
-                    <section className="grid card">
-                        <div className="grid">
-                            <h3>Weekly Rewards</h3>
-                        </div>
-                        <div className="grid sub-card">
-                            <h1>{parseFloat(weeklyCashback).toFixed(2)} AMD</h1>
-                            <IoMdSwap className="icon" />
-                            <h1>${(parseFloat(weeklyCashback) * parseFloat(amdPrice)).toFixed(2)}</h1>
-                        </div>
-                    </section>
-                </div>
-
-                <div className="grid card-container">
-                    <section className="grid card">
-                        <div className="grid">
                             <h3>Staked Balance</h3>
                         </div>
                         <div className="grid sub-card">
@@ -99,6 +75,28 @@ const Dashboard =  () => {
                             <h1>100 AMD</h1>
                             <IoMdSwap className="icon" />
                             <h1>$25</h1>
+                        </div>
+                    </section>
+
+                    <section className="grid card">
+                        <div className="grid">
+                            <h3>Daily Rewards</h3>
+                        </div>
+                        <div className="grid sub-card">
+                            <h1>{parseFloat(dailyCashback).toFixed(2)} AMD</h1>
+                            <IoMdSwap className="icon" />
+                            <h1>${(parseFloat(dailyCashback) * parseFloat(amdPrice)).toFixed(2)}</h1>
+                        </div>
+                    </section>
+
+                    <section className="grid card">
+                        <div className="grid">
+                            <h3>Weekly Rewards</h3>
+                        </div>
+                        <div className="grid sub-card">
+                            <h1>{parseFloat(weeklyCashback).toFixed(2)} AMD</h1>
+                            <IoMdSwap className="icon" />
+                            <h1>${(parseFloat(weeklyCashback) * parseFloat(amdPrice)).toFixed(2)}</h1>
                         </div>
                     </section>
 

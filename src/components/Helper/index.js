@@ -1,4 +1,5 @@
 require('dotenv/config');
+const axios = require('axios');
 
 const toFixed = _amount => Number(_amount).toFixed(2);
 
@@ -26,10 +27,45 @@ const fixedDataArray = async _data => {
     return _result;
 }
 
+const getRefferalHistory = async (web3, amusedToken, user) => {
+    try {
+        const startBlock = await (await axios.get("https://amused-finance-backend.herokuapp.com/api/v1/startBlock"))
+        const _endBlock = parseInt(await web3.eth.getBlockNumber());
+        let _tempData = [];
+        
+        for(let i = startBlock; i <= _endBlock; i = i + 10000) {
+            const _step = i + 10000;
+            const _result = await amusedToken.getPastEvents("ReferralReward", { fromBlock: i, toBlock: _step });
+            _tempData = [..._tempData, ..._result]
+        }
+        _tempData = _tempData.filter(item => web3.utils.toChecksumAddress(item.returnValues.referrer) === web3.utils.toChecksumAddress(user));
+
+        _tempData = _tempData.map(item => {
+            const { blockNumber, returnValues, transactionHash: hash } = item;
+            const { user, referrer, purchased, reward, timestamp } = returnValues;
+            return {
+                user,
+                referrer,
+                blockNumber,
+                purchased: web3.utils.fromWei(purchased, "ether"),
+                reward: web3.utils.fromWei(reward, "ether"),
+                hash,
+                timestamp
+            }
+        });
+        _tempData = _tempData.reverse();
+        return _tempData;
+    } catch (error) { 
+        console.log(error);
+        return error.message;
+    }
+}
+
 export { 
     toFixed, 
     formatNumber,
     walletShortner,
     shortener,
-    fixedDataArray
+    fixedDataArray,
+    getRefferalHistory
 }

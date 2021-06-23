@@ -3,9 +3,11 @@ import { web3Context } from "../Context";
 import { shortener } from "../Helper";
 import Loading from "../Loading";
 import { NormalTransactionWrapper } from "./styles";
+import { ErrorBoundary } from "../ErrorBoundary";
 require('dotenv/config');
 
-export const NormalTransaction = () => {
+
+const NormalTransaction = () => {
     const context = useContext(web3Context);
     const { loading, fromWei, transactionHistory } = context;
     if(loading) return <Loading />;
@@ -90,3 +92,5 @@ export const NormalTransaction = () => {
         </NormalTransactionWrapper>
     );
 }
+
+export default ErrorBoundary(NormalTransaction)

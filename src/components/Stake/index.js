@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { web3Context } from "../Context";
 import Error from "../Error";
+import { ErrorBoundary } from "../ErrorBoundary";
 
-
-export const Stake = () => {
+const Stake = () => {
     const [approveInput, setApproveInput] = useState("");
     const [stakeInput, setStakeInput] = useState("");
     const [getAllowance, setAllowance] = useState(0);
@@ -65,3 +65,4 @@ export const Stake = () => {
         </form>
     )
 }
+export default ErrorBoundary(Stake);
