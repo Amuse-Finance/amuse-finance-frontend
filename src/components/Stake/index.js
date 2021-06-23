@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { web3Context } from "../Context";
 import Error from "../Error";
 
+
 export const Stake = () => {
     const [approveInput, setApproveInput] = useState("");
     const [stakeInput, setStakeInput] = useState("");
@@ -49,7 +50,14 @@ export const Stake = () => {
                 placeholder="Enter amount to lock" 
                 onChange={ e => validateInput(e, setStakeInput, e.target.value) } 
             />
-            <button className={getAllowance > 0 && approveInput.length  < 1 ? "hidden" : ""} onClick={e => _exec(e, approve, approveInput)}>
+            <button 
+                className={
+                    (getAllowance > 0 && approveInput.length  < 1) || (stakeInput.length  > 0)
+                        ? "hidden" 
+                        : ""
+                    } 
+                onClick={e => _exec(e, approve, approveInput)}
+            >
                 Approve    
             </button>
             <button onClick={ e => _exec(e, stake, stakeInput) }>Lock</button>

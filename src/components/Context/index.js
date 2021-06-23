@@ -3,7 +3,7 @@ import Web3 from "web3";
 import axios from "axios";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { fixedDataArray, getRefferalHistory } from "../Helper";
+import { fixedDataArray } from "../Helper";
 
 const web3Context = createContext();
 
@@ -15,6 +15,7 @@ class Web3Provider extends Component {
             loading: true,
             web3: null,
             user: "",
+            ethereum: null,
             amuseTokenAddress: "",
             amusedVaultAddress: "",
             amusedToken: null,
@@ -49,8 +50,11 @@ class Web3Provider extends Component {
 
     loadWeb3 = async () => {
         try {
-            const amuseTokenAddress = "0x68A753059A2d1D5A64358Ff985AC5Edbf54C7De4";
-            const amusedVaultAddress = "0xe04064D1deC63456B4696Db1995F37ce7C21a92E";
+            // const amuseTokenAddress = "0x68A753059A2d1D5A64358Ff985AC5Edbf54C7De4";
+            // const amusedVaultAddress = "0xe04064D1deC63456B4696Db1995F37ce7C21a92E";
+
+            const amuseTokenAddress = "0xC44260c0b92658EA786661d41d86E3AaAe136AB1";
+            const amusedVaultAddress = "0xb1F1cE027EB1877F98E883E816a6DB24c359EB11";
 
             const ethereum = window.ethereum;
             await ethereum.enable();
@@ -63,13 +67,14 @@ class Web3Provider extends Component {
             const web3 = new Web3(ethereum);
             const user = web3.utils.toChecksumAddress(_accounts[0]);            
 
-            const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
-            const amusedVault = new web3.eth.Contract(amusedVaultABI, amusedVaultAddress);
+            const amusedToken = (new web3.eth.Contract(amusedTokenABI, amuseTokenAddress)).methods;
+            const amusedVault = (new web3.eth.Contract(amusedVaultABI, amusedVaultAddress)).methods;
 
             this.setState({
                 loading: false,
                 web3,
                 user,
+                ethereum,
                 amuseTokenAddress,
                 amusedVaultAddress,
                 amusedToken,
@@ -83,15 +88,15 @@ class Web3Provider extends Component {
     }
 
     // load blockchain data
-    loadBlockchainData = async ({ web3, user, amusedVault } = this.state) => {
+    loadBlockchainData = async ({ loading, web3, user, amusedVault } = this.state) => {
         try {
-            if(!web3) return;
+            if(loading || !web3) return;
             const amdPrice = 0.25;
             const balance = await this.balanceOf();
             const stakes = await this.stakes();
             const dailyCashback = await this.getDailyCashback();
             const _transactionHistory = await fixedDataArray((await axios.get(`https://amused-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`)).data);
-            const _refferalHistory = await fixedDataArray(await this.getRefferalHistory());
+            const _refferalHistory = await fixedDataArray(await (await axios.get(`https://amused-finance-backend.herokuapp.com/api/v1/transactions/refferalHistory?user=${user}`)).data);
 
             this.setState({
                 amdPrice,
@@ -114,7 +119,7 @@ class Web3Provider extends Component {
     balanceOf = async (_account, { loading, user, amusedToken } = this.state) => {
         try {
             if(loading) return;
-            const _balance = await amusedToken.methods.balanceOf(_account ? _account : user).call();
+            const _balance = await amusedToken.balanceOf(_account ? _account : user).call();
             return this.fromWei(_balance);
         } catch (error) {
             return error.message;
@@ -124,7 +129,7 @@ class Web3Provider extends Component {
     stakes = async ({ loading, user, amusedVault } = this.state) => {
         try {
             if(loading) return;
-            const { stakes: _stakes, timestamp } = await amusedVault.methods.stakes(user).call();
+            const { stakes: _stakes, timestamp } = await amusedVault.stakes(user).call();
             const stakes = this.fromWei(_stakes);
             const stakesRewads = await this.getStakeRewards(_stakes);
 
@@ -138,7 +143,7 @@ class Web3Provider extends Component {
     allowance = async ({ loading, user, amuseTokenAddress, amusedToken } = this.state) => {
         try {
             if(loading) return;
-            const _allowance = await amusedToken.methods.allowance(user, amuseTokenAddress).call();
+            const _allowance = await amusedToken.allowance(user, amuseTokenAddress).call();
             return this.fromWei(_allowance);
         } catch (error) {
             return error;
@@ -157,7 +162,7 @@ class Web3Provider extends Component {
 
     getDailyCashback = async ({ user, amusedToken } = this.state) => {
         try {
-            const _dailyCashback = await amusedToken.methods.calculateDailyCashback(user).call();
+            const _dailyCashback = await amusedToken.calculateDailyCashback(user).call();
             return this.fromWei(_dailyCashback);
         } catch (error) { return error; }
     }
@@ -168,8 +173,7 @@ class Web3Provider extends Component {
             let ethValueEarned = 0;
 
             if(loading || parseFloat(_stakes) < 1) return { tokenValueEarned, ethValueEarned };
-
-            const { _tokenValueEarned, _ethValueEarned } = await amusedVault.methods.calculateRewards(user).call();
+            const { _tokenValueEarned, _ethValueEarned } = await amusedVault.calculateStakeRewards(user, _stakes).call();
             tokenValueEarned = this.fromWei(_tokenValueEarned);
             ethValueEarned = this.fromWei(_ethValueEarned);
 
@@ -182,7 +186,7 @@ class Web3Provider extends Component {
             if(loading || _amount < 0) return;
             // const gasPrice = await web3.eth.getGasPrice();
             const _formattedStakeAmount = this.toWei(_amount);
-            const _response = await amusedToken.methods.approve(amusedVaultAddress, _formattedStakeAmount).send({
+            const _response = await amusedToken.approve(amusedVaultAddress, _formattedStakeAmount).send({
                 from: user,
                 // gasPrice,
             });
@@ -204,16 +208,13 @@ class Web3Provider extends Component {
             if(loading || _amount < 0) return;
             // const gasPrice = await web3.eth.getGasPrice();
             const _formattedStakeAmount = this.toWei(_amount);
-            await amusedVault.methods.stake(_formattedStakeAmount).call({ from: user });
-            const _response = await amusedVault.methods.stake(_formattedStakeAmount).send({
+            await amusedVault.stake(_formattedStakeAmount).call({ from: user });
+            const _response = await amusedVault.stake(_formattedStakeAmount).send({
                 from: user,
                 // gasPrice,
             });
             console.log(_response);
-            return {
-                status: true,
-                data: _response
-            }
+            return { status: true, data: _response };
         } catch (error) {
             return {
                 status: false,
@@ -222,14 +223,21 @@ class Web3Provider extends Component {
         }
     }
 
-    getRefferalHistory = async ({ loading, web3, user, amusedToken } = this.state) => {
+    unstake = async (_amount, { loading, user, amusedVault } = this.state) => {
         try {
             if(loading) return;
-            const _result = await getRefferalHistory(amusedToken, web3, user);
-            return _result;
+            await amusedVault.unstake(this.toWei(_amount)).call({ from: user });
+            const _response = await amusedVault.unstake(this.toWei(_amount)).send({ 
+                from: user
+            });
+            console.log(_response);
+
+            return { status: true,  data: _response };
         } catch (error) {
-            console.log(error);
-            return error;
+            return {
+                status: false,
+                data: this.parseErrorMessage(error)
+            }
         }
     }
 
@@ -237,10 +245,13 @@ class Web3Provider extends Component {
         return (
             <web3Context.Provider value={{
                 ...this.state,
+                fromWei: this.fromWei,
+                toWei: this.toWei,
                 connectDapp: this.connectDapp,
                 allowance: this.allowance,
                 approve: this.approve,
                 stake: this.stake,
+                unstake: this.unstake
             }}>
                 {this.props.children}
             </web3Context.Provider>
