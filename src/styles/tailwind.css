@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .react-accordion-collapsible-container {
+    @apply bg-blue-500 shadow m-0 !important;
+  }
+}

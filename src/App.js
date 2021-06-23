@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer";
 
 import { handleEffect } from "./components/Helper/handleEffect";
 import { ScrollTop } from "./components/ScrollTop";
+import Faq from "./pages/Faq";
 require("dotenv/config");
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path='/vault' component={Vault} />
+        <Route exact path="/vault" component={Vault} />
+        <Route exact path="/faq" component={Faq} />
       </Switch>
       <ScrollTop />
       <Footer />

@@ -10902,6 +10902,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-accordion-collapsible@^1.0.53:
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/react-accordion-collapsible/-/react-accordion-collapsible-1.0.53.tgz#7a469891739055ef73764e686b71b90a0b2ab60f"
+  integrity sha512-IA7mDByaF2jDrPsqdJGIN0A+jhAyETw7dlyXiUL6/GyRrjK1Mqhe0cbgXpsK79QUDtCC/+J8X7HspQYtlaAPSw==
+
 react-app-polyfill@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-2.0.0.tgz#a0bea50f078b8a082970a9d853dc34b6dcc6a3cf"

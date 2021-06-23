@@ -51,16 +51,36 @@ button {
   margin: 0 auto;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 .white {
   background: var(--white) !important;
   color: var(--darkGrey) !important;
 }
 
+body {
+  background: var(--lightGrey);
+  line-height: 1.8rem;
+}
+
 .skeyArt {
   clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
 }
-body {
-  background: var(--lightGrey);
+
+.content {
+  text-align: initial !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  color: #7b8697;
+}
+
+.react-accordion-collapsible-container {
+  margin: 0 !important;
+}
+.react-accordion-collapsible-title-container {
+  padding: 15px !important;
 }
