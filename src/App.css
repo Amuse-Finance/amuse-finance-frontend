@@ -84,3 +84,9 @@ body {
 .react-accordion-collapsible-title-container {
   padding: 15px !important;
 }
+
+@media (max-width: 768px) {
+  .ethLogo {
+    display: none !important;
+  }
+}
