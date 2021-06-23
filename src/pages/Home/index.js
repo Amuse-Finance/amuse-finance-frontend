@@ -99,41 +99,37 @@ function Home() {
         </div>
       </section>
 
-      <section className="w-2/3 mx-auto bg-gray-500 p-7 rounded block md:flex justify-between items-center">
+      <section className="md:w-full lg:w-3/4 mx-auto bg-gray-500 p-7 rounded flex flex-col sm:flex-row justify-between items-center">
         <div>
-          <h5>Convert COIN to USD</h5>
-          <div className="flex ">
-            <div className="mr-3 bg-gray-500 rounded w-1/2 md:w-full">
-              <input
-                className="w-full outline-none p-3 bg-gray-400 rounded"
-                placeholder="Enter amount..."
-              />
-            </div>
+          <p>Convert COIN to USD</p>
+          <span className="flex ">
+            <input
+              className="w-full mr-3 outline-none p-3 bg-gray-400 rounded"
+              placeholder="Enter amount..."
+            />
             <select className="outline-none p-3 px-4 bg-black text-white rounded">
               <option>ETH</option>
               <option>BTC</option>
               <option>BNB</option>
             </select>
-          </div>
+          </span>
         </div>
-        <div>
+        <div className="m-3.5 sm:self-end sm:my-0">
           <IoMdSwap className="icon text-5xl" />
         </div>
         <div>
           <p>Convert COIN to USD</p>
-          <div className="flex ">
-            <div className="mr-3 bg-gray-500 rounded w-1/2 md:w-full">
-              <input
-                className="w-full outline-none p-3 bg-gray-400 rounded"
-                placeholder="Enter amount..."
-              />
-            </div>
+          <span className="flex ">
+            <input
+              className="w-full mr-3 outline-none p-3 bg-gray-400 rounded"
+              placeholder="Enter amount..."
+            />
             <select className="outline-none p-3 px-4 bg-black text-white rounded">
               <option>ETH</option>
               <option>BTC</option>
               <option>BNB</option>
             </select>
-          </div>
+          </span>
         </div>
       </section>
     </div>
