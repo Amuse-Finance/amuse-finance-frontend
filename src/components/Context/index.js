@@ -1,8 +1,9 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
+import axios from "axios";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { getNormalTransactionLists, getRefferalHistory } from "../Helper";
+import { fixedDataArray, getRefferalHistory } from "../Helper";
 
 const web3Context = createContext();
 
@@ -14,8 +15,11 @@ class Web3Provider extends Component {
       loading: true,
       web3: null,
       user: "",
+      ethereum: null,
       amuseTokenAddress: "",
       amusedVaultAddress: "",
+      USDT: "",
+      WETH: "",
       amusedToken: null,
       amusedVault: null,
       balance: 0,
@@ -48,8 +52,19 @@ class Web3Provider extends Component {
 
   loadWeb3 = async () => {
     try {
-      const amuseTokenAddress = "0xAb3074455A4b2735D0a6cb1dac76B59decd71e93";
-      const amusedVaultAddress = "0x8b97C9B4a4414F6031D6587b0fbeF343AEB122Ca";
+      // const amuseTokenAddress = "0x68A753059A2d1D5A64358Ff985AC5Edbf54C7De4";
+      // const amusedVaultAddress = "0xe04064D1deC63456B4696Db1995F37ce7C21a92E";
+
+      const amuseTokenAddress = "0x75daeD05386Eb10aeA80bBF040780e07ef5eb861";
+      const amusedVaultAddress = "0x48ae18ABDe7e22AA7ab7b179d2b81322f6de8DD3";
+
+      /*
+                Mainnet address for WETH and USDT
+                const USDT = "0xdac17f958d2ee523a2206206994597c13d831ec7";
+                const WETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
+            */
+      const USDT = "0xd9ba894e0097f8cc2bbc9d24d308b98e36dc6d02";
+      const WETH = "0xc778417e063141139fce010982780140aa0cd5ab";
 
       const ethereum = window.ethereum;
       await ethereum.enable();
@@ -57,7 +72,7 @@ class Web3Provider extends Component {
       // Get Network / chainId
       const _chainId = await ethereum.request({ method: "eth_chainId" });
       if (parseInt(_chainId, 16) !== 4)
-        return alert("Connect wallet to a Rinkeby network");
+        return alert("Amused: Connect wallet to a Rinkeby network");
 
       const _accounts = await ethereum.request({ method: "eth_accounts" });
       const web3 = new Web3(ethereum);
@@ -66,22 +81,24 @@ class Web3Provider extends Component {
       const amusedToken = new web3.eth.Contract(
         amusedTokenABI,
         amuseTokenAddress
-      );
+      ).methods;
       const amusedVault = new web3.eth.Contract(
         amusedVaultABI,
         amusedVaultAddress
-      );
+      ).methods;
 
       this.setState({
         loading: false,
         web3,
         user,
+        ethereum,
         amuseTokenAddress,
         amusedVaultAddress,
+        USDT,
+        WETH,
         amusedToken,
         amusedVault,
       });
-      ethereum.autoRefreshOnNetworkChange = true;
     } catch (error) {
       console.log(error.message);
       return error.message;
@@ -89,15 +106,25 @@ class Web3Provider extends Component {
   };
 
   // load blockchain data
-  loadBlockchainData = async ({ web3, user, amusedVault } = this.state) => {
+  loadBlockchainData = async (
+    { loading, web3, user, amusedToken, amusedVault } = this.state
+  ) => {
     try {
-      if (!web3) return;
+      if (loading || !web3) return;
       const amdPrice = 0.25;
       const balance = await this.balanceOf();
       const stakes = await this.stakes();
       const dailyCashback = await this.getDailyCashback();
-      const _transactionHistory = await getNormalTransactionLists(web3, user);
-      const _refferalHistory = await this.getRefferalHistory();
+      const _transactionHistory = await fixedDataArray(
+        (
+          await axios.get(
+            `https://amused-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`
+          )
+        ).data
+      );
+      const _refferalHistory = await fixedDataArray(
+        await getRefferalHistory(web3, amusedToken, user)
+      );
 
       this.setState({
         amdPrice,
@@ -113,16 +140,30 @@ class Web3Provider extends Component {
     }
   };
 
+  reRender = async () => await this.loadBlockchainData();
+
+  updateAccount = async (_newAddress) => {
+    try {
+      this.setState({ user: _newAddress });
+      await this.reRender();
+    } catch (error) {
+      return error;
+    }
+  };
+
   fromWei = (_amount, { web3 } = this.state) =>
     web3.utils.fromWei(_amount.toString(), "ether");
 
   toWei = (_amount, { web3 } = this.state) =>
     web3.utils.toWei(_amount.toString(), "ether");
 
+  toChecksumAddress = (_account, { web3 } = this.state) =>
+    web3.utils.toChecksumAddress(_account);
+
   balanceOf = async (_account, { loading, user, amusedToken } = this.state) => {
     try {
       if (loading) return;
-      const _balance = await amusedToken.methods
+      const _balance = await amusedToken
         .balanceOf(_account ? _account : user)
         .call();
       return this.fromWei(_balance);
@@ -134,7 +175,7 @@ class Web3Provider extends Component {
   stakes = async ({ loading, user, amusedVault } = this.state) => {
     try {
       if (loading) return;
-      const { stakes: _stakes, timestamp } = await amusedVault.methods
+      const { stakes: _stakes, timestamp } = await amusedVault
         .stakes(user)
         .call();
       const stakes = this.fromWei(_stakes);
@@ -152,7 +193,7 @@ class Web3Provider extends Component {
   ) => {
     try {
       if (loading) return;
-      const _allowance = await amusedToken.methods
+      const _allowance = await amusedToken
         .allowance(user, amuseTokenAddress)
         .call();
       return this.fromWei(_allowance);
@@ -163,8 +204,13 @@ class Web3Provider extends Component {
 
   parseErrorMessage = (_error) => {
     try {
+      const _unparsed =
+        "while converting number to string, invalid number value '', should be a number matching (^-?[0-9.]+).";
       const _errArr = _error.message.split(":");
-      return _errArr[_errArr.length - 1].split(`"`)[0];
+      const _errorMessage = _errArr[_errArr.length - 1].split(`"`)[0];
+      if (_errorMessage === _unparsed) return `Unable to parse arguments`;
+      console.log(_errorMessage);
+      return _errorMessage;
     } catch (error) {
       return error;
     }
@@ -172,7 +218,7 @@ class Web3Provider extends Component {
 
   getDailyCashback = async ({ user, amusedToken } = this.state) => {
     try {
-      const _dailyCashback = await amusedToken.methods
+      const _dailyCashback = await amusedToken
         .calculateDailyCashback(user)
         .call();
       return this.fromWei(_dailyCashback);
@@ -189,14 +235,14 @@ class Web3Provider extends Component {
       let tokenValueEarned = 0;
       let ethValueEarned = 0;
 
-      if (loading || parseFloat(_stakes) <= 0)
+      if (loading || parseFloat(_stakes) < 1)
         return { tokenValueEarned, ethValueEarned };
-
-      const { _tokenValueEarned, _ethValueEarned } = await amusedVault.methods
-        .calculateRewards(user)
+      const { _tokenValueEarned, _ethValueEarned } = await amusedVault
+        .calculateStakeRewards(user, _stakes)
         .call();
       tokenValueEarned = this.fromWei(_tokenValueEarned);
       ethValueEarned = this.fromWei(_ethValueEarned);
+
       return { tokenValueEarned, ethValueEarned };
     } catch (error) {
       return error;
@@ -211,13 +257,13 @@ class Web3Provider extends Component {
       if (loading || _amount < 0) return;
       // const gasPrice = await web3.eth.getGasPrice();
       const _formattedStakeAmount = this.toWei(_amount);
-      const _response = await amusedToken.methods
+      const _response = await amusedToken
         .approve(amusedVaultAddress, _formattedStakeAmount)
         .send({
           from: user,
           // gasPrice,
         });
-      console.log(_response);
+      await this.reRender();
       return {
         status: true,
         data: _response,
@@ -238,34 +284,18 @@ class Web3Provider extends Component {
       if (loading || _amount < 0) return;
       // const gasPrice = await web3.eth.getGasPrice();
       const _formattedStakeAmount = this.toWei(_amount);
-      await amusedVault.methods
-        .stake(_formattedStakeAmount)
-        .call({ from: user });
-      const _response = await amusedVault.methods
-        .stake(_formattedStakeAmount)
-        .send({
-          from: user,
-          // gasPrice,
-        });
-      console.log(_response);
-      return {
-        status: true,
-        data: _response,
-      };
+      await amusedVault.stake(_formattedStakeAmount).call({ from: user });
+      const _response = await amusedVault.stake(_formattedStakeAmount).send({
+        from: user,
+        // gasPrice,
+      });
+      await this.reRender();
+      return { status: true, data: _response };
     } catch (error) {
       return {
         status: false,
         data: this.parseErrorMessage(error),
       };
-    }
-  };
-
-  getNormalTransactionLists = async (web3, user) => {
-    try {
-      const _data = await getNormalTransactionLists(web3, user);
-      return _data;
-    } catch (error) {
-      return error;
     }
   };
 
@@ -282,15 +312,36 @@ class Web3Provider extends Component {
     }
   };
 
+  unstake = async (_amount, { loading, user, amusedVault } = this.state) => {
+    try {
+      if (loading) return;
+      await amusedVault.unstake(this.toWei(_amount)).call({ from: user });
+      const _response = await amusedVault.unstake(this.toWei(_amount)).send({
+        from: user,
+      });
+      await this.reRender();
+      return { status: true, data: _response };
+    } catch (error) {
+      return {
+        status: false,
+        data: this.parseErrorMessage(error),
+      };
+    }
+  };
+
   render() {
     return (
       <web3Context.Provider
         value={{
           ...this.state,
+          fromWei: this.fromWei,
+          toWei: this.toWei,
           connectDapp: this.connectDapp,
+          updateAccount: this.updateAccount,
           allowance: this.allowance,
           approve: this.approve,
           stake: this.stake,
+          unstake: this.unstake,
         }}
       >
         {this.props.children}

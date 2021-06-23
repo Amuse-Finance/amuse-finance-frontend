@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import { web3Context } from "../Context";
-import { fromWei, shortener } from "../Helper";
+import { shortener } from "../Helper";
 import Loading from "../Loading";
 import { NormalTransactionWrapper } from "./styles";
+import { ErrorBoundary } from "../ErrorBoundary";
 require('dotenv/config');
 
-export const NormalTransaction = () => {
+
+const NormalTransaction = () => {
     const context = useContext(web3Context);
-    const { loading, web3, transactionHistory } = context;
+    const { loading, fromWei, transactionHistory } = context;
     if(loading) return <Loading />;
 
     let _txnItems = [];
@@ -16,7 +18,7 @@ export const NormalTransaction = () => {
         let _index = transactionHistory.length;
         _txnItems = transactionHistory.map(item => {
             const { hash, from, to, value, gasPrice, gasUsed } = item;
-            const gasFee = (fromWei(web3, gasPrice, "ether") * gasUsed) * 2400;
+            const gasFee = (fromWei(gasPrice) * gasUsed) * 2400;
             const _currentIndex = _index;
             _index--;
             return (
@@ -90,3 +92,5 @@ export const NormalTransaction = () => {
         </NormalTransactionWrapper>
     );
 }
+
+export default ErrorBoundary(NormalTransaction)

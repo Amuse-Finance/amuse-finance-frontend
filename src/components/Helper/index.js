@@ -1,14 +1,7 @@
 require('dotenv/config');
-
-const etherscanApiKey = process.env.REACT_APP_etherscanAPi;
-const startBlock = 8781375;
-
+const axios = require('axios');
 
 const toFixed = _amount => Number(_amount).toFixed(2);
-
-const toWei = (web3, _amount, _unit) => web3.utils.toWei(_amount.toString(), _unit);
-
-const fromWei = (web3, _amount, _unit) => web3.utils.fromWei(_amount.toString(), _unit);
 
 const formatNumber = _amount => new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(Number(_amount));
 
@@ -27,63 +20,34 @@ const shortener = (_data) => {
     return `${firstPart}...${secondPart}`;
 }
 
-
-const getNormalTransactionLists = async (web3, user) => {
-    try {
-        let tempData = [];
-        const _endBlock = parseInt(await web3.eth.getBlockNumber());
-        for(let i = startBlock; i <= _endBlock; i = i + 10000) {
-            const _step = i + 10000;
-            const result = await (await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${user}&startblock=${i}&endblock=${_step}&sort=desc&apikey=${etherscanApiKey}`)).json();
-            tempData = [...tempData, ...result.result];
-        }
-        return formatTransactionLists(web3, tempData);
-    } catch (error) { return error.message; }
+const fixedDataArray = async _data => {
+    if(_data.length <= 10) return _data;
+    let _result = [];
+    for(let i = 0; i < 10; i++) _result = [..._result, _data[i]];
+    return _result;
 }
 
-const formatTransactionLists = async (web3, _data) => {
+const getRefferalHistory = async (web3, amusedToken, user) => {
     try {
-        let result = await _data.map(item => {
-            const { hash, from, to, gasPrice, gasUsed, nonce, value, blockNumber } = item;
-            return {
-                hash,
-                from,
-                to,
-                gasPrice,
-                gasUsed,
-                nonce,
-                blockNumber,
-                value: fromWei(web3, value, "ether")
-            }
-        })
-
-        result = result.reverse();
-        return result;
-    } catch (error) {
-        return error.message;
-    }
-}
-
-const getRefferalHistory = async (amusedToken, web3, user) => {
-    try {
+        const startBlock = await (await axios.get("https://amused-finance-backend.herokuapp.com/api/v1/startBlock"))
         const _endBlock = parseInt(await web3.eth.getBlockNumber());
         let _tempData = [];
-
+        
         for(let i = startBlock; i <= _endBlock; i = i + 10000) {
             const _step = i + 10000;
-            const _result = await amusedToken.getPastEvents("ReferrerReward", { fromBlock: i, toBlock: _step });
+            const _result = await amusedToken.getPastEvents("ReferralReward", { fromBlock: i, toBlock: _step });
             _tempData = [..._tempData, ..._result]
         }
-
         _tempData = _tempData.filter(item => web3.utils.toChecksumAddress(item.returnValues.referrer) === web3.utils.toChecksumAddress(user));
 
         _tempData = _tempData.map(item => {
             const { blockNumber, returnValues, transactionHash: hash } = item;
-            const { user, referrer, reward, timestamp } = returnValues;
+            const { user, referrer, purchased, reward, timestamp } = returnValues;
             return {
                 user,
                 referrer,
                 blockNumber,
+                purchased: web3.utils.fromWei(purchased, "ether"),
                 reward: web3.utils.fromWei(reward, "ether"),
                 hash,
                 timestamp
@@ -99,11 +63,9 @@ const getRefferalHistory = async (amusedToken, web3, user) => {
 
 export { 
     toFixed, 
-    fromWei,
-    toWei,
     formatNumber,
     walletShortner,
-    getNormalTransactionLists,
     shortener,
+    fixedDataArray,
     getRefferalHistory
 }

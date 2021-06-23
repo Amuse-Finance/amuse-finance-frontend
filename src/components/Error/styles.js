@@ -6,7 +6,7 @@ export const ErrorBanner = styled.div`
     left: 0;
     right: 0;
     height: 10em;
-    width: 50vw;
+    width: 35vw;
     background: var(--darkGrey);
     color: var(--white);
     padding: 1em 2em;

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const DashboardContainer = styled.div`    
     & .dashboard-wrapper {
-        grid-template-columns: repeat(2, 1fr);
         width: 100%;
         grid-gap: 2em;
         padding: 4em 3em;

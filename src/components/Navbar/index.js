@@ -2,31 +2,20 @@ import { useState, useContext } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { web3Context } from "../Context";
+import { ErrorBoundary } from "../ErrorBoundary";
 import './navbar.css';
 
 import { NavbarContainer } from './styles'
 import user from '../../assets/login/userLogin.jpeg';
 
-export function Navbar({ theme }) {
+const Navbar = ({ theme }) => {
     const [navOpen, setNavOpen] = useState(false);
-    const context = useContext(web3Context);
+    const { loading, connectDapp } = useContext(web3Context);
 
-    const { loading, connectDapp } = context;
-
-    const _active = {
-        'padding': '.75rem',
-    }
-
-    let Navlist = ['', 'Dashboard', 'Vault', 'Referral', 'Governance', 'FAQ'];
+    let Navlist = ['', 'Dashboard', 'Vault', 'Governance', 'Contact', 'FAQ'];
     Navlist = Navlist.map((item, i) => {
         return (
-            <NavLink 
-                key={i} 
-                exact
-                activeStyle={_active} 
-                to={item.replace('','/').toLowerCase()}
-                className='mainSpacing'
-            >
+            <NavLink key={i} exact to={item.replace('','/').toLowerCase()} className='mainSpacing'>
                 {item === '' ? 'Home' : item}
             </NavLink>
         );
@@ -37,7 +26,7 @@ export function Navbar({ theme }) {
             <div className="grid nav-brand">
                 <Link to='/'>
                     <h2 className='mainSpacing'>
-                        Amused.Finance
+                        Amused
                     </h2>
                 </Link>
             </div>
@@ -55,3 +44,5 @@ export function Navbar({ theme }) {
         </NavbarContainer>
     )
 }
+
+export default ErrorBoundary(Navbar);

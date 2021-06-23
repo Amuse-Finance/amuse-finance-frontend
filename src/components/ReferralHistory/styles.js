@@ -4,7 +4,7 @@ export const CashbackTransactionWrapper = styled.div`
     width: 100%;
 
     & .header {
-        grid-template-columns: 1fr 4fr 4fr 4fr 2fr;
+        grid-template-columns: 1fr 4fr 4fr 4fr 4fr 2fr;
         align-items: center;
         width: 100%;
         height: 50px;
@@ -15,7 +15,7 @@ export const CashbackTransactionWrapper = styled.div`
         height: 100%;
 
         & .card {
-            grid-template-columns: 1fr 4fr 4fr 4fr 2fr;
+            grid-template-columns: 1fr 4fr 4fr 4fr 4fr 2fr;
             align-items: center;
             width: 100%;
             height: 50px;
