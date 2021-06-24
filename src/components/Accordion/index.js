@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion } from "react-accordion-collapsible";
+import { ErrorBoundary } from "../ErrorBoundary";
 
 const AccordionCom = ({ defaultOpen }) => {
   return (
@@ -14,4 +15,4 @@ const AccordionCom = ({ defaultOpen }) => {
   );
 };
 
-export default AccordionCom;
+export default ErrorBoundary(AccordionCom);

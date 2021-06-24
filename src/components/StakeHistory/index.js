@@ -1,15 +1,15 @@
-import { useContext } from "react";
-import { web3Context } from "../Context";
-import { shortener } from "../Helper";
-import { RefferalWrapper } from "./styles";
-import { ErrorBoundary } from "../ErrorBoundary";
+import { useContext } from 'react';
+import { web3Context } from '../Context';
+import ErrorBoundary from "../ErrorBoundary/";
+import { shortener } from '../Helper';
+import { StakeTransactionWrapper } from './styles';
 
-const ReferralHistory = () => {
-    const { amuseTokenAddress, referralHistory } = useContext(web3Context);
+const StakeHistory = () => {
+    const { stakeHistory } = useContext(web3Context);
 
-    let _index = referralHistory.length;
-    const _txnItems = referralHistory.map(item => {
-        const { user, referrer, purchased, reward, hash, timestamp } = item;
+    let _index = stakeHistory.length;
+    const _txnItems = stakeHistory.map(item => {
+        const { ethValue, tokenValue, hash, timestamp } = item;
         const _currentIndex = _index;
         _index--;
         return (
@@ -26,22 +26,22 @@ const ReferralHistory = () => {
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/address/${user}`} target="_blank" rel="noreferrer">
-                            {shortener(user)}
+                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                            {parseFloat(10000).toFixed(2)} AMD
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
                         <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
-                            {parseFloat(purchased).toFixed(2)} AMD
+                            {parseFloat(tokenValue).toFixed(2)} AMD
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/token/${amuseTokenAddress}?a=${referrer}`} target="_blank" rel="noreferrer">
-                            {parseFloat(reward).toFixed(2)} AMD
+                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                            {parseFloat(ethValue).toFixed(6)} ETH
                         </a>
                     </h2>
                 </div>
@@ -54,10 +54,10 @@ const ReferralHistory = () => {
                 </div>
             </div>
         );
-    })
+    });
 
     return (
-        <RefferalWrapper className="grid">
+        <StakeTransactionWrapper className="grid">
             <header className="grid header">
                 <div className="grid">
                     <h2>#</h2>
@@ -66,13 +66,13 @@ const ReferralHistory = () => {
                     <h2>Hash</h2>
                 </div>
                 <div className="grid">
-                    <h2>Wallet</h2>
+                    <h2>Amount Unstaked</h2>
                 </div>
                 <div className="grid">
-                    <h2>Purchased Amount</h2>
+                    <h2>Estimated AMD Rewards</h2>
                 </div>
                 <div className="grid">
-                    <h2>Rewards Amount</h2>
+                    <h2>Estimated ETH Rewards</h2>
                 </div>
                 <div className="grid">
                     <h2>Date</h2>
@@ -80,9 +80,8 @@ const ReferralHistory = () => {
             </header>
 
             <div className="grid card-container">{_txnItems}</div>
-        </RefferalWrapper>
+        </StakeTransactionWrapper>
     )
 }
 
-
-export default ErrorBoundary(ReferralHistory);
+export default ErrorBoundary(StakeHistory);;

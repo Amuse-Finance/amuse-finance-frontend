@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Typewriter from "typewriter-effect";
-import { IoMdSwap } from "react-icons/io";
+// import { IoMdSwap } from "react-icons/io";
 import CustomButton from "../../components/CustomButton";
 import logo1 from "../../images/logo1.jpg";
 import Particles from "react-particles-js";
 import particlesoptions from "../particleOptions";
 import ethLogo from "../../assets/ethereum-logo.png";
+import FisionDoughnut from "../../components/FisionDoughnut";
+import { ChartWrapper } from "./styles";
+import { cashbackCalculator } from "../../components/Helper";
+import { web3Context } from "../../components/Context";
 
 function Home() {
+  const [inputAmount, setInputAmount] = useState("");
+  const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(cashbackCalculator());
+  const { cashbackPercentage } = useContext(web3Context);
+
+  const handleInput = async e => {
+      e.preventDefault();
+      if(isNaN(e.target.value)) return;
+      setInputAmount(() => e.target.value);
+      if(parseFloat(cashbackPercentage) === 0 || e.target.value === "") {
+        setCashbackCalculatorInput(() => cashbackCalculator());
+        return;
+      }
+      const _result = cashbackCalculator(parseFloat(e.target.value), cashbackPercentage);
+      console.log(_result);
+      setCashbackCalculatorInput(() => _result);
+  }
+
   return (
-    <div>
+    <div className="grid">
       <section
         style={{ height: "75vh" }}
         className="relative bg-blue-900 flex justify-center items-center "
@@ -56,7 +77,7 @@ function Home() {
           </section>
         </div>
       </section>
-      <section className="bg-indigo-300 text-center py-10">
+      <section className="text-center py-10">
         <h1 className="text-4xl md:text-5xl font-semibold pb-5">FEATURES</h1>
         <p className="px-3 text-lg md:text-xl lg:mx-32 md:mx-10 sm:mx-2 leading-relaxed">
           Duo no sed et elitr tempor dolor et ipsum. Et amet clita invidunt sit
@@ -102,7 +123,30 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-indigo-200 py-10">
+
+      <ChartWrapper className="grid chart-container">
+        <div className="grid fusion-chart">
+          <header className="grid">
+            <h4>TOKEN DISTRIBUTION</h4>
+            <h1>Initial Distibution</h1>
+          </header>
+          <FisionDoughnut  type="doughnut3d" showPercentValues={true} />
+        </div>
+
+        <div className="grid fusion-chart">
+          <div className="grid">
+            <header className="grid">
+              <h1>Cashback Calculator</h1>
+            </header>
+            <form className="grid">
+                <input value={inputAmount} placeholder="Enter amount in USD" onChange={handleInput} />
+            </form>
+            <FisionDoughnut type="doughnut2d" data={cashbackCalculatorInput} numberPrefix="$" />
+          </div>
+        </div>
+      </ChartWrapper>
+
+      {/* <section className="py-10">
         <div className="md:w-full lg:w-3/4 mx-auto bg-gray-500 p-7 rounded flex flex-col sm:flex-row justify-between items-center">
           <div>
             <p>Convert COIN to USD</p>
@@ -136,7 +180,7 @@ function Home() {
             </span>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

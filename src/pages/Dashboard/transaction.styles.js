@@ -6,8 +6,8 @@ export const Transaction = styled.div`
     padding: 0 3em 3em;
 
     & .transaction-header {
-        grid-template-columns: repeat(2, 1fr);
-        width: 50%;
+        grid-template-columns: repeat(3, 1fr);
+        width: 55%;
         height: 55px;
         place-items: start;
         margin: 0;
@@ -37,7 +37,6 @@ export const Transaction = styled.div`
             background: green; outline: none;
             color: var(--white);
         }
-        & .refferal { border-right: none; }
     }
 
     & .transaction-body {

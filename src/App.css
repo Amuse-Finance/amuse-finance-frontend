@@ -54,14 +54,8 @@ button {
 .hidden {
   display: none;
 }
-
-.white {
-  background: var(--white) !important;
-  color: var(--darkGrey) !important;
-}
-
 body {
-  background: var(--lightGrey);
+  background: var(--white);
   line-height: 1.8rem;
 }
 

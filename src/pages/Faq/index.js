@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import Accordion from "../../components/Accordion";
 import CustomButton from "../../components/CustomButton";
 
@@ -36,9 +36,11 @@ function Faq() {
           <h2 className="font-bold text-xl md:text-3xl mb-8 leading-tight text-gray-50 opacity-">
             If You Have A Question Which Is Not Written Here, Kindly Contact Us.
           </h2>
-          <CustomButton styles="shadow bg-gradient-to-r from-blue-600 to-green-500 p-5 text-white rounded">
-            CONTACT US NOW
-          </CustomButton>
+          <Link to="/contact">
+            <CustomButton styles="shadow bg-gradient-to-r from-blue-600 to-green-500 p-5 text-white rounded">
+              CONTACT US NOW
+            </CustomButton>
+          </Link>
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RefferalWrapper = styled.div`
+export const StakeTransactionWrapper = styled.div`
     width: 100%;
 
     & .header {

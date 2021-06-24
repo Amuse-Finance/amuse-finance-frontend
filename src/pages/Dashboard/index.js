@@ -5,6 +5,7 @@ import { DashboardContainer } from "./styles.js";
 import { Transaction } from "./transaction.styles.js";
 import ReferralHistory from "../../components/ReferralHistory";
 import NormalTransaction from "../../components/NormalTransaction";
+import StakeHistory from "../../components/StakeHistory";
 
 
 const Dashboard =  () => {
@@ -136,15 +137,21 @@ const Dashboard =  () => {
                         <h2>Transaction History</h2>
                     </div>
 
-                    <div className={activeTab === "Refferal History" ? "grid tabs refferal active" : "grid tabs refferal"} onClick={() => setActiveTab("Refferal History")}>
+                    <div className={activeTab === "Refferal History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Refferal History")}>
                         <h2>Refferal History</h2>
+                    </div>
+                    
+                    <div className={activeTab === "Staked History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Staked History")}>
+                        <h2>Staked History</h2>
                     </div>
                 </section>
                 <section className="grid transaction-body">
                     {
-                        activeTab === "Refferal History"
-                            ? <ReferralHistory />
-                            : <NormalTransaction />
+                        activeTab === "Transaction History"
+                            ? <NormalTransaction />
+                            : activeTab === "Refferal History"
+                                ? <ReferralHistory />
+                                : <StakeHistory />
                     }
                 </section>
             </Transaction>
