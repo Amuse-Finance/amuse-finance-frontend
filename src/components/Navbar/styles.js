@@ -9,6 +9,7 @@ export const NavbarContainer = styled.div`
     height: auto;
     // padding: 2rem;
     z-index: 1;
+    position: relative;
 
     & .nav-list ul a,
     & .toggle {

@@ -7,10 +7,12 @@ import './navbar.css';
 
 import { NavbarContainer } from './styles'
 import user from '../../assets/login/userLogin.jpeg';
+import Panel from '../Panel';
 
 const Navbar = ({ theme }) => {
     const [navOpen, setNavOpen] = useState(false);
-    const { loading, connectDapp } = useContext(web3Context);
+    const [panelState, setPanelState] = useState(false)
+    const { loading } = useContext(web3Context);
 
     let Navlist = ['', 'Dashboard', 'Vault', 'Governance', 'Contact', 'FAQ'];
     Navlist = Navlist.map((item, i) => {
@@ -33,10 +35,11 @@ const Navbar = ({ theme }) => {
             <div className={ navOpen ? 'grid nav-list nav-list-mobile' : 'grid nav-list' }>
                 <ul>{Navlist}</ul>
             </div>
-            <div className="grid nav-icons" onClick={loading ? connectDapp : undefined}>
+            <div className="grid nav-icons" onClick={() => setPanelState(() => !panelState)}>
                 <span className='grid'>
                     <img src={user} alt="user" className={!loading ? "online" : ""}  />
                 </span>
+                {panelState && <Panel className="grid" />}
             </div>
             <div className="toggle">
                 <AiOutlineMenu className='icon' onClick={() => setNavOpen(!navOpen)} />
