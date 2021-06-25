@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import reactDom from "react-dom";
-import { BsArrowRight } from "react-icons/bs";
 import { web3Context } from "../Context";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { shortener } from "../Helper";

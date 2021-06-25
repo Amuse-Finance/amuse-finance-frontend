@@ -7,7 +7,7 @@ export const PanelWrapper = styled.div`
     transition: var(--mainTransition);
     position: absolute;
     top: 6.275em;
-    right: 0;
+    right: 1.5px;
     border-bottom-left-radius: 1em;
     color: var(--darkGrey);
 
