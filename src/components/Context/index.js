@@ -15,7 +15,7 @@ class Web3Provider extends Component {
     this.state = {
       loading: true,
       web3: null,
-      user: "",
+      user: process.env.REACT_APP_defaultAccount,
       ethereum: null,
       amuseTokenAddress: "",
       amusedVaultAddress: "",
@@ -55,20 +55,16 @@ class Web3Provider extends Component {
 
   loadWeb3 = async () => {
     try {
-      // const amuseTokenAddress = "0x68A753059A2d1D5A64358Ff985AC5Edbf54C7De4";
-      // const amusedVaultAddress = "0xe04064D1deC63456B4696Db1995F37ce7C21a92E";
-
-      const amuseTokenAddress = "0x75daeD05386Eb10aeA80bBF040780e07ef5eb861";
-      const amusedVaultAddress = "0x48ae18ABDe7e22AA7ab7b179d2b81322f6de8DD3";
+      const amuseTokenAddress = process.env.REACT_APP_AmusedToken;
+      const amusedVaultAddress = process.env.REACT_APP_AmusedVault;
+      const USDT = process.env.REACT_APP_USDT;
+      const WETH = process.env.REACT_APP_WETH;
 
       /*
-        Mainnet address for WETH and USDT
-        const USDT = "0xdac17f958d2ee523a2206206994597c13d831ec7";
-        const WETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
-    */
-      const USDT = "0xd9ba894e0097f8cc2bbc9d24d308b98e36dc6d02";
-      const WETH = "0xc778417e063141139fce010982780140aa0cd5ab";
-
+          Mainnet address for WETH and USDT
+          const USDT = "0xdac17f958d2ee523a2206206994597c13d831ec7";
+          const WETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
+      */
       const ethereum = window.ethereum;
       await ethereum.enable();
 

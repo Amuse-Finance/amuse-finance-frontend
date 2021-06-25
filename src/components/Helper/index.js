@@ -13,6 +13,7 @@ const walletShortner = (_data, _start, _end) => {
 }
 
 const shortener = (_data) => {
+    if(_data === undefined) return;
     const _splited = _data.split('');
     const _length = _splited.length;
 
