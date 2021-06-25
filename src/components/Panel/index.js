@@ -7,7 +7,6 @@ import { PanelWrapper } from "./styles";
 
 const Panel = () => {
     const { user } = useContext(web3Context);
-    console.log(shortener(user));
 
     return reactDom.createPortal(
         <PanelWrapper className="grid">

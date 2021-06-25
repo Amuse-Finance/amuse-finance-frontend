@@ -70,11 +70,16 @@ class Web3Provider extends Component {
 
       // Get Network / chainId
       const _chainId = await ethereum.request({ method: "eth_chainId" });
-      if (parseInt(_chainId, 16) !== 4)
-        return alert("Amused: Connect wallet to a Rinkeby network");
-
       const _accounts = await ethereum.request({ method: "eth_accounts" });
       const web3 = new Web3(ethereum);
+      const _netWorkType = await web3.eth.net.getNetworkType();
+
+      if (parseInt(_chainId, 16) !== 1 && parseInt(_chainId, 16) !== 4) {
+        this.setState({ loading: true });
+        return alert(`Amused: Invalid network detected. Please switch from ${_netWorkType} to Mainnet / Rinkeby`);
+      }
+
+
       const user = web3.utils.toChecksumAddress(_accounts[0]);
 
       const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
