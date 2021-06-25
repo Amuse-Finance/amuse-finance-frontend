@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PanelWrapper = styled.div`
-    width: 350px;
+    width: 270px;
     height: auto;
     background: var(--lightGrey);
     transition: var(--mainTransition);
@@ -13,15 +13,13 @@ export const PanelWrapper = styled.div`
 
     & header {
         grid-template-columns: repeat(2, 1fr);
-        width: 100%;
         height: auto;
         color: var(--darkGrey);
-        padding: 0 1em;
         place-items: center;
-        grid-gap: 0 2em;
+        grid-gap: 0 .5em;
         border-bottom: 2px solid var(--mainWhite);
 
-        & .button {
+        & .grid {
             padding: 1em;
             border-radius: 1em;
             text-align: center;
@@ -33,16 +31,28 @@ export const PanelWrapper = styled.div`
     }
 
     & .list-container {
-        padding: 2em 0;
-        grid-gap: 0 4em;
-        line-height: 2;
-        height: auto;
+        width: 100%;
+        place-items: start;
         margin: 0;
+        line-height: 2;
+        transition: var(--mainTransition);
+        
+        & .list-item {
+            text-align: left;
+            color: green;
+            width: 100%;
+            padding: .5em 1em;
+            border-radius: inherit;
+            transition: all 1s ease-in-out;
+            cursor: pointer;
 
-        & li {
-            grid-template-columns: repeat(2, 1fr);
-            place-items: start;
+            &:hover {
+                background: green;
+                color: var(--white);
+            }
         }
+
+        & .list-item:nth-last-child(1) { border-bottom-left-radius: 1em; }
     }
 
 `;

@@ -13,37 +13,29 @@ const Panel = () => {
     return reactDom.createPortal(
         <PanelWrapper className="grid">
             <header className="grid">
-                <div className="grid button">
+                <div className="grid">
                     <a href={`https://etherscan.io/address/${user}`}>
                         {shortener(user)}
                     </a>
                 </div>
-                <div className="grid button">
-                    <p className="grid">Rinkeby</p>
+                <div className="grid">
+                    <h2>Rinkeby</h2>
                 </div>
             </header>
-            <ul className="grid list-container">
-                <li className="grid">
-                    <BsArrowRight className="icon" />
-                    <span>My Account</span>
-                </li>
-                <li className="grid">
-                    <BsArrowRight className="icon" />
-                    <span>My Account</span>
-                </li>
-                <li className="grid">
-                    <BsArrowRight className="icon" />
-                    <span>My Account</span>
-                </li>
-                <li className="grid">
-                    <BsArrowRight className="icon" />
-                    <span>My Account</span>
-                </li>
-                <li className="grid">
-                    <BsArrowRight className="icon" />
-                    <span>My Account</span>
-                </li>
-            </ul>
+            <div className="grid list-container">
+                <div className="grid list-item">
+                    <h3>My Account</h3>
+                </div>
+                <div className="grid list-item">
+                    <h3>Referral</h3>
+                </div>
+                <div className="grid list-item">
+                    <h3>Get Testnet Faucets</h3>
+                </div>
+                <div className="grid list-item">
+                    <h3>Get Support</h3>
+                </div>
+            </div>
         </PanelWrapper>,
         document.querySelector("#portal")
     )
