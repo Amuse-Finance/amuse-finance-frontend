@@ -13,21 +13,26 @@ import { web3Context } from "../../components/Context";
 
 function Home() {
   const [inputAmount, setInputAmount] = useState("");
-  const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(cashbackCalculator());
+  const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(
+    cashbackCalculator()
+  );
   const { cashbackPercentage } = useContext(web3Context);
 
-  const handleInput = async e => {
-      e.preventDefault();
-      if(isNaN(e.target.value)) return;
-      setInputAmount(() => e.target.value);
-      if(parseFloat(cashbackPercentage) === 0 || e.target.value === "") {
-        setCashbackCalculatorInput(() => cashbackCalculator());
-        return;
-      }
-      const _result = cashbackCalculator(parseFloat(e.target.value), cashbackPercentage);
-      console.log(_result);
-      setCashbackCalculatorInput(() => _result);
-  }
+  const handleInput = async (e) => {
+    e.preventDefault();
+    if (isNaN(e.target.value)) return;
+    setInputAmount(() => e.target.value);
+    if (parseFloat(cashbackPercentage) === 0 || e.target.value === "") {
+      setCashbackCalculatorInput(() => cashbackCalculator());
+      return;
+    }
+    const _result = cashbackCalculator(
+      parseFloat(e.target.value),
+      cashbackPercentage
+    );
+    console.log(_result);
+    setCashbackCalculatorInput(() => _result);
+  };
 
   return (
     <div className="grid">
@@ -35,13 +40,13 @@ function Home() {
         style={{ height: "75vh" }}
         className="relative bg-blue-900 flex justify-center items-center "
       >
-        <div>
+        <div className="container mx-auto px-0 md:px-10">
           <Particles
             style={{ position: "absolute", top: 0, right: 0 }}
             params={particlesoptions}
           />
-          <section className="container mx-auto flex flex-col md:flex-row justify-between items-center ">
-            <div className="w-full lg:w-1/2 text-center md:text-left z-50">
+          <section className="flex flex-col md:flex-row justify-between items-center ">
+            <div className="w-full mx-auto md:mx-0 lg:w-1/2 z-50 text-center md:text-left">
               <h1 className="text-gray-50 text-2xl md:text-5xl font-semibold">
                 100% Cashbacks On
                 <span className="text-red-500">
@@ -58,8 +63,7 @@ function Home() {
                 From the Dev of UniDexBot.com
               </p>
               <div>
-                <CustomButton styles="ring-8 ring-inset ring-offset-2 ring-offset-blue-600 hover:bg-blue-600 p-3 md:p-5 mr-3 mb-3 sm:mb-0 text-white rounded">
-                  {/* BE8DA4 shadow border-blue-600 hover:bg-blue-600 border-3 border-solid */}
+                <CustomButton styles="shadow border-blue-400 hover:bg-blue-400 border-3 border-solid p-3 md:p-5 mr-3 mb-3 sm:mb-0 text-white rounded">
                   LAUNCH APP
                 </CustomButton>
                 <CustomButton styles="shadow border-blue-600 border-3 border-solid bg-blue-600 p-3 md:p-5 text-white rounded">
@@ -130,7 +134,7 @@ function Home() {
             <h4>TOKEN DISTRIBUTION</h4>
             <h1>Initial Distibution</h1>
           </header>
-          <FisionDoughnut  type="doughnut3d" showPercentValues={true} />
+          <FisionDoughnut type="doughnut3d" showPercentValues={true} />
         </div>
 
         <div className="grid fusion-chart">
@@ -139,9 +143,17 @@ function Home() {
               <h1>Cashback Calculator</h1>
             </header>
             <form className="grid">
-                <input value={inputAmount} placeholder="Enter amount in USD" onChange={handleInput} />
+              <input
+                value={inputAmount}
+                placeholder="Enter amount in USD"
+                onChange={handleInput}
+              />
             </form>
-            <FisionDoughnut type="doughnut2d" data={cashbackCalculatorInput} numberPrefix="$" />
+            <FisionDoughnut
+              type="doughnut2d"
+              data={cashbackCalculatorInput}
+              numberPrefix="$"
+            />
           </div>
         </div>
       </ChartWrapper>
