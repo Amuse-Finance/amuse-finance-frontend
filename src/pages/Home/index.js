@@ -31,7 +31,6 @@ function Home() {
       parseFloat(e.target.value),
       cashbackPercentage
     );
-    console.log(_result);
     setCashbackCalculatorInput(() => _result);
   };
 

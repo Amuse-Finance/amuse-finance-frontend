@@ -4,6 +4,7 @@ import axios from "axios";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
 import { fixedDataArray, getRefferalHistory, getStakedHistory } from "../Helper";
+require('dotenv/config');
 
 const web3Context = createContext();
 
