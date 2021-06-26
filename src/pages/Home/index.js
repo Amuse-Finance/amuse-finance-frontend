@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Typewriter from "typewriter-effect";
+import { Link } from "react-router-dom";
 // import { IoMdSwap } from "react-icons/io";
 import CustomButton from "../../components/CustomButton";
 import logo1 from "../../images/logo1.jpg";
@@ -60,11 +61,11 @@ function Home() {
                 </span>
               </h1>
               <p className="text-gray-100 md:text-2xl my-5 ">
-                From the Dev of UniDexBot.com
+                From the Dev of TweetsZone.com
               </p>
               <div>
                 <CustomButton styles="shadow border-blue-400 hover:bg-blue-400 border-3 border-solid p-3 md:p-5 mr-3 mb-3 sm:mb-0 text-white rounded">
-                  LAUNCH APP
+                  <Link to="/dashboard">LAUNCH APP</Link>
                 </CustomButton>
                 <CustomButton styles="shadow border-blue-600 border-3 border-solid bg-blue-600 p-3 md:p-5 text-white rounded">
                   DOWNLOAD WHITE PAPER

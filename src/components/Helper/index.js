@@ -6,12 +6,6 @@ const toFixed = _amount => Number(_amount).toFixed(2);
 
 const formatNumber = _amount => new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(Number(_amount));
 
-const walletShortner = (_data, _start, _end) => {
-    let result = '';
-    for(let i = _start;  i < _end; i++) result = [...result, _data[i]];
-    return result.join('');
-}
-
 const shortener = (_data) => {
     if(_data === undefined) return;
     const _splited = _data.split('');
@@ -137,7 +131,6 @@ const getStakedHistory = async (web3, user, amusedVault) => {
 export { 
     toFixed, 
     formatNumber,
-    walletShortner,
     shortener,
     buildDoughnutChart,
     fixedDataArray,

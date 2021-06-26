@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { web3Context } from "../../components/Context";
-import Stake from "../../components/Stake";
-import Unstake from "../../components/Unstake";
+import Stake from "./Stake";
+import Unstake from "./Unstake";
 import { VaultContainer } from "./styles";
 
 const Vault = () => {

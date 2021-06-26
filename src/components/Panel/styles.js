@@ -50,6 +50,8 @@ export const PanelWrapper = styled.div`
                 background: green;
                 color: var(--white);
             }
+
+            & h3 {  width: 100%; }
         }
 
         & .list-item:nth-last-child(1) { border-bottom-left-radius: 1em; }

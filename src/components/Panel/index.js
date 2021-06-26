@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import reactDom from "react-dom";
+import { Link } from "react-router-dom";
 import { web3Context } from "../Context";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { shortener } from "../Helper";
@@ -22,16 +23,26 @@ const Panel = () => {
             </header>
             <div className="grid list-container">
                 <div className="grid list-item">
-                    <h3>My Account</h3>
+                    <h3 className="grid">
+                        <Link to="/my-account">My Account</Link>
+                    </h3>
                 </div>
                 <div className="grid list-item">
-                    <h3>Referral</h3>
+                    <h3 className="grid">
+                        <Link to="/referral">Referral</Link>
+                    </h3>
                 </div>
                 <div className="grid list-item">
-                    <h3>Get Testnet Faucets</h3>
+                    <h3 className="grid">
+                        <Link to="/faucet">Get Testnet Faucets</Link>
+                    </h3>
                 </div>
                 <div className="grid list-item">
-                    <h3>Get Support</h3>
+                    <h3 className="grid">
+                        <Link to="/support">
+                            Get Support
+                        </Link>
+                    </h3>
                 </div>
             </div>
         </PanelWrapper>,

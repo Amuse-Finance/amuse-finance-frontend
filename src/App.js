@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import { handleEffect } from "./components/Helper/handleEffect";
 import ScrollTop from "./components/ScrollTop";
 import Faq from "./pages/Faq";
+import Faucet from "./pages/Faucet";
 require("dotenv/config");
 
 const ethereum = window.ethereum;
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/vault" component={Vault} />
         <Route exact path="/faq" component={Faq} />
+        <Route exact path="/faucet" component={Faucet} />
       </Switch>
       <ScrollTop />
       <Footer />

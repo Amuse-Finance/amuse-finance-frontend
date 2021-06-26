@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { web3Context } from "../Context";
-import Error from "../Error";
-import { ErrorBoundary } from "../ErrorBoundary";
+import { web3Context } from "../../../components/Context";
+import Error from "../../../components/Error";
+import { ErrorBoundary } from "../../../components/ErrorBoundary";
 
 const Unstake = () => {
     const [unstakeInput, setUnstakeInput] = useState("");
