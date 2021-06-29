@@ -157,42 +157,6 @@ function Home() {
           </div>
         </div>
       </ChartWrapper>
-
-      {/* <section className="py-10">
-        <div className="md:w-full lg:w-3/4 mx-auto bg-gray-500 p-7 rounded flex flex-col sm:flex-row justify-between items-center">
-          <div>
-            <p>Convert COIN to USD</p>
-            <span className="flex ">
-              <input
-                className="w-full mr-3 outline-none p-3 bg-gray-400 rounded"
-                placeholder="Enter amount..."
-              />
-              <select className="outline-none p-3 px-4 bg-black text-white rounded">
-                <option>ETH</option>
-                <option>BTC</option>
-                <option>BNB</option>
-              </select>
-            </span>
-          </div>
-          <div className="m-3.5 sm:self-end sm:my-0">
-            <IoMdSwap className="icon text-5xl" />
-          </div>
-          <div>
-            <p>Convert COIN to USD</p>
-            <span className="flex ">
-              <input
-                className="w-full mr-3 outline-none p-3 bg-gray-400 rounded"
-                placeholder="Enter amount..."
-              />
-              <select className="outline-none p-3 px-4 bg-black text-white rounded">
-                <option>ETH</option>
-                <option>BTC</option>
-                <option>BNB</option>
-              </select>
-            </span>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

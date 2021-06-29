@@ -17,7 +17,7 @@ export const ChartWrapper = styled.div`
          & h1 { font-size: 2em; }
 
         & input {
-            margin-top: 1em;
+            margin: 1em 0;
             padding: .5em 1em;
             border: .05em solid var(--darkGrey);
             background: transparent;
