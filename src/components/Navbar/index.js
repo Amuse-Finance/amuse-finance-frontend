@@ -7,7 +7,7 @@ import './navbar.css';
 
 import { NavbarContainer } from './styles'
 import user from '../../assets/login/userLogin.jpeg';
-import Panel from '../Panel';
+import Panel from './Panel';
 
 const Navbar = ({ theme }) => {
     const [navOpen, setNavOpen] = useState(false);

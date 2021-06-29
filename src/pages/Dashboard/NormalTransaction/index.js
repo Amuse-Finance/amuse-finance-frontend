@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { web3Context } from "../Context";
-import { shortener } from "../Helper";
-import Loading from "../Loading";
+import { web3Context } from "../../../components/Context";
+import { shortener } from "../../../components/Helper";
+import Loading from "../../../components/Loading";
 import { NormalTransactionWrapper } from "./styles";
-import { ErrorBoundary } from "../ErrorBoundary";
+import { ErrorBoundary } from "../../../components/ErrorBoundary";
 require('dotenv/config');
 
 

@@ -3,9 +3,9 @@ import { IoMdSwap } from "react-icons/io";
 import { web3Context } from "../../components/Context";
 import { DashboardContainer } from "./styles.js";
 import { Transaction } from "./transaction.styles.js";
-import ReferralHistory from "../../components/ReferralHistory";
-import NormalTransaction from "../../components/NormalTransaction";
-import StakeHistory from "../../components/StakeHistory";
+import ReferralHistory from "./ReferralHistory";
+import NormalTransaction from "./NormalTransaction";
+import StakeHistory from "./StakeHistory";
 
 
 const Dashboard =  () => {

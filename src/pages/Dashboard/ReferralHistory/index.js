@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { web3Context } from "../Context";
-import { shortener } from "../Helper";
+import { web3Context } from "../../../components/Context";
+import { shortener } from "../../../components/Helper";
 import { RefferalWrapper } from "./styles";
-import { ErrorBoundary } from "../ErrorBoundary";
+import { ErrorBoundary } from "../../../components/ErrorBoundary";
 
 const ReferralHistory = () => {
     const { amuseTokenAddress, referralHistory } = useContext(web3Context);

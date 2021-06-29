@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Accordion from "../../components/Accordion";
+import Accordion from "./Accordion";
 import CustomButton from "../../components/CustomButton";
 
 function Faq() {

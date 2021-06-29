@@ -1,6 +1,6 @@
 import React from "react";
 import { Accordion } from "react-accordion-collapsible";
-import { ErrorBoundary } from "../ErrorBoundary";
+import { ErrorBoundary } from "../../../components/ErrorBoundary";
 
 const AccordionCom = ({ defaultOpen }) => {
   return (

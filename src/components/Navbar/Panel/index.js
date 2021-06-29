@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import reactDom from "react-dom";
 import { Link } from "react-router-dom";
-import { web3Context } from "../Context";
-import { ErrorBoundary } from "../ErrorBoundary";
-import { shortener } from "../Helper";
+import { web3Context } from "../../Context";
+import { ErrorBoundary } from "../../ErrorBoundary";
+import { shortener } from "../../Helper";
 import { PanelWrapper } from "./styles";
 
 const Panel = () => {
@@ -24,7 +24,12 @@ const Panel = () => {
             <div className="grid list-container">
                 <div className="grid list-item">
                     <h3 className="grid">
-                        <Link to="/my-account">My Account</Link>
+                        <Link to="/dashboard">Dashboard</Link>
+                    </h3>
+                </div>
+                <div className="grid list-item">
+                    <h3 className="grid">
+                        <Link to="/vault">Vault</Link>
                     </h3>
                 </div>
                 <div className="grid list-item">

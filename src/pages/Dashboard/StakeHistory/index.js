@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { web3Context } from '../Context';
-import ErrorBoundary from "../ErrorBoundary/";
-import { shortener } from '../Helper';
+import { web3Context } from '../../../components/Context';
+import ErrorBoundary from "../../../components/ErrorBoundary/";
+import { shortener } from '../../../components/Helper';
 import { StakeTransactionWrapper } from './styles';
 
 const StakeHistory = () => {

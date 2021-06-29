@@ -7,7 +7,7 @@ import logo1 from "../../images/logo1.jpg";
 import Particles from "react-particles-js";
 import particlesoptions from "../particleOptions";
 import ethLogo from "../../assets/ethereum-logo.png";
-import FisionDoughnut from "../../components/FisionDoughnut";
+import FisionDoughnut from "./FisionDoughnut";
 import { ChartWrapper } from "./styles";
 import { cashbackCalculator } from "../../components/Helper";
 import { web3Context } from "../../components/Context";
