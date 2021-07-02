@@ -14,12 +14,19 @@ const Navbar = ({ theme }) => {
     const [panelState, setPanelState] = useState(false)
     const { loading } = useContext(web3Context);
 
-    let Navlist = ['', 'Dashboard', 'Vault', 'Governance', 'Contact', 'FAQ'];
-    Navlist = Navlist.map((item, i) => {
+    const pages = [
+        { name: "Home", path: "" },
+        { name: "Dashboard", path: "dashboard" },
+        { name: "Vault", path: "vault" },
+        { name: "Team", path: "team" },
+        { name: "Contact", path: "contact" },
+        { name: "FAQ", path: "faq" },
+    ];
+
+    const Navlist = pages.map((item, i) => {
+        const { name, path } = item;
         return (
-            <NavLink key={i} exact to={item.replace('','/').toLowerCase()} className='mainSpacing'>
-                {item === '' ? 'Home' : item}
-            </NavLink>
+            <NavLink key={i} exact to={path.replace('','/').toLowerCase()} className='mainSpacing'>{name}</NavLink>
         );
     });
 
@@ -28,7 +35,7 @@ const Navbar = ({ theme }) => {
             <div className="grid nav-brand">
                 <Link to='/'>
                     <h2 className='mainSpacing'>
-                        Amused
+                        Amused.Finance
                     </h2>
                 </Link>
             </div>

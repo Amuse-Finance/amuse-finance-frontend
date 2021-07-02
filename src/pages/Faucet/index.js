@@ -6,7 +6,7 @@ import { FaucetContainer } from './styles';
 const Faucet = () => {
     const [walletAddress, setWalletAddress] = useState("");
     const [faucetAmount, setFaucetAmount] = useState("");
-    const { loading, user } = useContext(web3Context);
+    const { loading, user, requestFaucet } = useContext(web3Context);
 
     useEffect(() => {
         if(loading) return;
@@ -25,10 +25,15 @@ const Faucet = () => {
         );
     }
 
+    const _handleSubmit = async e => {
+        e.preventDefault();
+        await requestFaucet(walletAddress, faucetAmount);
+    }
+
     return (
         <FaucetContainer className="grid">
             <div className="grid wrapper">
-                <form className="grid">
+                <form className="grid" onSubmit={_handleSubmit}>
                     <h2>Request for Testnet Faucet</h2>
                     <input 
                         type="text" value={walletAddress} 

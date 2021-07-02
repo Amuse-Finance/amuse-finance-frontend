@@ -24,13 +24,8 @@ const Panel = () => {
             <div className="grid list-container">
                 <div className="grid list-item">
                     <h3 className="grid">
-                        <Link to="/dashboard">Dashboard</Link>
-                    </h3>
-                </div>
-                <div className="grid list-item">
-                    <h3 className="grid">
-                        <Link to="/vault">Vault</Link>
-                    </h3>
+                    <Link to="/my-account">My Account</Link>
+                </h3>
                 </div>
                 <div className="grid list-item">
                     <h3 className="grid">

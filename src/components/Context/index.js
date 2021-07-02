@@ -3,7 +3,8 @@ import Web3 from "web3";
 import axios from "axios";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { fixedDataArray, getRefferalHistory, getStakedHistory } from "../Helper";
+import { abi as amusedFaucetABI } from "../../contracts/AmusedFaucet.json";
+import { fixedDataArray, getRefferalHistory, getStakedHistory, postData } from "../Helper";
 require('dotenv/config');
 
 const web3Context = createContext();
@@ -24,6 +25,7 @@ class Web3Provider extends Component {
       WETH: "",
       amusedToken: null,
       amusedVault: null,
+      amusedFaucet: null,
       balance: 0,
       cashbackPercentage: 0,
       stakes: {
@@ -58,6 +60,7 @@ class Web3Provider extends Component {
     try {
       const amuseTokenAddress = process.env.REACT_APP_AmusedToken;
       const amusedVaultAddress = process.env.REACT_APP_AmusedVault;
+      const amusedFaucetAddress = process.env.REACT_APP_AmusedFaucet;
       const USDT = process.env.REACT_APP_USDT;
       const WETH = process.env.REACT_APP_WETH;
 
@@ -67,6 +70,7 @@ class Web3Provider extends Component {
           const WETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
       */
       const ethereum = window.ethereum;
+      if(!ethereum) return new Error("Non-Ethereum browser deteected. Please install metamask and relaod the page");
       await ethereum.enable();
 
       // Get Network / chainId
@@ -85,6 +89,7 @@ class Web3Provider extends Component {
 
       const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
       const amusedVault = new web3.eth.Contract(amusedVaultABI, amusedVaultAddress);
+      const amusedFaucet = new web3.eth.Contract(amusedFaucetABI, amusedFaucetAddress);
 
       this.setState({
         loading: false,
@@ -97,6 +102,7 @@ class Web3Provider extends Component {
         WETH,
         amusedToken,
         amusedVault,
+        amusedFaucet,
       });
     } catch (error) {
       console.log(error.message);
@@ -291,6 +297,50 @@ class Web3Provider extends Component {
     }
   };
 
+
+  requestFaucet = async (_account = this.state.user, amount, { loading, ethereum, user, amusedFaucet } = this.state) => {
+    if(loading) return;
+    try {
+      const chainId = parseInt(await ethereum.request({ method: "eth_chainId" }), 16);
+      const title = "Test network faucet request";
+      const msgParams = JSON.stringify({
+        domain: {
+          chainId,
+          name: "Amused.Finance",
+          version: "1",
+        },
+        message: { title, user: _account, amount },
+        primaryType: "FaucetRequest",
+        types: {
+          EIP712Domain: [
+            { name: "name", type: "string" },
+            { name: "version", type: "string" },
+            { name: "chainId", type: "uint256" },
+          ],
+          FaucetRequest: [
+            { name: "title", type: "string" },
+            { name: "user", type: "address" },
+            { name: "amount", type: "uint256" }
+          ],
+        },
+      });
+
+      const signature = await ethereum.request({
+        method: "eth_signTypedData_v4",
+        params: [_account, msgParams],
+        from: user
+      });
+      await amusedFaucet.methods.lastWithdrawTime(_account).call();
+      const _data = { user, signature, chainId, amount };
+      const _url = "https://amused-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
+      const _result = await postData(_data, _url);
+      console.log(_result)
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
   render() {
     return (
       <web3Context.Provider
@@ -304,6 +354,7 @@ class Web3Provider extends Component {
           approve: this.approve,
           stake: this.stake,
           unstake: this.unstake,
+          requestFaucet: this.requestFaucet
         }}
       >
         {this.props.children}

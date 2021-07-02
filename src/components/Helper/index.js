@@ -128,6 +128,17 @@ const getStakedHistory = async (web3, user, amusedVault) => {
     }
 }
 
+const postData = async (data, url) => {
+    try {
+        const _response = await axios({
+            method: 'post',
+            url,
+            data
+        })
+        return _response;
+    } catch (error) { return error; }
+}
+
 export { 
     toFixed, 
     formatNumber,
@@ -137,4 +148,5 @@ export {
     getRefferalHistory,
     getStakedHistory,
     cashbackCalculator,
+    postData
 }
