@@ -10,6 +10,7 @@ require('dotenv/config');
 const NormalTransaction = () => {
     const context = useContext(web3Context);
     const { loading, fromWei, transactionHistory } = context;
+
     if(loading) return <Loading />;
 
     let _index = transactionHistory.length;

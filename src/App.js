@@ -14,7 +14,6 @@ import Faucet from "./pages/Faucet";
 import Team from "./pages/Team";
 
 import { handleEffect } from "./components/Helper/handleEffect";
-import TransactionModal from "./components/TransactionModal";
 
 require("dotenv/config");
 
@@ -35,7 +34,6 @@ function App() {
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/faucet" component={Faucet} />
       </Switch>
-      <TransactionModal />
       <ScrollTop />
       <Footer />
     </div>

@@ -1,15 +1,23 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { web3Context } from "../../../components/Context";
 import Error from "../../../components/Error";
 import { ErrorBoundary } from "../../../components/ErrorBoundary";
+import TransactionModal from "../../../components/TransactionModal";
 
 const Unstake = () => {
     const [unstakeInput, setUnstakeInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [txnResponse, setTxnResponse] = useState({ status: false, hash: null });
 
     const context = useContext(web3Context);
     const { unstake, stakes } = context;
     const { stakes: _stakes } = stakes;
+
+    useEffect(() => {
+        if(txnResponse.status) setTimeout(() => {
+            setTxnResponse(()=> ({status: false, hash: null}))
+        }, 7000);
+    }, [txnResponse.status]);
     
     const validateInput = e => {
         e.preventDefault();
@@ -20,12 +28,13 @@ const Unstake = () => {
     const _unstake = async e => {
         e.preventDefault();
         if(parseFloat(unstakeInput) === "") setUnstakeInput(() => _stakes);
-        const { status, data } = await unstake(unstakeInput);
+        const { status, transactionHash: hash, data } = await unstake(unstakeInput);
         setUnstakeInput(() => "");
         if(!status) {
             setErrorMessage(() => data);
             setTimeout(() => window.location.reload(), 10000);
         }
+        setTxnResponse(()=> ({status: true, hash}));
     }
 
     return (
@@ -37,6 +46,7 @@ const Unstake = () => {
                 onChange={validateInput} 
             />
             <button onClick={_unstake}>Unlock</button>
+            {txnResponse.status && <TransactionModal status="SUCCESS" hash={txnResponse.hash} />}
             { errorMessage.length > 0 && <Error error={errorMessage} /> }
         </form>
     )

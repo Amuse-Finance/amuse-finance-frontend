@@ -231,11 +231,11 @@ class Web3Provider extends Component {
       // const gasPrice = await web3.eth.getGasPrice();
       const _formattedStakeAmount = this.toWei(_amount);
       const _response = await amusedToken.methods.approve(amusedVaultAddress, _formattedStakeAmount).send({
-          from: user,
-          // gasPrice,
-        });
+        from: user,
+        // gasPrice,
+      });
       await this.reRender();
-      return { status: true, data: _response };
+      return { ..._response };
     } catch (error) {
       return { status: false, data: this.parseErrorMessage(error) };
     }
@@ -252,7 +252,24 @@ class Web3Provider extends Component {
         // gasPrice,
       });
       await this.reRender();
-      return { status: true, data: _response };
+      return { ..._response };
+    } catch (error) {
+      return {
+        status: false,
+        data: this.parseErrorMessage(error),
+      };
+    }
+  };
+
+  unstake = async (_amount, { loading, user, amusedVault } = this.state) => {
+    try {
+      if (loading) return;
+      await amusedVault.methods.unstake(this.toWei(_amount)).call({ from: user });
+      const _response = await amusedVault.methods.unstake(this.toWei(_amount)).send({
+        from: user,
+      });
+      await this.reRender();
+      return { ..._response };
     } catch (error) {
       return {
         status: false,
@@ -279,24 +296,6 @@ class Web3Provider extends Component {
       return  _result;
     } catch (error) { return error; }
   }
-
-  unstake = async (_amount, { loading, user, amusedVault } = this.state) => {
-    try {
-      if (loading) return;
-      await amusedVault.methods.unstake(this.toWei(_amount)).call({ from: user });
-      const _response = await amusedVault.methods.unstake(this.toWei(_amount)).send({
-        from: user,
-      });
-      await this.reRender();
-      return { status: true, data: _response };
-    } catch (error) {
-      return {
-        status: false,
-        data: this.parseErrorMessage(error),
-      };
-    }
-  };
-
 
   requestFaucet = async (_account = this.state.user, amount, { loading, ethereum, user, amusedFaucet } = this.state) => {
     if(loading) return;
