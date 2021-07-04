@@ -9,9 +9,10 @@ const Referral = () => {
     const { generateReferralLink } = useContext(web3Context);
     const generateReferral = async e => {
         e.preventDefault();
+
         if(referralLink !== "") return;
         const _sig = await generateReferralLink();
-        setReferralLink(() => `http://localhost:3000/referral/create?referrerID=${_sig}`);
+        setReferralLink(() => `${window.location.href}/create?referrerID=${_sig}`);
     }
     return (
         <ReferralWrapper className="grid">
