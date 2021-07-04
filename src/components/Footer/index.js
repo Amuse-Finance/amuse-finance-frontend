@@ -38,7 +38,7 @@ const Footer = () => {
                     <input type="email" 
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder='enter email address'
+                        placeholder='example@mail.com'
                     />
                 </form>
             </section>

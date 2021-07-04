@@ -16,7 +16,7 @@ const shortener = (_data) => {
     return `${firstPart}...${secondPart}`;
 }
 
-const buildDoughnutChart = (data, _type, numberPrefix, showPercentValues) => {
+const doughnutChartConfig = (data, _type, numberPrefix, showPercentValues) => {
     const _chart = {
         type: _type ? _type : "doughnut2d",
         width: "700",
@@ -25,7 +25,6 @@ const buildDoughnutChart = (data, _type, numberPrefix, showPercentValues) => {
         dataSource: {
             chart: {
                 numberPrefix: numberPrefix ? numberPrefix : "",
-                centerLabel: "Amount for $label: $value",
                 decimals: "2",
                 theme: "fusion",
                 showPercentValues: showPercentValues ? showPercentValues : false,
@@ -63,7 +62,7 @@ const fixedDataArray = async _data => {
 
 const getRefferalHistory = async (web3, amusedToken, user) => {
     try {
-        const startBlock = await (await axios.get("https://amused-finance-backend.herokuapp.com/api/v1/startBlock"))
+        const startBlock = await (await axios.get("https://amused-finance-backend.herokuapp.com/api/v1/startBlock")).data;
         const _endBlock = parseInt(await web3.eth.getBlockNumber());
         let _tempData = [];
         
@@ -143,7 +142,7 @@ export {
     toFixed, 
     formatNumber,
     shortener,
-    buildDoughnutChart,
+    doughnutChartConfig,
     fixedDataArray,
     getRefferalHistory,
     getStakedHistory,

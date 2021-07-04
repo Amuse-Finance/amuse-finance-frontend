@@ -4,19 +4,19 @@ export const ChartWrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
     width: 100vw;
     padding: 1.5em 0;
-    grid-gap: 2em 0;
+    grid-gap: 2em;
 
 
-    & .fusion-chart {
+    .fusion-chart {
         width: 100%;
         grid-gap: 2em 0;
         place-items: center;
         text-align: center;
         line-height: 2;
 
-         & h1 { font-size: 2em; }
+        h1 { font-size: 2em; }
 
-        & input {
+        input {
             margin: 1em 0;
             padding: .5em 1em;
             border: .05em solid var(--darkGrey);

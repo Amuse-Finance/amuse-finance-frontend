@@ -43,8 +43,8 @@ const Team = () => {
                         <img alt="team-member" src={user1} />
                     </div>
                     <div className="grid details">
-                        <h1>Abdullah Zakariyya</h1>
-                        <small>DragonLord</small>
+                        <h1>Ahnum Pan Sharma</h1>
+                        <small>Zues</small>
 
                         <div className="grid social-handles">
                             <FaDiscord />
@@ -60,8 +60,8 @@ const Team = () => {
                         <img alt="team-member" src={user1} />
                     </div>
                     <div className="grid details">
-                        <h1>Abdullah Zakariyya</h1>
-                        <small>DragonLord</small>
+                        <h1>Uthmaan Zakariyya</h1>
+                        <small>Javamind</small>
 
                         <div className="grid social-handles">
                             <FaDiscord />
@@ -77,8 +77,8 @@ const Team = () => {
                         <img alt="team-member" src={user1} />
                     </div>
                     <div className="grid details">
-                        <h1>Abdullah Zakariyya</h1>
-                        <small>DragonLord</small>
+                        <h1>AbdulLateef Raji</h1>
+                        <small>SoftDev</small>
 
                         <div className="grid social-handles">
                             <FaDiscord />

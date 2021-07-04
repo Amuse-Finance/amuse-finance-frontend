@@ -12,21 +12,18 @@ const Panel = () => {
     return reactDom.createPortal(
         <PanelWrapper className="grid">
             <header className="grid">
-                <div className="grid">
-                    <a href={`https://etherscan.io/address/${user}`}>
-                        {shortener(user)}
-                    </a>
+                <div className="grid top">
+                    <h2>Connected with Metamask</h2>
+                    <p>Rinkeby</p>
                 </div>
-                <div className="grid">
-                    <h2>Rinkeby</h2>
+                <div className="grid body">
+                    <div className="grid bg"></div>
+                    <div className="grid wallet">
+                        <a href={`https://rinkeby.etherscan.io/address/${user}`}>{shortener(user)}</a>
+                    </div>
                 </div>
             </header>
             <div className="grid list-container">
-                <div className="grid list-item">
-                    <h3 className="grid">
-                    <Link to="/my-account">My Account</Link>
-                </h3>
-                </div>
                 <div className="grid list-item">
                     <h3 className="grid">
                         <Link to="/referral">Referral</Link>

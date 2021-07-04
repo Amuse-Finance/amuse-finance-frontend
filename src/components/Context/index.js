@@ -1,6 +1,7 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
 import axios from "axios";
+import { AES, enc } from "crypto-js";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
 import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
 import { abi as amusedFaucetABI } from "../../contracts/AmusedFaucet.json";
@@ -12,13 +13,13 @@ const web3Context = createContext();
 class Web3Provider extends Component {
   constructor(props) {
     super(props);
-    
 
     this.state = {
       loading: true,
       web3: null,
       user: process.env.REACT_APP_defaultAccount,
       ethereum: null,
+      INIT_REFERRAL_HASH: "",
       amuseTokenAddress: "",
       amusedVaultAddress: "",
       USDT: "",
@@ -64,11 +65,6 @@ class Web3Provider extends Component {
       const USDT = process.env.REACT_APP_USDT;
       const WETH = process.env.REACT_APP_WETH;
 
-      /*
-          Mainnet address for WETH and USDT
-          const USDT = "0xdac17f958d2ee523a2206206994597c13d831ec7";
-          const WETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
-      */
       const ethereum = window.ethereum;
       if(!ethereum) return new Error("Non-Ethereum browser deteected. Please install metamask and relaod the page");
       await ethereum.enable();
@@ -84,8 +80,8 @@ class Web3Provider extends Component {
         return alert(`Amused: Invalid network detected. Please switch from ${_netWorkType} to Mainnet / Rinkeby`);
       }
 
-
       const user = web3.utils.toChecksumAddress(_accounts[0]);
+      const INIT_REFERRAL_HASH = "REFERRAL_CODEHASH";
 
       const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
       const amusedVault = new web3.eth.Contract(amusedVaultABI, amusedVaultAddress);
@@ -96,6 +92,7 @@ class Web3Provider extends Component {
         web3,
         user,
         ethereum,
+        INIT_REFERRAL_HASH,
         amuseTokenAddress,
         amusedVaultAddress,
         USDT,
@@ -278,6 +275,27 @@ class Web3Provider extends Component {
     }
   };
 
+  registerReferrer = async (_account, { loading, web3, user, amusedToken } = this.state) => {
+    if(loading) return;
+    try {
+      const _referrer = this.toChecksumAddress(_account);
+      await amusedToken.methods.addReferrer(_referrer).call({ from: user });
+      const _response = await amusedToken.methods.addReferrer(_referrer).send({
+        from: user
+      });
+      return { ..._response };
+    } catch (error) {
+      const _errResponse = !this.parseErrorMessage(error).includes("Cannot read property 'words' of undefined")
+        ? this.parseErrorMessage(error)
+        : "Invalid Referrer ID";
+
+      return {
+        status: false,
+        data: _errResponse
+      };
+    }
+  }
+
   getRefferalHistory = async ({ loading, web3, user, amusedToken } = this.state) => {
     try {
       if (loading) return;
@@ -340,6 +358,28 @@ class Web3Provider extends Component {
     }
   }
 
+  generateReferralLink = async ({ loading, user, INIT_REFERRAL_HASH } = this.state) => {
+    if(loading) return;
+    try {
+      const referralID = AES.encrypt(user, INIT_REFERRAL_HASH).toString();
+      const _result = referralID.replaceAll("=", "");
+      return _result;
+    } catch (error) {
+      console.log(error)
+      return error;
+    }
+  }
+
+  decryptReferrerHash = (_data, { INIT_REFERRAL_HASH } = this.state) => {
+    try {
+      const _result = AES.decrypt(_data, INIT_REFERRAL_HASH);
+      const _referrer = _result.toString(enc.Utf8);
+      return _referrer;
+    } catch (error) {
+      return error;
+    }
+  }
+
   render() {
     return (
       <web3Context.Provider
@@ -353,7 +393,10 @@ class Web3Provider extends Component {
           approve: this.approve,
           stake: this.stake,
           unstake: this.unstake,
-          requestFaucet: this.requestFaucet
+          registerReferrer: this.registerReferrer,
+          requestFaucet: this.requestFaucet,
+          generateReferralLink: this.generateReferralLink,
+          decryptReferrerHash: this.decryptReferrerHash
         }}
       >
         {this.props.children}
