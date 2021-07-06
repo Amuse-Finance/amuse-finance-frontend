@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { IoMdSwap } from "react-icons/io";
 import { web3Context } from "../../components/Context";
 import { DashboardContainer } from "./styles.js";
-import { Transaction } from "./transaction.styles.js";
-import ReferralHistory from "./ReferralHistory";
 import NormalTransaction from "./NormalTransaction";
 import StakeHistory from "./StakeHistory";
 
@@ -131,14 +129,10 @@ const Dashboard =  () => {
                 </div>
             </div>
 
-            <Transaction className={isValidWidth ? "grid" : "hide"}>
+            <div className={isValidWidth ? "grid txn-data" : "hide"}>
                 <section className="grid transaction-header">
                     <div id="transaction_history" className={activeTab === "Transaction History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Transaction History")}>
                         <h2>Transaction History</h2>
-                    </div>
-
-                    <div className={activeTab === "Refferal History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Refferal History")}>
-                        <h2>Refferal History</h2>
                     </div>
                     
                     <div className={activeTab === "Staked History" ? "grid tabs active" : "grid tabs"} onClick={() => setActiveTab("Staked History")}>
@@ -149,12 +143,10 @@ const Dashboard =  () => {
                     {
                         activeTab === "Transaction History"
                             ? <NormalTransaction />
-                            : activeTab === "Refferal History"
-                                ? <ReferralHistory />
-                                : <StakeHistory />
+                            : <StakeHistory /> 
                     }
                 </section>
-            </Transaction>
+            </div>
         </DashboardContainer>
     );
 }

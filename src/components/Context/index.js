@@ -75,8 +75,8 @@ class Web3Provider extends Component {
       const _accounts = await ethereum.request({ method: "eth_accounts" });
       const web3 = new Web3(ethereum);
       const _networkType = await web3.eth.net.getNetworkType();
-
-      if (parseInt(_chainId, 16) !== 1 && parseInt(_chainId, 16) !== 4) {
+      
+      if (parseInt(_chainId, 16) !== 4) {
         this.setState({ loading: true });
         return alert(`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`);
       }

@@ -16,6 +16,7 @@ import Team from "./pages/Team";
 import { handleEffect } from "./components/Helper/handleEffect";
 import Referral from "./pages/Referral";
 import RegisterReferral from "./pages/Referral/Register"
+import Contact from "./pages/Contact";
 
 require("dotenv/config");
 
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/vault" component={Vault} />
+        <Route exact path="/contact" component={Contact} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/faucet" component={Faucet} />

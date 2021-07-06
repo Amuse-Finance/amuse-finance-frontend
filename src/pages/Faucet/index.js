@@ -1,17 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { web3Context } from '../../components/Context';
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { FaucetContainer } from './styles';
 
 const Faucet = () => {
-    const [walletAddress, setWalletAddress] = useState("");
     const [faucetAmount, setFaucetAmount] = useState("");
-    const { loading, user, requestFaucet } = useContext(web3Context);
-
-    useEffect(() => {
-        if(loading) return;
-        setWalletAddress(() => user);
-    }, [loading, user])
+    const { user, requestFaucet } = useContext(web3Context);
 
     const validateInput = (_elem, _func, _excluded) => {
         _elem.preventDefault();
@@ -27,7 +21,7 @@ const Faucet = () => {
 
     const _handleSubmit = async e => {
         e.preventDefault();
-        await requestFaucet(walletAddress, faucetAmount);
+        await requestFaucet(user, faucetAmount);
     }
 
     return (
@@ -36,9 +30,9 @@ const Faucet = () => {
                 <form className="grid" onSubmit={_handleSubmit}>
                     <h2>Request for Testnet Faucet</h2>
                     <input 
-                        type="text" value={walletAddress} 
+                        type="text" 
+                        value={user} 
                         placeholder="Enter wallet address" 
-                        onChange={e => validateInput(e, setWalletAddress, true)} 
                     />
                     <input 
                         type="text" value={faucetAmount} 
