@@ -11,12 +11,11 @@ import FisionDoughnut from "./FisionDoughnut";
 import { ChartWrapper } from "./styles";
 import { cashbackCalculator } from "../../components/Helper";
 import { web3Context } from "../../components/Context";
+import whitepaper from "../../assets/Amuse-Protocol-whitepaper.pdf";
 
 function Home() {
   const [inputAmount, setInputAmount] = useState("");
-  const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(
-    cashbackCalculator()
-  );
+  const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(cashbackCalculator());
   const { cashbackPercentage } = useContext(web3Context);
 
   const handleInput = async (e) => {
@@ -33,6 +32,8 @@ function Home() {
     );
     setCashbackCalculatorInput(() => _result);
   };
+
+  console.log(whitepaper)
 
   return (
     <div className="grid">
@@ -67,7 +68,9 @@ function Home() {
                   <Link to="/dashboard">LAUNCH APP</Link>
                 </CustomButton>
                 <CustomButton styles="shadow border-blue-600 border-3 border-solid bg-blue-600 p-3 md:p-5 text-white rounded">
-                  DOWNLOAD WHITE PAPER
+                  <a href={whitepaper}>
+                    DOWNLOAD WHITEPAPER
+                  </a>
                 </CustomButton>
               </div>
             </div>

@@ -19,6 +19,7 @@ class Web3Provider extends Component {
       web3: null,
       user: process.env.REACT_APP_defaultAccount,
       ethereum: null,
+      networkType: "",
       INIT_REFERRAL_HASH: "",
       amuseTokenAddress: "",
       amusedVaultAddress: "",
@@ -73,11 +74,11 @@ class Web3Provider extends Component {
       const _chainId = await ethereum.request({ method: "eth_chainId" });
       const _accounts = await ethereum.request({ method: "eth_accounts" });
       const web3 = new Web3(ethereum);
-      const _netWorkType = await web3.eth.net.getNetworkType();
+      const _networkType = await web3.eth.net.getNetworkType();
 
       if (parseInt(_chainId, 16) !== 1 && parseInt(_chainId, 16) !== 4) {
         this.setState({ loading: true });
-        return alert(`Amused: Invalid network detected. Please switch from ${_netWorkType} to Mainnet / Rinkeby`);
+        return alert(`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`);
       }
 
       const user = web3.utils.toChecksumAddress(_accounts[0]);
@@ -92,6 +93,7 @@ class Web3Provider extends Component {
         web3,
         user,
         ethereum,
+        networkType: _networkType === "main" ? "Mainnet" : _networkType,
         INIT_REFERRAL_HASH,
         amuseTokenAddress,
         amusedVaultAddress,

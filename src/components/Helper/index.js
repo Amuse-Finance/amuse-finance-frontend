@@ -16,6 +16,13 @@ const shortener = (_data) => {
     return `${firstPart}...${secondPart}`;
 }
 
+const getPath = _networkType => {
+    const path = _networkType === "Mainnet"
+        ? `https://etherscan.io`
+        : `https://${_networkType}.etherscan.io`;
+    return path;
+}
+
 const doughnutChartConfig = (data, _type, numberPrefix, showPercentValues) => {
     const _chart = {
         type: _type ? _type : "doughnut2d",
@@ -142,6 +149,7 @@ export {
     toFixed, 
     formatNumber,
     shortener,
+    getPath,
     doughnutChartConfig,
     fixedDataArray,
     getRefferalHistory,

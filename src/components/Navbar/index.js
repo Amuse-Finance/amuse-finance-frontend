@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { web3Context } from "../Context";
 import { ErrorBoundary } from "../ErrorBoundary";
+import amuseLogo from "../../assets/Amuse-logo.jpg";
 import './navbar.css';
 
 import { NavbarContainer } from './styles'
@@ -34,9 +35,7 @@ const Navbar = ({ theme }) => {
         <NavbarContainer className='grid navbar' theme={theme}>
             <div className="grid nav-brand">
                 <Link to='/'>
-                    <h2 className='mainSpacing'>
-                        Amused.Finance
-                    </h2>
+                    <img src={amuseLogo} alt="Amuse.Finance" />
                 </Link>
             </div>
             <div className={ navOpen ? 'grid nav-list nav-list-mobile' : 'grid nav-list' }>

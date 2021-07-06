@@ -47,4 +47,21 @@ export const FaucetContainer = styled.div`
             }
         }
     }
+
+    @media(max-width: 1023px) {
+        & {
+            .wrapper {
+                width: 100%;
+                padding: 2em 0;
+            }
+        }
+
+        @media(max-width: 767px) {
+            & {
+                .wrapper {    
+                    form { width: 90%; }
+                }
+            }
+        }
+    }
 `;

@@ -1,12 +1,20 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { ReferralWrapper } from './styles';
 import networkImage from "../../assets/referral/network.png";
 import { web3Context } from '../../components/Context';
+import ReferralHistory from './ReferralHistory';
 
 const Referral = () => {
     const [referralLink, setReferralLink] = useState("");
+    const [isCopied, setCopied] = useState(false);
     const { generateReferralLink } = useContext(web3Context);
+
+    useEffect(() => {
+        if(isCopied) setTimeout(() => setCopied(false), 2000);
+    })
+
     const generateReferral = async e => {
         e.preventDefault();
 
@@ -14,6 +22,8 @@ const Referral = () => {
         const _sig = await generateReferralLink();
         setReferralLink(() => `${window.location.href}/create?referrerID=${_sig}`);
     }
+
+    console.log(isCopied)
     return (
         <ReferralWrapper className="grid">
             <div className="grid generate">
@@ -30,18 +40,25 @@ const Referral = () => {
                 </div>
                 
                 <form className="grid">
-                    <input value={referralLink} placeholder="http://127.0.0.1:3000/refferal/create?user=xf610" disabled={true} />
-                    <button type="button" onClick={generateReferral}>
-                        {
-                            referralLink === ""
-                                ? "generate"
-                                : "copy your referral link"
-                        }
-                    </button>
+                    <input value={referralLink} placeholder="http://127.0.0.1:3000/refferal/create?user=0xf610" disabled={true} />
+                    
+                    <CopyToClipboard text={referralLink} onCopy={() => setCopied(true)}>
+                        <button type="button" onClick={generateReferral}>
+                            {
+                                referralLink === ""
+                                    ? "generate"
+                                    : !isCopied
+                                        ? "copy your referral link"
+                                        : "copied"
+                            }
+                        </button>
+                    </CopyToClipboard>
                 </form>
             </div>
 
-            <div className="grid container"></div>
+            <div className="container">
+                <ReferralHistory />
+            </div>
         </ReferralWrapper>
     )
 }

@@ -8,6 +8,7 @@ export const ReferralWrapper = styled.div`
     background: -moz-linear-gradient(bottom left, #8865D9, #A5C8AB);
     background: linear-gradient(to top right, #8865D9, #A5C8AB);
     padding: 3em;
+    grid-gap: 2em;
 
     .generate {
         grid-column: 1/5;
@@ -48,7 +49,7 @@ export const ReferralWrapper = styled.div`
             margin: 2em auto;
             border-radius: .25em;
             grid-gap: 1em 0;
-            padding: 0 2em;
+            padding: 0 1.5em;
 
             input {
                 height: 50px;
@@ -82,5 +83,43 @@ export const ReferralWrapper = styled.div`
         grid-column: 5/13;
         width: 100%;
         height: 100%;
+    }
+
+    @media(max-width: 1200px) {
+        & {
+            grid-template-columns: repeat(1, 1fr);
+            padding: 3em 1em;
+            grid-gap: 2em 1em;
+
+            .generate {
+                grid-column: 1/13;
+                grid-row: 1;
+                margin: 0 auto;
+                width: 80%;
+            }
+
+            .container { 
+                grid-column: 1/13;
+                grid-row: 2;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+
+
+        @media(max-width: 767px) {
+            & {
+                grid-template-columns: 1fr;
+                padding: 3em .5em;
+    
+                .generate {
+                    grid-columns: 1;
+
+                    form { padding: 0 1em; }
+                }
+
+                .container { display: none; }
+            }
+        }
     }
 `;

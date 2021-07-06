@@ -7,9 +7,18 @@ export const NavbarContainer = styled.div`
     border-bottom: ${props => props.theme !== 'dark' && '1px solid var(--darkGrey)'};
     width: 100vw;
     height: auto;
-    // padding: 2rem;
     z-index: 1;
     position: relative;
+
+    .nav-brand {  
+        align-items: center;
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+    }
 
     & .nav-list ul a,
     & .toggle {

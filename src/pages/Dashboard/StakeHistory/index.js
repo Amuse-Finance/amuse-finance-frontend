@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { web3Context } from '../../../components/Context';
 import ErrorBoundary from "../../../components/ErrorBoundary/";
-import { shortener } from '../../../components/Helper';
+import { getPath, shortener } from '../../../components/Helper';
 import { StakeTransactionWrapper } from './styles';
 
 const StakeHistory = () => {
-    const { stakeHistory } = useContext(web3Context);
+    const { networkType, stakeHistory } = useContext(web3Context);
 
     let _index = stakeHistory.length;
     const _txnItems = stakeHistory.map(item => {
@@ -19,35 +19,35 @@ const StakeHistory = () => {
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {shortener(hash)}
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {parseFloat(10000).toFixed(2)} AMD
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {parseFloat(tokenValue).toFixed(2)} AMD
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {parseFloat(ethValue).toFixed(6)} ETH
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {timestamp}
                         </a>
                     </h2>

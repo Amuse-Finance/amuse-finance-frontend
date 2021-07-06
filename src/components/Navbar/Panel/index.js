@@ -1,26 +1,43 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import reactDom from "react-dom";
 import { Link } from "react-router-dom";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { web3Context } from "../../Context";
 import { ErrorBoundary } from "../../ErrorBoundary";
-import { shortener } from "../../Helper";
+import { shortener, getPath } from "../../Helper";
 import { PanelWrapper } from "./styles";
 
 const Panel = () => {
-    const { user } = useContext(web3Context);
+    const [isCopied, setCopied] = useState(false);
+    const { user, networkType } = useContext(web3Context);
 
     return reactDom.createPortal(
         <PanelWrapper className="grid">
             <header className="grid">
                 <div className="grid top">
                     <h2>Connected with Metamask</h2>
-                    <p>Rinkeby</p>
+                    <p>{networkType}</p>
                 </div>
                 <div className="grid body">
                     <div className="grid bg"></div>
                     <div className="grid wallet">
-                        <a href={`https://rinkeby.etherscan.io/address/${user}`}>{shortener(user)}</a>
+                        <a href={`${getPath(networkType)}/address/${user}`} target="_blank" rel="noreferrer">
+                        {shortener(user)}
+                    </a>
                     </div>
+                </div>
+
+                <div className="grid clipboard">
+                    <CopyToClipboard text={user} onCopy={() => setCopied(true)}>
+                        <button type="button">
+                            { isCopied ? "copied" : "copy address" }
+                        </button>
+                    </CopyToClipboard>
+                    <button type="button">
+                        <a href={`${getPath(networkType)}/address/${user}`} target="_blank" rel="noreferrer">
+                            view on explorer
+                        </a>
+                    </button>
                 </div>
             </header>
             <div className="grid list-container">
@@ -36,7 +53,7 @@ const Panel = () => {
                 </div>
                 <div className="grid list-item">
                     <h3 className="grid">
-                        <Link to="/support">
+                        <Link to="/contact">
                             Get Support
                         </Link>
                     </h3>

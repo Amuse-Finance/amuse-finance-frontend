@@ -57,7 +57,7 @@ const ReferralHistory = () => {
     })
 
     return (
-        <RefferalWrapper className="grid">
+        <RefferalWrapper>
             <header className="grid header">
                 <div className="grid">
                     <h2>#</h2>

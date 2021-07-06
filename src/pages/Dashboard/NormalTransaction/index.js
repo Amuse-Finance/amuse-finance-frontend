@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { web3Context } from "../../../components/Context";
-import { shortener } from "../../../components/Helper";
+import { getPath, shortener } from "../../../components/Helper";
 import Loading from "../../../components/Loading";
 import { NormalTransactionWrapper } from "./styles";
 import { ErrorBoundary } from "../../../components/ErrorBoundary";
@@ -8,8 +8,7 @@ require('dotenv/config');
 
 
 const NormalTransaction = () => {
-    const context = useContext(web3Context);
-    const { loading, fromWei, transactionHistory } = context;
+    const { loading, fromWei, transactionHistory, networkType } = useContext(web3Context);
 
     if(loading) return <Loading />;
 
@@ -26,35 +25,35 @@ const NormalTransaction = () => {
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {shortener(hash)}
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://etherscan.io/address/${from}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/address/${from}`} target="_blank" rel="noreferrer">
                             {shortener(from)}
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://etherscan.io/address/${to}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/address/${to}`} target="_blank" rel="noreferrer">
                             {shortener(to)}
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                             {parseFloat(value).toFixed(3)} ETH
                         </a>
                     </h2>
                 </div>
                 <div className="grid">
                     <h2>
-                        <a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer">
+                        <a href={`${getPath(networkType)}/tx/${hash}`} target="_blank" rel="noreferrer">
                         ${parseFloat(gasFee).toFixed(3)}
                         </a>
                     </h2>

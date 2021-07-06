@@ -8,16 +8,16 @@ export const PanelWrapper = styled.div`
     transition: var(--mainTransition);
     position: absolute;
     top: 6.275em;
-    right: 1.5px;
+    right: 3px;
     border-bottom-left-radius: .25em;
     color: var(--darkGrey);
+    z-index: 100;
 
     header {
         width: 100%;
         height: auto;
         color: var(--darkGrey);
         grid-gap: 0 .5em;
-        border: 2px solid var(--mainWhite);
         padding: .5em;
 
 
@@ -46,6 +46,27 @@ export const PanelWrapper = styled.div`
                 font-weight: 500;
                 font-size: .75em;
                 letter-spacing: var(--mainSpacing);
+                text-transform: capitalize;
+            }
+        }
+
+        .clipboard {
+            grid-template-columns: repeat(2, 1fr);
+            width: 100%;
+            grid-gap: 0 .5em;
+            padding: 1em .5em 0;
+
+            button {
+                padding: .25em 1em;
+                background: gray;
+                border-radius: .5em;
+                font-weight: 600;
+                transition: var(--mainTransition);
+
+                &:hover {
+                    background: transparent;
+                    border: 1px solid gray;
+                }
             }
         }
 
@@ -73,7 +94,6 @@ export const PanelWrapper = styled.div`
         .container {
             grid-template-columns: repeat(2, 1fr);
             place-items: center;
-            // padding: 1em;
             border-radius: 1em;
             text-align: center;
             text-decoration: underline;
@@ -108,7 +128,6 @@ export const PanelWrapper = styled.div`
             h3 {  width: 100%; }
         }
 
-        .list-item:nth-last-child(1) { border-bottom-left-radius: 1em; }
     }
 
 `;
