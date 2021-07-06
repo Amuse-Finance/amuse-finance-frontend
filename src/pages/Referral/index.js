@@ -22,8 +22,7 @@ const Referral = () => {
         const _sig = await generateReferralLink();
         setReferralLink(() => `${window.location.href}/create?referrerID=${_sig}`);
     }
-
-    console.log(isCopied)
+    
     return (
         <ReferralWrapper className="grid">
             <div className="grid generate">

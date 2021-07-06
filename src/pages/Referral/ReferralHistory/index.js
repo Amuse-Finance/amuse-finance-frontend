@@ -79,7 +79,7 @@ const ReferralHistory = () => {
                 </div>
             </header>
 
-            <div className="grid card-container">{_txnItems}</div>
+            <div className="card-container">{_txnItems}</div>
         </RefferalWrapper>
     )
 }

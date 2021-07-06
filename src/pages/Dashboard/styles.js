@@ -52,7 +52,7 @@ export const DashboardContainer = styled.div`
 
         .transaction-header {
             grid-template-columns: repeat(2, 1fr);
-            width: 55%;
+            width: 35%;
             height: 55px;
             place-items: start;
             margin: 0;

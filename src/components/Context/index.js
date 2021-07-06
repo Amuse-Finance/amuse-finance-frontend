@@ -78,11 +78,11 @@ class Web3Provider extends Component {
       
       if (parseInt(_chainId, 16) !== 4) {
         this.setState({ loading: true });
-        return alert(`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`);
+        return alert(`Amused: Invalid network detected. Please switch from ${_networkType} to Rinkeby`);
       }
 
       const user = web3.utils.toChecksumAddress(_accounts[0]);
-      const INIT_REFERRAL_HASH = "REFERRAL_CODEHASH";
+      const INIT_REFERRAL_HASH = process.env.REACT_APP_REFERRAL_HASH;
 
       const amusedToken = new web3.eth.Contract(amusedTokenABI, amuseTokenAddress);
       const amusedVault = new web3.eth.Contract(amusedVaultABI, amusedVaultAddress);
