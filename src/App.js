@@ -29,6 +29,7 @@ function App() {
 		useContext(web3Context);
 	loading = _loading;
 	updateAccount = _updateAccount;
+
 	return (
 		<div className="w-full App">
 			<Navbar />

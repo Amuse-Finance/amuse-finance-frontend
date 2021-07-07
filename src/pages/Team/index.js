@@ -38,7 +38,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>c.e.o</small>
+						<small>untagged</small>
 					</div>
 				</div>
 
@@ -78,7 +78,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>c.e.o</small>
+						<small>strategist</small>
 					</div>
 				</div>
 
@@ -88,7 +88,7 @@ const Team = () => {
 					</div>
 					<div className="grid details">
 						<h1>Abdullah Zakariyya</h1>
-						<small>DragonLord</small>
+						<small>Zenesk</small>
 
 						<div className="grid social-handles">
 							<FaDiscord />
@@ -98,7 +98,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>c.e.o</small>
+						<small>untagged</small>
 					</div>
 				</div>
 			</div>
