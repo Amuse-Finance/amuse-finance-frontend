@@ -34,9 +34,7 @@ const Panel = () => {
 				<div className="grid clipboard">
 					<div className="btn">
 						<CopyToClipboard text={user} onCopy={() => setCopied(true)}>
-							<button type="button">
-								{isCopied ? "copied" : "copy address"}
-							</button>
+							<button type="button">{isCopied ? "copied" : "copy"}</button>
 						</CopyToClipboard>
 					</div>
 					<div className="btn">

@@ -20,14 +20,18 @@ import Contact from "./pages/Contact";
 
 require("dotenv/config");
 
-const ethereum = window.ethereum;
+let provider = null;
 let loading = true;
 let updateAccount;
 
-function App() {
-	const { loading: _loading, updateAccount: _updateAccount } =
-		useContext(web3Context);
+const App = () => {
+	const {
+		loading: _loading,
+		ethereum,
+		updateAccount: _updateAccount,
+	} = useContext(web3Context);
 	loading = _loading;
+	provider = ethereum;
 	updateAccount = _updateAccount;
 
 	return (
@@ -48,13 +52,13 @@ function App() {
 			<Footer />
 		</div>
 	);
-}
+};
 
 !loading &&
-	ethereum.on("accountsChanged", async (_accounts) =>
+	provider.on("accountsChanged", async (_accounts) =>
 		updateAccount(_accounts[0])
 	);
-!loading && ethereum.on("chainChanged", () => window.location.reload());
+!loading && provider.on("chainChanged", () => window.location.reload());
 document.addEventListener("scroll", handleEffect);
 
 export default App;

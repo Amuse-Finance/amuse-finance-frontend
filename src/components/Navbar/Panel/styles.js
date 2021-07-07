@@ -18,13 +18,13 @@ export const PanelWrapper = styled.div`
 		height: auto;
 		color: var(--darkGrey);
 		grid-gap: 0 0.5em;
-		padding: 0.5em;
+		padding: 0.5em 0;
 
 		.top {
-			/* grid-template-columns: 4fr 2fr; */
 			grid-template-columns: repeat(12, 1fr);
 			place-items: start;
 			width: 100%;
+			padding: 0 0 0 0.5em;
 
 			h2 {
 				grid-column: 1/8;
@@ -50,34 +50,12 @@ export const PanelWrapper = styled.div`
 			}
 		}
 
-		.clipboard {
-			grid-template-columns: repeat(2, 1fr);
-			width: 100%;
-			grid-gap: 0 0.5em;
-			padding: 1em 0.5em 0;
-
-			.btn {
-				background: red;
-				button {
-					padding: 0.25em 0.75em;
-					background: gray;
-					border-radius: 0.5em;
-					font-weight: 600;
-					transition: var(--mainTransition);
-
-					&:hover {
-						background: transparent;
-						border: 1px solid gray;
-					}
-				}
-			}
-		}
-
 		.body {
 			grid-template-columns: repeat(12, 1fr);
 			grid-gap: 0 1em;
 			align-items: center;
 			place-items: start;
+			padding: 0 0 0 0.5em;
 
 			.bg {
 				width: 20px;
@@ -94,7 +72,33 @@ export const PanelWrapper = styled.div`
 			}
 		}
 
-		.container {
+		.clipboard {
+			grid-template-columns: 2fr 3fr;
+			width: 100%;
+			padding: 0.5em 0.5em 0;
+			margin: 0 auto;
+
+			.btn {
+				width: 90%;
+				grid-gap: 0 0.5em;
+
+				button {
+					padding: 0.25em 0.75em;
+					background: gray;
+					border-radius: 0.5em;
+					font-weight: 600;
+					width: 100%;
+					transition: var(--mainTransition);
+
+					&:hover {
+						background: transparent;
+						border: 1px solid gray;
+					}
+				}
+			}
+		}
+
+		/* .container {
 			grid-template-columns: repeat(2, 1fr);
 			place-items: center;
 			border-radius: 1em;
@@ -102,12 +106,12 @@ export const PanelWrapper = styled.div`
 			text-decoration: underline;
 			color: inherit;
 			font-weight: 700;
-		}
+		} */
 	}
 
 	.list-container {
 		width: 100%;
-		place-items: start;
+		/* place-items: start; */
 		margin: 0;
 		line-height: 2;
 		transition: var(--mainTransition);
@@ -116,11 +120,12 @@ export const PanelWrapper = styled.div`
 		.list-item {
 			text-align: left;
 			color: green;
-			width: 100%;
+			width: 94%;
 			padding: 0.5em;
 			border-radius: inherit;
 			transition: all 1s ease-in-out;
 			cursor: pointer;
+			margin: 0;
 
 			&:hover {
 				background: green;

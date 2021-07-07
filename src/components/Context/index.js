@@ -1,5 +1,6 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import axios from "axios";
 import { AES, enc } from "crypto-js";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
@@ -54,9 +55,32 @@ class Web3Provider extends Component {
 		await this.connectDapp();
 	}
 
-	connectDapp = async () => {
+	connectDapp = async (_provider) => {
 		try {
-			await this.loadWeb3();
+			let ethereum;
+			let _chainId;
+			let _accounts;
+
+			if (_provider === "wallectconnect") {
+				ethereum = new WalletConnectProvider({
+					rpc: {
+						1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.REACT_APP_AlchemyApiKey}`,
+						4: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.REACT_APP_AlchemyApiKey}`,
+					},
+				});
+			} else {
+				ethereum = window.ethereum;
+				_chainId = await ethereum.request({ method: "eth_chainId" });
+				_accounts = await ethereum.request({ method: "eth_accounts" });
+
+				if (ethereum === undefined)
+					throw new Error(
+						"Non-Ethereum browser deteected. Please install metamask and relaod the page"
+					);
+			}
+
+			await ethereum.enable();
+			this.loadWeb3(ethereum, _chainId, _accounts);
 			await this.loadBlockchainData();
 		} catch (error) {
 			console.log(error);
@@ -64,7 +88,7 @@ class Web3Provider extends Component {
 		}
 	};
 
-	loadWeb3 = async () => {
+	loadWeb3 = async (ethereum, _chainId, _accounts, _networkType) => {
 		try {
 			const amuseTokenAddress = process.env.REACT_APP_AmusedToken;
 			const amusedVaultAddress = process.env.REACT_APP_AmusedVault;
@@ -72,16 +96,6 @@ class Web3Provider extends Component {
 			const USDT = process.env.REACT_APP_USDT;
 			const WETH = process.env.REACT_APP_WETH;
 
-			const ethereum = window.ethereum;
-			if (ethereum === undefined)
-				throw new Error(
-					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
-				);
-			await ethereum.enable();
-
-			// Get Network / chainId
-			const _chainId = await ethereum.request({ method: "eth_chainId" });
-			const _accounts = await ethereum.request({ method: "eth_accounts" });
 			const web3 = new Web3(ethereum);
 			const _networkType = await web3.eth.net.getNetworkType();
 
