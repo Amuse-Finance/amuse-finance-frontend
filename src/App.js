@@ -15,39 +15,45 @@ import Team from "./pages/Team";
 
 import { handleEffect } from "./components/Helper/handleEffect";
 import Referral from "./pages/Referral";
-import RegisterReferral from "./pages/Referral/Register"
+import RegisterReferral from "./pages/Referral/Register";
 import Contact from "./pages/Contact";
 
 require("dotenv/config");
 
 const ethereum = window.ethereum;
+let loading = true;
 let updateAccount;
 
 function App() {
-  const { updateAccount: _updateAccount } = useContext(web3Context);
-  updateAccount = _updateAccount;
-  return (
-    <div className="w-full App">
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/vault" component={Vault} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/team" component={Team} />
-        <Route exact path="/faq" component={Faq} />
-        <Route exact path="/faucet" component={Faucet} />
-        <Route exact path="/referral" component={Referral} />
-        <Route exact path="/referral/create" component={RegisterReferral} />
-      </Switch>
-      <ScrollTop />
-      <Footer />
-    </div>
-  );
+	const { loading: _loading, updateAccount: _updateAccount } =
+		useContext(web3Context);
+	loading = _loading;
+	updateAccount = _updateAccount;
+	return (
+		<div className="w-full App">
+			<Navbar />
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/vault" component={Vault} />
+				<Route exact path="/contact" component={Contact} />
+				<Route exact path="/team" component={Team} />
+				<Route exact path="/faq" component={Faq} />
+				<Route exact path="/faucet" component={Faucet} />
+				<Route exact path="/referral" component={Referral} />
+				<Route exact path="/referral/create" component={RegisterReferral} />
+			</Switch>
+			<ScrollTop />
+			<Footer />
+		</div>
+	);
 }
 
-ethereum.on("accountsChanged", async (_accounts) => updateAccount(_accounts[0]));
-ethereum.on("chainChanged", () => window.location.reload());
+!loading &&
+	ethereum.on("accountsChanged", async (_accounts) =>
+		updateAccount(_accounts[0])
+	);
+!loading && ethereum.on("chainChanged", () => window.location.reload());
 document.addEventListener("scroll", handleEffect);
 
 export default App;
