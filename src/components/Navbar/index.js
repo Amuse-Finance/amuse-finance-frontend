@@ -14,14 +14,29 @@ const Navbar = ({ theme }) => {
 	const [panelState, setPanelState] = useState(false);
 	const { loading } = useContext(web3Context);
 
-	const pages = [
-		{ name: "Home", path: "" },
-		{ name: "Dashboard", path: "dashboard" },
-		{ name: "Vault", path: "vault" },
-		{ name: "Team", path: "team" },
-		{ name: "Contact", path: "contact" },
-		{ name: "FAQ", path: "faq" },
-	];
+	let pages = [];
+
+	if (parseFloat(window.innerWidth) <= 767) {
+		pages = [
+			{ name: "Home", path: "" },
+			{ name: "Dashboard", path: "dashboard" },
+			{ name: "Vault", path: "vault" },
+			{ name: "Team", path: "team" },
+			{ name: "Contact", path: "contact" },
+			{ name: "Referral", path: "referral" },
+			{ name: "Faucet", path: "faucet" },
+			{ name: "FAQ", path: "faq" },
+		];
+	} else {
+		pages = [
+			{ name: "Home", path: "" },
+			{ name: "Dashboard", path: "dashboard" },
+			{ name: "Vault", path: "vault" },
+			{ name: "Team", path: "team" },
+			{ name: "Contact", path: "contact" },
+			{ name: "FAQ", path: "faq" },
+		];
+	}
 
 	const Navlist = pages.map((item, i) => {
 		const { name, path } = item;
