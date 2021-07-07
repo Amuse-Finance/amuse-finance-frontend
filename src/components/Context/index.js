@@ -59,6 +59,7 @@ class Web3Provider extends Component {
 			await this.loadWeb3();
 			await this.loadBlockchainData();
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};
@@ -72,8 +73,8 @@ class Web3Provider extends Component {
 			const WETH = process.env.REACT_APP_WETH;
 
 			const ethereum = window.ethereum;
-			if (!ethereum)
-				return new Error(
+			if (ethereum === undefined)
+				throw new Error(
 					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
 				);
 			await ethereum.enable();
@@ -123,8 +124,7 @@ class Web3Provider extends Component {
 				amusedFaucet,
 			});
 		} catch (error) {
-			console.log(error.message);
-			return error.message;
+			return error;
 		}
 	};
 
@@ -162,8 +162,7 @@ class Web3Provider extends Component {
 				stakeHistory: _stakeHistory,
 			});
 		} catch (error) {
-			console.log(error.message);
-			return error.message;
+			return error;
 		}
 	};
 
