@@ -4,7 +4,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { web3Context } from "../Context";
 import { ErrorBoundary } from "../ErrorBoundary";
 import amuseLogo from "../../assets/Amuse-logo-icon.png";
-import "./navbar.css";
 
 import { NavbarContainer } from "./styles";
 import user from "../../assets/login/userLogin.jpeg";
