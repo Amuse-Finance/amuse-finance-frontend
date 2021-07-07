@@ -1,6 +1,5 @@
 import { createContext, Component } from "react";
 import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import axios from "axios";
 import { AES, enc } from "crypto-js";
 import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
@@ -22,10 +21,11 @@ class Web3Provider extends Component {
 
 		this.state = {
 			loading: true,
+			modalState: true,
 			web3: null,
 			user: process.env.REACT_APP_defaultAccount,
 			ethereum: null,
-			networkType: "",
+			networkType: "NONE",
 			INIT_REFERRAL_HASH: "",
 			amuseTokenAddress: "",
 			amusedVaultAddress: "",
@@ -55,41 +55,29 @@ class Web3Provider extends Component {
 		await this.connectDapp();
 	}
 
-	connectDapp = async (_provider) => {
+	connectDapp = async () => {
 		try {
-			let ethereum;
-			let _chainId;
-			let _accounts;
-
-			if (_provider === "wallectconnect") {
-				ethereum = new WalletConnectProvider({
-					rpc: {
-						1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.REACT_APP_AlchemyApiKey}`,
-						4: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.REACT_APP_AlchemyApiKey}`,
-					},
-				});
-			} else {
-				ethereum = window.ethereum;
-				_chainId = await ethereum.request({ method: "eth_chainId" });
-				_accounts = await ethereum.request({ method: "eth_accounts" });
-
-				if (ethereum === undefined)
-					throw new Error(
-						"Non-Ethereum browser deteected. Please install metamask and relaod the page"
-					);
-			}
-
-			await ethereum.enable();
-			this.loadWeb3(ethereum, _chainId, _accounts);
+			await this.loadWeb3();
 			await this.loadBlockchainData();
 		} catch (error) {
-			console.log(error);
 			return error;
 		}
 	};
 
-	loadWeb3 = async (ethereum, _chainId, _accounts, _networkType) => {
+	loadWeb3 = async () => {
 		try {
+			const ethereum = window.ethereum;
+			if (ethereum === undefined) {
+				alert(
+					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
+				);
+				throw new Error(
+					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
+				);
+			}
+			// initiate metamask pop
+			await ethereum.enable();
+
 			const amuseTokenAddress = process.env.REACT_APP_AmusedToken;
 			const amusedVaultAddress = process.env.REACT_APP_AmusedVault;
 			const amusedFaucetAddress = process.env.REACT_APP_AmusedFaucet;
@@ -97,9 +85,12 @@ class Web3Provider extends Component {
 			const WETH = process.env.REACT_APP_WETH;
 
 			const web3 = new Web3(ethereum);
-			const _networkType = await web3.eth.net.getNetworkType();
 
-			if (parseInt(_chainId, 16) !== 4) {
+			const _chainId = await web3.eth.getChainId();
+			const _networkType = await web3.eth.net.getNetworkType();
+			const _accounts = await web3.eth.getAccounts();
+
+			if (parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
 				return alert(
 					`Amused: Invalid network detected. Please switch from ${_networkType} to Rinkeby`
@@ -124,6 +115,7 @@ class Web3Provider extends Component {
 
 			this.setState({
 				loading: false,
+				modalState: false,
 				web3,
 				user,
 				ethereum,
@@ -138,18 +130,20 @@ class Web3Provider extends Component {
 				amusedFaucet,
 			});
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};
 
 	// load blockchain data
 	loadBlockchainData = async (
-		{ loading, web3, user, amusedToken, amusedVault } = this.state
+		{ loading, web3, user, amusedToken } = this.state
 	) => {
 		try {
 			if (loading || !web3) return;
 			const amdPrice = 0.25;
 			const _cashbackPercentage = await this.cashbackPercentage();
+
 			const balance = await this.balanceOf();
 			const stakes = await this.stakes();
 			const dailyCashback = await this.getDailyCashback();
@@ -176,6 +170,7 @@ class Web3Provider extends Component {
 				stakeHistory: _stakeHistory,
 			});
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};
@@ -190,6 +185,8 @@ class Web3Provider extends Component {
 			return error;
 		}
 	};
+
+	closeModal = () => this.setState({ modalState: false });
 
 	fromWei = (_amount, { web3 } = this.state) =>
 		web3.utils.fromWei(_amount.toString(), "ether");
@@ -490,6 +487,7 @@ class Web3Provider extends Component {
 			<web3Context.Provider
 				value={{
 					...this.state,
+					closeModal: this.closeModal,
 					fromWei: this.fromWei,
 					toWei: this.toWei,
 					connectDapp: this.connectDapp,
