@@ -62,7 +62,7 @@ export const ReferralWrapper = styled.div`
 				height: 50px;
 				padding: 0 0.5em;
 				border-radius: 0.5em;
-				background: var(--mainGreen);
+				background: var(--mainBlue);
 				color: var(--white);
 				outline: none;
 				border: none;

@@ -1,37 +1,51 @@
-html { scroll-behavior: smooth; }
-
-.scrollTop {
-    visibility: hidden;
-    position: fixed;
-    bottom: 3rem;
-    right: 3rem;
-
-    background: var(--red);
-    color: #fff;
-    place-self: center;
-    width: 25px;
-    height: 25px;
-
-    border-radius: .5rem ;
-    border: .05rem solid var(--mainWhite);
-    cursor: pointer;
-    transition: var(--mainTransition);
-    animation: scrollEffect 3s ease-in-out forwards infinite alternate-reverse;
+html {
+	scroll-behavior: smooth;
 }
 
+.scrollTop {
+	visibility: hidden;
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
 
-.scrollTop span { margin: auto; }
-.show { visibility: visible; }
+	background: var(--red);
+	color: #fff;
+	place-self: center;
+	width: 25px;
+	height: 25px;
 
+	border-radius: 0.5rem;
+	border: 0.05rem solid var(--mainWhite);
+	cursor: pointer;
+	transition: var(--mainTransition);
+	animation: scrollEffect 3s ease-in-out forwards infinite alternate-reverse;
+}
+
+.scrollTop span {
+	margin: auto;
+}
+.show {
+	visibility: visible;
+}
 
 @keyframes scrollEffect {
-    0%{ transform: scale(1.25) }
-    100%{ background: var(--darkGrey); transform: scale(1.75); }
+	0% {
+		transform: scale(1.25);
+	}
+	100% {
+		background: var(--darkGrey);
+		transform: scale(1.75);
+	}
 }
 
 @media (max-width: 767px) {
-    @keyframes scrollEffect {
-        0%{ transform: scale(.95); }
-        100%{ transform: scale(1.5); background: var(--darkGrey); }
-    }
+	@keyframes scrollEffect {
+		0% {
+			transform: scale(0.95);
+		}
+		100% {
+			transform: scale(1.5);
+			background: var(--darkGrey);
+		}
+	}
 }

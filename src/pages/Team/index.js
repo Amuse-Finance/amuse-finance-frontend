@@ -98,7 +98,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>untagged</small>
+						<small>Strategist</small>
 					</div>
 				</div>
 			</div>
