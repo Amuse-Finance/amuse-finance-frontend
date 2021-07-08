@@ -38,7 +38,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>untagged</small>
+						<small>founder</small>
 					</div>
 				</div>
 
@@ -58,7 +58,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>developer</small>
+						<small>co-founder</small>
 					</div>
 				</div>
 
@@ -78,7 +78,7 @@ const Team = () => {
 						</div>
 					</div>
 					<div className="grid role">
-						<small>strategist</small>
+						<small>co-founder</small>
 					</div>
 				</div>
 
