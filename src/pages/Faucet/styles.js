@@ -16,11 +16,12 @@ export const FaucetContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--white);
+			background: var(--mainBlue);
+			color: var(--white);
 			place-items: center;
-			padding: 2em;
-			line-height: 2;
+			padding: 2em 2em 3em;
 			grid-gap: 1.25em 0;
+			border-radius: 0.75em;
 
 			input {
 				width: 100%;
@@ -28,6 +29,7 @@ export const FaucetContainer = styled.div`
 				padding: 0.75em;
 				border-radius: 0.5em;
 				border: 1px solid gray;
+				color: var(--darkGrey);
 			}
 
 			button {

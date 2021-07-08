@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const VaultContainer = styled.div`
 	width: 100vw;
-
+	/* background: var(); */
 	.wrapper {
 		width: 70%;
 		grid-gap: 2em 4em;
@@ -16,11 +16,12 @@ export const VaultContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--white);
+			background: var(--mainBlue);
+			color: var(--white);
 			place-items: center;
-			padding: 2em;
-			line-height: 2;
+			padding: 2em 2em 3em;
 			grid-gap: 1.25em 0;
+			border-radius: 0.75em;
 
 			input {
 				width: 100%;
@@ -28,16 +29,18 @@ export const VaultContainer = styled.div`
 				padding: 0.75em;
 				border-radius: 0.3em;
 				border: 0.1em solid gray;
+				color: var(--darkGrey);
 			}
 
 			button {
 				background: var(--mainGreen);
+				color: var(--white);
 				width: 100%;
 				height: 60px;
 				border-radius: 0.3em;
 				letter-spacing: 0.25em;
-				color: var(--white);
-				transition: var(--mainTransition);
+				margin: 0.25em 0 0;
+				transition: all 1s ease-in-out;
 
 				&:hover {
 					color: var(--mainGreen);

@@ -9,29 +9,32 @@ export const ContactWrapper = styled.div`
 
 	form {
 		width: 40%;
-		background: var(--white);
+		background: var(--mainBlue);
+		color: var(--white);
 		place-items: center;
-		padding: 2em;
-		line-height: 2;
+		padding: 2em 2em 4em;
 		grid-gap: 1.25em 0;
+		border-radius: 0.75em;
 
 		header {
-			/* line-height: 1.25; */
 			font-family: atmospheric;
+			padding: 1em 0;
 
 			.icon {
 				font-size: 4em;
-				color: var(--darkGrey);
+				color: var(--white);
 			}
 
 			h1 {
 				font-size: 2em;
 				font-weight: 600;
+				margin: 0.5em 0 0;
 			}
 		}
 
 		input,
 		textarea {
+			color: var(--darkGrey);
 			width: 100%;
 			height: 60px;
 			padding: 0.75em;

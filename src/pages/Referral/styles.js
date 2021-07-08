@@ -50,6 +50,7 @@ export const ReferralWrapper = styled.div`
 			border-radius: 0.25em;
 			grid-gap: 1em 0;
 			padding: 0 1.5em;
+			color: var(--darkGrey);
 
 			input {
 				height: 50px;
