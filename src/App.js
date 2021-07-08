@@ -21,18 +21,14 @@ import Presale from "./pages/Presale";
 
 require("dotenv/config");
 
-let ethereum = null;
+const ethereum = window.ethereum;
 let loading = true;
 let updateAccount;
 
 const App = () => {
-	const {
-		loading: _loading,
-		ethereum: _ethereum,
-		updateAccount: _updateAccount,
-	} = useContext(web3Context);
+	const { loading: _loading, updateAccount: _updateAccount } =
+		useContext(web3Context);
 	loading = _loading;
-	ethereum = _ethereum;
 	updateAccount = _updateAccount;
 
 	return (
@@ -57,9 +53,10 @@ const App = () => {
 };
 
 !loading &&
-	ethereum.on("accountsChanged", async (_accounts) =>
-		updateAccount(_accounts[0])
-	);
+	ethereum.on("accountsChanged", async (_accounts) => {
+		updateAccount(_accounts[0]);
+		console.log(_accounts);
+	});
 !loading && ethereum.on("chainChanged", () => window.location.reload());
 document.addEventListener("scroll", handleEffect);
 

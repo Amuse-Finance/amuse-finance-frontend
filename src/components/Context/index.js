@@ -137,7 +137,7 @@ class Web3Provider extends Component {
 
 	// load blockchain data
 	loadBlockchainData = async (
-		{ loading, web3, user, amusedToken } = this.state
+		{ loading, web3, user, amusedToken, amusedVault } = this.state
 	) => {
 		try {
 			if (loading || !web3) return;
@@ -155,7 +155,7 @@ class Web3Provider extends Component {
 				).data
 			);
 			const _refferalHistory = await fixedDataArray(
-				await getRefferalHistory(web3, amusedToken, user)
+				await this.getRefferalHistory()
 			);
 			const _stakeHistory = await this.getStakedHistory();
 
@@ -388,7 +388,7 @@ class Web3Provider extends Component {
 	) => {
 		try {
 			if (loading) return;
-			const _result = await getRefferalHistory(amusedToken, web3, user);
+			const _result = await getRefferalHistory(web3, user, amusedToken);
 			return _result;
 		} catch (error) {
 			console.log(error);

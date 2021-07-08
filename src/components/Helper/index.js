@@ -75,7 +75,7 @@ const fixedDataArray = async (_data) => {
 	return _result;
 };
 
-const getRefferalHistory = async (web3, amusedToken, user) => {
+const getRefferalHistory = async (web3, user, amusedToken) => {
 	try {
 		const startBlock = await (
 			await axios.get(
@@ -122,23 +122,23 @@ const getRefferalHistory = async (web3, amusedToken, user) => {
 
 const getStakedHistory = async (web3, user, amusedVault) => {
 	try {
+		let _tempData = [];
+
 		const startBlock = await (
 			await axios.get(
 				"https://amused-finance-backend.herokuapp.com/api/v1/startBlock"
 			)
 		).data;
-
 		const _endBlock = await web3.eth.getBlockNumber();
-		let _tempData = [];
+
 		for (let i = startBlock; i <= _endBlock; i = i + 10000) {
 			const _step = i + 10000;
-			const _result = await amusedVault.getPastEvents("UNSTKAKE", {
+			const _result = await amusedVault.getPastEvents("UNSTAKE", {
 				fromBlock: i,
 				toBlock: _step,
 			});
 			_tempData = [..._tempData, ..._result];
 		}
-
 		_tempData = _tempData.filter(
 			(item) =>
 				web3.utils.toChecksumAddress(item.returnValues.user) ===
@@ -146,10 +146,11 @@ const getStakedHistory = async (web3, user, amusedVault) => {
 		);
 		_tempData = _tempData.map((item) => {
 			const { blockNumber, returnValues, transactionHash: hash } = item;
-			const { user, tokenValue, ethValue, timestamp } = returnValues;
+			const { user, amount, tokenValue, ethValue, timestamp } = returnValues;
 			return {
 				user,
 				blockNumber,
+				amount: web3.utils.fromWei(amount, "ether"),
 				tokenValue: web3.utils.fromWei(tokenValue, "ether"),
 				ethValue: web3.utils.fromWei(ethValue, "ether"),
 				hash,
