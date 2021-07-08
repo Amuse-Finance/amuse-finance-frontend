@@ -1,12 +1,11 @@
 import styled from "styled-components";
+import background from "../../assets/background.jpeg";
 
 export const ReferralWrapper = styled.div`
 	grid-template-columns: repeat(12, 1fr);
 	width: 100vw;
-	background: #8865d9;
-	background: -webkit-linear-gradient(bottom left, #8865d9, #a5c8ab);
-	background: -moz-linear-gradient(bottom left, #8865d9, #a5c8ab);
-	background: linear-gradient(to top right, #8865d9, #a5c8ab);
+	background: url(${background}) center/cover no-repeat;
+
 	padding: 3em;
 	grid-gap: 2em;
 

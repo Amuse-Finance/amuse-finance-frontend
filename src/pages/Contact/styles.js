@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import background from "../../assets/background.jpeg";
 
 export const ContactWrapper = styled.div`
+	background: url(${background}) center/cover no-repeat;
 	place-items: center;
 	padding: 3em 0;
 	width: 100%;

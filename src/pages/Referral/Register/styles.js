@@ -3,19 +3,19 @@ import styled from "styled-components";
 export const RegisterReferralContainer = styled.div`
 	width: 100vw;
 
-	& .wrapper {
+	.wrapper {
 		width: 70%;
 		grid-gap: 2em 4em;
 		padding: 4rem 0;
 
-		& h2 {
+		h2 {
 			font-size: 1.5em;
 			font-weight: 900;
 			letter-spacing: var(--mainSpacing);
 			margin: 0 0 1em;
 		}
 
-		& form {
+		form {
 			width: 50%;
 			background: var(--mainBlue);
 			color: var(--white);
@@ -24,7 +24,7 @@ export const RegisterReferralContainer = styled.div`
 			grid-gap: 1.25em 0;
 			border-radius: 0.75em;
 
-			& input {
+			input {
 				width: 100%;
 				height: 60px;
 				padding: 0.75em;
@@ -32,7 +32,7 @@ export const RegisterReferralContainer = styled.div`
 				border: 0.1em solid gray;
 			}
 
-			& button {
+			button {
 				background: var(--mainGreen);
 				width: 100%;
 				height: 60px;

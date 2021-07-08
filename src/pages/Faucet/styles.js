@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import background from "../../assets/background.jpeg";
 
 export const FaucetContainer = styled.div`
+	background: url(${background}) center/cover no-repeat;
 	width: 100vw;
 
 	.wrapper {

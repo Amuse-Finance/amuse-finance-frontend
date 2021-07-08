@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import background from "../../assets/background.jpeg";
 
 export const VaultContainer = styled.div`
 	width: 100vw;
-	/* background: var(); */
+	background: url(${background}) center/cover no-repeat;
+
 	.wrapper {
 		width: 70%;
 		grid-gap: 2em 4em;
