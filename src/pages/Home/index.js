@@ -38,7 +38,7 @@ function Home() {
 		<div className="grid white">
 			<section
 				style={{ height: "75vh" }}
-				className="relative bg-blue-900 flex justify-center items-center "
+				className="relative blue flex justify-center items-center "
 			>
 				<div className="container mx-auto px-0 md:px-10">
 					<Particles

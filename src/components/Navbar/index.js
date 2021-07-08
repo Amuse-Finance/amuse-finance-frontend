@@ -15,6 +15,7 @@ const Navbar = ({ theme }) => {
 	const { loading } = useContext(web3Context);
 
 	let pages = [];
+	let _activeStyle = {};
 
 	if (parseFloat(window.innerWidth) <= 767) {
 		pages = [
@@ -27,6 +28,7 @@ const Navbar = ({ theme }) => {
 			{ name: "Faucet", path: "faucet" },
 			{ name: "FAQ", path: "faq" },
 		];
+		_activeStyle = { background: "var(--mainBlue)", color: "var(--white)" };
 	} else {
 		pages = [
 			{ name: "Home", path: "" },
@@ -45,7 +47,7 @@ const Navbar = ({ theme }) => {
 				key={i}
 				exact
 				to={path.replace("", "/").toLowerCase()}
-				className="mainSpacing"
+				activeStyle={_activeStyle}
 			>
 				{name}
 			</NavLink>

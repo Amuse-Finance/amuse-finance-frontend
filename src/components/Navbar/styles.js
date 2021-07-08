@@ -8,7 +8,7 @@ export const NavbarContainer = styled.div`
 	height: auto;
 	z-index: 1;
 	position: relative;
-	padding: 2rem;
+	padding: 1.75em 2rem;
 
 	.nav-brand,
 	.nav-list,

@@ -1,27 +1,26 @@
 import styled from "styled-components";
-import background from "../../assets/footer-bg.jpeg";
 
 export const FooterContainer = styled.div`
 	grid-template-columns: 2fr 2fr 1fr;
 	grid-template-rows: minmax(200px, auto);
 	grid-gap: 2rem;
-	background: url(${background}) center/cover no-repeat;
+	background: var(--mainBlue);
 	color: var(--white);
 	padding: 3rem;
 
-	& .center {
+	.center {
 		line-height: 2.5;
 		height: 100px;
 
-		& h3 {
+		h3 {
 			text-transform: capitalize;
 		}
 	}
 
-	& .form-control {
+	.form-control {
 		margin: 1rem 0 0;
 
-		& input {
+		input {
 			color: var(--darkGrey);
 			width: 100%;
 			height: 50px;
@@ -35,19 +34,20 @@ export const FooterContainer = styled.div`
 		}
 	}
 
-	& .social-icons {
+	.social-icons {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		width: auto;
 		width: auto;
-	}
 
-	& .icon {
-		margin: 0 1rem 0 0;
-		font-size: 1.1rem;
-	}
-	& .icon:hover {
-		color: var(--lightBlue);
+		.icon {
+			margin: 0 1rem 0 0;
+			font-size: 1.1rem;
+
+			&::hover {
+				color: var(--lightBlue);
+			}
+		}
 	}
 
 	@media (max-width: 1000px) {
@@ -58,17 +58,16 @@ export const FooterContainer = styled.div`
 		@media (max-width: 767px) {
 			& {
 				grid-template-columns: 1fr;
-			}
-			& .center {
-				height: auto;
-			}
-			& .form-control input {
 				width: 100%;
-			}
 
-			@media (max-width: 482px) {
-				& .form-control {
-					display: block;
+				.center {
+					height: auto;
+				}
+
+				.form-control {
+					input {
+						width: 100%;
+					}
 				}
 			}
 		}

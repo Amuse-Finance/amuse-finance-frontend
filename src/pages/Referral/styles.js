@@ -112,7 +112,7 @@ export const ReferralWrapper = styled.div`
 				padding: 3em 0.5em;
 
 				.generate {
-					grid-columns: 1;
+					grid-column: 1;
 
 					form {
 						padding: 0 1em;

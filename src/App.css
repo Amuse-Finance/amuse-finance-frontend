@@ -65,6 +65,10 @@ body {
 	background: var(--white);
 }
 
+.blue {
+	background: var(--mainBlue);
+}
+
 .fixed-nav {
 	position: fixed;
 	top: 0;

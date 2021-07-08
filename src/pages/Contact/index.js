@@ -6,9 +6,11 @@ import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { ContactWrapper } from "./styles";
 
 const Contact = () => {
+	const [email, setEmail] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const { user } = useContext(web3Context);
+
 	const _handleSubmit = async () => {};
 
 	return (
@@ -28,6 +30,12 @@ const Contact = () => {
 					value={user}
 					placeholder="Enter wallet address"
 					disabled={true}
+				/>
+				<input
+					type="email"
+					value={email}
+					placeholder="example@mail.com"
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<input
 					type="text"

@@ -59,6 +59,7 @@ export const DashboardContainer = styled.div`
 			place-items: start;
 			margin: 0 0 1em;
 			grid-gap: 0 0.5em;
+			transition: var(--mainTransition);
 
 			.tabs {
 				width: 100%;
@@ -77,15 +78,13 @@ export const DashboardContainer = styled.div`
 			}
 
 			.active {
-				background: green;
-				outline: none;
-				color: var(--white);
+				background: transparent;
+				border: 0.1em solid var(--mainBlue);
 			}
 		}
 
 		.transaction-body {
 			width: 100%;
-			/* background: var(--white); */
 			line-height: 2;
 		}
 	}
