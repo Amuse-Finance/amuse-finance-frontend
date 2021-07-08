@@ -16,7 +16,7 @@ export const FaucetContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--mainWhite);
+			background: var(--white);
 			place-items: center;
 			padding: 2em;
 			line-height: 2;

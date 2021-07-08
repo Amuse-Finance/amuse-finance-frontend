@@ -145,7 +145,6 @@ const Dashboard = () => {
 			<div className={isValidWidth ? "grid txn-data" : "hide"}>
 				<section className="grid transaction-header">
 					<div
-						id="transaction_history"
 						className={
 							activeTab === "Transaction History"
 								? "grid tabs active"

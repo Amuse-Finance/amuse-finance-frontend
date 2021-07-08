@@ -16,7 +16,7 @@ export const VaultContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--mainWhite);
+			background: var(--white);
 			place-items: center;
 			padding: 2em;
 			line-height: 2;
@@ -26,15 +26,15 @@ export const VaultContainer = styled.div`
 				width: 100%;
 				height: 60px;
 				padding: 0.75em;
-				border-radius: 0.5em;
-				border: 0.1em solid var(--white);
+				border-radius: 0.3em;
+				border: 0.1em solid gray;
 			}
 
 			button {
 				background: var(--mainGreen);
 				width: 100%;
 				height: 60px;
-				border-radius: 0.5em;
+				border-radius: 0.3em;
 				letter-spacing: 0.25em;
 				color: var(--white);
 				transition: var(--mainTransition);

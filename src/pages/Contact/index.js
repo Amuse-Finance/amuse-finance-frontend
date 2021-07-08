@@ -13,16 +13,16 @@ const Contact = () => {
 
 	return (
 		<ContactWrapper className="grid">
-			<header className="grid">
-				<div className="grid team-icon">
-					<IoMdContacts className="icon" />
-				</div>
-				<div className="grid">
-					<h1>Get in touch with the team</h1>
-				</div>
-			</header>
-
 			<form className="grid" onSubmit={_handleSubmit}>
+				<header className="grid">
+					<div className="grid team-icon">
+						<IoMdContacts className="icon" />
+					</div>
+					<div className="grid">
+						<h1>Get in touch with the team</h1>
+					</div>
+				</header>
+
 				<input
 					type="text"
 					value={user}

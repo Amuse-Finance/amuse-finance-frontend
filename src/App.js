@@ -17,6 +17,7 @@ import { handleEffect } from "./components/Helper/handleEffect";
 import Referral from "./pages/Referral";
 import RegisterReferral from "./pages/Referral/Register";
 import Contact from "./pages/Contact";
+import Presale from "./pages/Presale";
 
 require("dotenv/config");
 
@@ -47,6 +48,7 @@ const App = () => {
 				<Route exact path="/faucet" component={Faucet} />
 				<Route exact path="/referral" component={Referral} />
 				<Route exact path="/referral/create" component={RegisterReferral} />
+				<Route exact path="/presale" component={Presale} />
 			</Switch>
 			<ScrollTop />
 			<Footer />

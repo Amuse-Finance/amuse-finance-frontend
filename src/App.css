@@ -15,6 +15,7 @@
 	--darkGrey: #333;
 	--lightGrey: #e2dddd;
 	--mainGreen: #29ca8e;
+	--mainBlue: #0a3b63;
 	--mainSpacing: 0.1rem;
 	--wordSpacing: 0.25rem;
 	--mainTransition: all 2s ease-in-out;
@@ -39,8 +40,13 @@ button {
 	cursor: pointer;
 }
 
+body {
+	background: var(--mainWhite);
+	line-height: 1.8rem;
+	overflow-x: hidden;
+}
+
 .App {
-	overflow: hidden;
 	font-family: "Recursive", sans-serif;
 }
 
@@ -54,9 +60,9 @@ button {
 .hidden {
 	display: none;
 }
-body {
+
+.white {
 	background: var(--white);
-	line-height: 1.8rem;
 }
 
 .fixed-nav {

@@ -8,7 +8,7 @@ export const PanelWrapper = styled.div`
 	transition: var(--mainTransition);
 	position: absolute;
 	top: 7.2em;
-	right: 1em;
+	right: 0;
 	border-bottom-left-radius: 0.25em;
 	color: var(--darkGrey);
 	z-index: 100;
@@ -111,7 +111,6 @@ export const PanelWrapper = styled.div`
 
 	.list-container {
 		width: 100%;
-		/* place-items: start; */
 		margin: 0;
 		line-height: 2;
 		transition: var(--mainTransition);

@@ -7,36 +7,36 @@ export const ContactWrapper = styled.div`
 	height: 100%;
 	grid-gap: 2em 0;
 
-	header {
-		line-height: 1.25;
-		font-family: atmospheric;
-
-		.icon {
-			font-size: 4em;
-			color: var(--darkGrey);
-		}
-
-		h1 {
-			font-size: 2em;
-			font-weight: 600;
-		}
-	}
-
 	form {
-		width: 50%;
-		background: var(--mainWhite);
+		width: 40%;
+		background: var(--white);
 		place-items: center;
 		padding: 2em;
 		line-height: 2;
 		grid-gap: 1.25em 0;
+
+		header {
+			/* line-height: 1.25; */
+			font-family: atmospheric;
+
+			.icon {
+				font-size: 4em;
+				color: var(--darkGrey);
+			}
+
+			h1 {
+				font-size: 2em;
+				font-weight: 600;
+			}
+		}
 
 		input,
 		textarea {
 			width: 100%;
 			height: 60px;
 			padding: 0.75em;
-			border-radius: 0.25em;
-			border: 1px solid gray;
+			border-radius: 0.3em;
+			border: 0.1em solid gray;
 		}
 
 		textarea {

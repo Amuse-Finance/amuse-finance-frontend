@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 export const NavbarContainer = styled.div`
 	grid-template-columns: repeat(12, 1fr);
-	background: #000;
-	color: var(--white);
-	border-bottom: ${(props) =>
-		props.theme !== "dark" && "1px solid var(--darkGrey)"};
+	background: var(--white);
+	color: var(--darkGrey);
 	width: 100vw;
 	height: auto;
 	z-index: 1;
@@ -29,13 +27,8 @@ export const NavbarContainer = styled.div`
 		img {
 			width: 50px;
 			height: 50px;
-			border-radius: 100%;
+			/* border-radius: 100%; */
 		}
-	}
-
-	.nav-list ul a,
-	.toggle {
-		color: var(--white);
 	}
 
 	.nav-list {
@@ -46,6 +39,8 @@ export const NavbarContainer = styled.div`
 			a {
 				padding: 0 2rem;
 				letter-spacing: var(--mainSpacing);
+				font-weight: 500;
+				font-size: 1.1em;
 			}
 		}
 	}
