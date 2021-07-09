@@ -6,46 +6,56 @@ export const FooterContainer = styled.div`
 	grid-gap: 2rem;
 	background: var(--mainBlue);
 	color: var(--white);
-	padding: 3rem;
+	padding: 2em 3rem;
+	place-items: start;
+	align-items: center;
 
-	.center {
-		line-height: 2.5;
-		height: 100px;
+	h1 {
+		font-size: 1.25em;
+	}
 
-		h3 {
-			text-transform: capitalize;
+	.form {
+		width: 100%;
+		place-items: center;
+		grid-gap: 0.25em 0;
+
+		.form-control {
+			margin: 0.5em 0 0;
+			width: 70%;
+
+			input {
+				color: var(--darkGrey);
+				width: 100%;
+				height: 50px;
+				padding: 1rem;
+				letter-spacing: var(--letterSpacing);
+				border-radius: 1em 0.25em 1em 0.25em;
+			}
 		}
 	}
 
-	.form-control {
-		margin: 1rem 0 0;
+	.socials {
+		width: 100%;
+		grid-gap: 0.25em 0;
+		letter-spacing: var(--mainSpacing);
 
-		input {
-			color: var(--darkGrey);
-			width: 100%;
-			height: 50px;
-			padding: 1rem;
-			letter-spacing: var(--letterSpacing);
-			font-family: cursive;
-			border-top-left-radius: 1rem;
-			border-top-right-radius: 0.25rem;
-			border-bottom-left-radius: 0.25rem;
-			border-bottom-right-radius: 1rem;
+		p {
+			font-size: 0.8em;
 		}
-	}
 
-	.social-icons {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		width: auto;
-		width: auto;
+		.social-icons {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			width: auto;
+			width: auto;
 
-		.icon {
-			margin: 0 1rem 0 0;
-			font-size: 1.1rem;
+			.icon {
+				margin: 0 1rem 0 0;
+				font-size: 1.25rem;
 
-			&::hover {
-				color: var(--lightBlue);
+				&::hover {
+					color: var(--lightBlue);
+				}
 			}
 		}
 	}
@@ -64,9 +74,13 @@ export const FooterContainer = styled.div`
 					height: auto;
 				}
 
-				.form-control {
-					input {
-						width: 100%;
+				.form {
+					place-items: start;
+					width: 100%;
+					.form-control {
+						input {
+							width: 100%;
+						}
 					}
 				}
 			}

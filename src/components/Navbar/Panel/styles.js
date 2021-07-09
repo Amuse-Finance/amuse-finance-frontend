@@ -4,13 +4,13 @@ export const PanelWrapper = styled.div`
 	// width: 270px;
 	width: 350px;
 	height: auto;
-	background: var(--lightGrey);
+	background: var(--mainWhite);
 	transition: var(--mainTransition);
 	position: absolute;
-	top: 7.2em;
+	top: 6.65em;
 	right: 0;
 	border-bottom-left-radius: 0.25em;
-	color: var(--darkGrey);
+	color: var(--mainBlue);
 	z-index: 100;
 
 	header {
@@ -28,23 +28,22 @@ export const PanelWrapper = styled.div`
 
 			h2 {
 				grid-column: 1/8;
-				font-size: 0.825rem;
-				font-weight: 500;
+				font-size: 1em;
+				font-weight: 600;
 				width: 100%;
 				padding: 0.25em 0;
 			}
 
 			p {
 				grid-column: 8/12;
-				background: var(--darkGrey);
+				background: var(--mainBlue);
 				color: var(--white);
-				opacity: 0.75;
 				width: 100%;
 				text-align: center;
 				padding: 0.25em 0.75em;
 				border-radius: 0.5em;
 				font-weight: 500;
-				font-size: 0.75em;
+				font-size: 0.9em;
 				letter-spacing: var(--mainSpacing);
 				text-transform: capitalize;
 			}
@@ -84,7 +83,8 @@ export const PanelWrapper = styled.div`
 
 				button {
 					padding: 0.25em 0.75em;
-					background: gray;
+					background: var(--mainBlue);
+					color: var(--white);
 					border-radius: 0.5em;
 					font-weight: 600;
 					width: 100%;
@@ -92,21 +92,12 @@ export const PanelWrapper = styled.div`
 
 					&:hover {
 						background: transparent;
+						color: var(--mainBlue);
 						border: 1px solid gray;
 					}
 				}
 			}
 		}
-
-		/* .container {
-			grid-template-columns: repeat(2, 1fr);
-			place-items: center;
-			border-radius: 1em;
-			text-align: center;
-			text-decoration: underline;
-			color: inherit;
-			font-weight: 700;
-		} */
 	}
 
 	.list-container {
@@ -118,7 +109,7 @@ export const PanelWrapper = styled.div`
 
 		.list-item {
 			text-align: left;
-			color: green;
+			/* color: va; */
 			width: 94%;
 			padding: 0.5em;
 			border-radius: inherit;
@@ -127,7 +118,7 @@ export const PanelWrapper = styled.div`
 			margin: 0;
 
 			&:hover {
-				background: green;
+				background: var(--mainBlue);
 				color: var(--white);
 			}
 

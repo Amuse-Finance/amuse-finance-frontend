@@ -1,15 +1,12 @@
 import { useContext } from "react";
 import { web3Context } from "../../../components/Context";
 import { shortener } from "../../../components/Helper";
-import Loading from "../../../components/Loading";
 import { NormalTransactionWrapper } from "./styles";
 import { ErrorBoundary } from "../../../components/ErrorBoundary";
 require("dotenv/config");
 
 const NormalTransaction = () => {
-	const { loading, fromWei, transactionHistory } = useContext(web3Context);
-
-	if (loading) return <Loading />;
+	const { fromWei, transactionHistory } = useContext(web3Context);
 
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;

@@ -8,7 +8,7 @@ html {
 	bottom: 2rem;
 	right: 2rem;
 
-	background: var(--red);
+	background: var(--mainBlue);
 	color: #fff;
 	place-self: center;
 	width: 25px;
@@ -33,7 +33,7 @@ html {
 		transform: scale(1.25);
 	}
 	100% {
-		background: var(--darkGrey);
+		background: var(--red);
 		transform: scale(1.75);
 	}
 }
