@@ -107,7 +107,7 @@ export const DashboardContainer = styled.div`
 	}
 
 	@media (max-width: 1023px) {
-		@media (max-width: 500px) {
+		@media (max-width: 424px) {
 			& {
 				.dashboard-wrapper {
 					padding: 3em 0;
