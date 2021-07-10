@@ -14,12 +14,12 @@ export const DashboardContainer = styled.div`
 
 			.card {
 				width: 100%;
-				height: 175px;
-				background: var(--mainBlue);
-				color: var(--white);
+				height: 200px;
+				background: var(--white);
+				color: var(--mainBlue);
 				outline: none;
 				padding: 1.5em 1em;
-				border-radius: 1.5em;
+				border-radius: 1em;
 				cursor: pointer;
 				border: 1.5px solid var(--lightGrey);
 				transition: all 2s ease-in-out;
@@ -32,15 +32,34 @@ export const DashboardContainer = styled.div`
 					cursor: pointer;
 				}
 
+				h3 {
+					font-weight: 600;
+				}
+
 				.sub-card {
 					grid-template-columns: 2fr 1fr 2fr;
 					place-items: center;
-					grid-gap: 0 0.25em;
+					grid-gap: 0 0.75em;
 					font-size: 0.75em;
 					font-weight: 900;
+					width: 100%;
+
+					.text {
+						border: 1px solid rgba(14, 60, 98, 0.56);
+						padding: 0.5em;
+						border-radius: 0.75em;
+						font-weight: 600;
+						width: 150px;
+						/* font-size: 1.1em; */
+						place-items: center;
+					}
 
 					.icon {
 						font-size: 2em;
+						background: var(--mainBlue);
+						padding: 0.5em 0.5em;
+						border-radius: 100%;
+						color: var(--white);
 					}
 				}
 			}
@@ -78,8 +97,8 @@ export const DashboardContainer = styled.div`
 			}
 
 			.active {
-				background: transparent;
-				border: 0.1em solid var(--mainBlue);
+				background: var(--mainBlue);
+				color: var(--white);
 			}
 		}
 
@@ -101,7 +120,7 @@ export const DashboardContainer = styled.div`
 			}
 		}
 
-		@media (max-width: 425px) {
+		@media (max-width: 767px) {
 			& {
 				.dashboard-wrapper {
 					padding: 2.5em 0;
@@ -110,6 +129,14 @@ export const DashboardContainer = styled.div`
 					.card-container {
 						grid-template-columns: 1fr;
 						padding: 2.5em 0.5em;
+
+						.sub-card {
+							.text {
+								padding: 0.5em 0.75em;
+								font-size: 1em;
+								width: 120px;
+							}
+						}
 					}
 				}
 			}

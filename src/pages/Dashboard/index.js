@@ -37,9 +37,15 @@ const Dashboard = () => {
 							<h3>AMD Price</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>1.00 AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>${parseFloat(amdPrice).toFixed(2)}</h1>
+							<div className="grid text">
+								<h1>1.00 AMD</h1>
+							</div>
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>${parseFloat(amdPrice).toFixed(2)}</h1>
+							</div>
 						</div>
 					</section>
 
@@ -48,11 +54,17 @@ const Dashboard = () => {
 							<h3>AMD Balance</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>{parseFloat(balance).toFixed(2)} AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>
-								${(parseFloat(balance) * parseFloat(amdPrice)).toFixed(2)}
-							</h1>
+							<div className="grid text">
+								<h1>{parseFloat(balance).toFixed(2)} AMD</h1>
+							</div>
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>
+									${(parseFloat(balance) * parseFloat(amdPrice)).toFixed(2)}
+								</h1>
+							</div>
 						</div>
 					</section>
 
@@ -61,11 +73,21 @@ const Dashboard = () => {
 							<h3>Staked Balance</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>{parseFloat(stakedBalance).toFixed(2)} AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>
-								${(parseFloat(stakedBalance) * parseFloat(amdPrice)).toFixed(2)}
-							</h1>
+							<div className="grid text">
+								<h1>{parseFloat(stakedBalance).toFixed(2)} AMD</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>
+									$
+									{(parseFloat(stakedBalance) * parseFloat(amdPrice)).toFixed(
+										2
+									)}
+								</h1>
+							</div>
 						</div>
 					</section>
 
@@ -74,9 +96,16 @@ const Dashboard = () => {
 							<h3>Total claimed Rewards</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>100 AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>$25</h1>
+							<div className="grid text">
+								<h1>100 AMD</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>$25</h1>
+							</div>
 						</div>
 					</section>
 
@@ -85,11 +114,21 @@ const Dashboard = () => {
 							<h3>Daily Rewards</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>{parseFloat(dailyCashback).toFixed(2)} AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>
-								${(parseFloat(dailyCashback) * parseFloat(amdPrice)).toFixed(2)}
-							</h1>
+							<div className="grid text">
+								<h1>{parseFloat(dailyCashback).toFixed(2)} AMD</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>
+									$
+									{(parseFloat(dailyCashback) * parseFloat(amdPrice)).toFixed(
+										2
+									)}
+								</h1>
+							</div>
 						</div>
 					</section>
 
@@ -98,12 +137,21 @@ const Dashboard = () => {
 							<h3>Weekly Rewards</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>{parseFloat(weeklyCashback).toFixed(2)} AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>
-								$
-								{(parseFloat(weeklyCashback) * parseFloat(amdPrice)).toFixed(2)}
-							</h1>
+							<div className="grid text">
+								<h1>{parseFloat(weeklyCashback).toFixed(2)} AMD</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>
+									$
+									{(parseFloat(weeklyCashback) * parseFloat(amdPrice)).toFixed(
+										2
+									)}
+								</h1>
+							</div>
 						</div>
 					</section>
 
@@ -112,14 +160,21 @@ const Dashboard = () => {
 							<h3>Estimated AMD Rewards</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>{parseFloat(estimatedAmdRewards).toFixed(2)} AMD</h1>
-							<IoMdSwap className="icon" />
-							<h1>
-								$
-								{(
-									parseFloat(estimatedAmdRewards) * parseFloat(amdPrice)
-								).toFixed(2)}
-							</h1>
+							<div className="grid text">
+								<h1>{parseFloat(estimatedAmdRewards).toFixed(2)} AMD</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>
+									$
+									{(
+										parseFloat(estimatedAmdRewards) * parseFloat(amdPrice)
+									).toFixed(2)}
+								</h1>
+							</div>
 						</div>
 					</section>
 
@@ -128,15 +183,22 @@ const Dashboard = () => {
 							<h3>Estimated ETH Rewards</h3>
 						</div>
 						<div className="grid sub-card">
-							<h1>
-								{parseFloat(estimatedEthRewards) < 0.01 &&
-								parseFloat(estimatedEthRewards) !== 0
-									? parseFloat(estimatedEthRewards).toFixed(9)
-									: parseFloat(estimatedEthRewards).toFixed(2)}{" "}
-								ETH
-							</h1>
-							<IoMdSwap className="icon" />
-							<h1>{parseFloat(estimatedAmdRewards).toFixed(2)} AMD</h1>
+							<div className="grid text">
+								<h1>
+									{parseFloat(estimatedEthRewards) < 0.01 &&
+									parseFloat(estimatedEthRewards) !== 0
+										? parseFloat(estimatedEthRewards).toFixed(7)
+										: parseFloat(estimatedEthRewards).toFixed(2)}
+									ETH
+								</h1>
+							</div>
+
+							<div className="icon">
+								<IoMdSwap />
+							</div>
+							<div className="grid text">
+								<h1>{parseFloat(estimatedAmdRewards).toFixed(2)} AMD</h1>
+							</div>
 						</div>
 					</section>
 				</div>

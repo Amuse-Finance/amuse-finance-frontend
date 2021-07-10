@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import { IoMdContacts } from "react-icons/io";
 import { web3Context } from "../../components/Context";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { ContactWrapper } from "./styles";
@@ -17,9 +16,6 @@ const Contact = () => {
 		<ContactWrapper className="grid">
 			<form className="grid" onSubmit={_handleSubmit}>
 				<header className="grid">
-					<div className="grid team-icon">
-						<IoMdContacts className="icon" />
-					</div>
 					<div className="grid">
 						<h1>Get in touch with the team</h1>
 					</div>

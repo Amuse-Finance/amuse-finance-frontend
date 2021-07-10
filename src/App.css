@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 *,
 ::before,
 ::after {
@@ -36,6 +38,7 @@ textarea {
 	border: none;
 	outline: none;
 }
+
 button {
 	cursor: pointer;
 }
@@ -47,7 +50,7 @@ body {
 }
 
 .App {
-	font-family: "Recursive", sans-serif;
+	font-family: inter;
 }
 
 .grid {

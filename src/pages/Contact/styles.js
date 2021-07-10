@@ -4,44 +4,35 @@ import background from "../../assets/background.jpeg";
 export const ContactWrapper = styled.div`
 	background: url(${background}) center/cover no-repeat;
 	place-items: center;
-	padding: 3em 0;
+	padding: 10em 0;
 	width: 100%;
 	height: 100%;
 	grid-gap: 2em 0;
 
 	form {
-		width: 40%;
-		background: var(--mainBlue);
-		color: var(--white);
+		width: 50%;
+		background: var(--white);
+		color: var(--mainBlue);
 		place-items: center;
-		padding: 2em 2em 4em;
+		padding: 2em 2em 3em;
 		grid-gap: 1.25em 0;
 		border-radius: 0.75em;
+		line-height: 2;
 
 		header {
-			font-family: atmospheric;
-			padding: 1em 0;
-
-			.icon {
-				font-size: 4em;
-				color: var(--white);
-			}
-
-			h1 {
-				font-size: 2em;
-				font-weight: 600;
-				margin: 0.5em 0 0;
-			}
+			font-family: inter;
+			font-size: 2em;
+			font-weight: 600;
+			margin: 0 0 0;
 		}
 
 		input,
 		textarea {
-			color: var(--darkGrey);
 			width: 100%;
 			height: 60px;
 			padding: 0.75em;
-			border-radius: 0.3em;
-			border: 0.1em solid gray;
+			border-radius: 0.5em;
+			border: 0.1em solid var(--mainBlue);
 		}
 
 		textarea {
@@ -50,12 +41,12 @@ export const ContactWrapper = styled.div`
 		}
 
 		button {
-			background: var(--mainGreen);
+			background: var(--mainBlue);
+			color: var(--white);
 			width: 100%;
 			height: 60px;
 			border-radius: 0.25em;
 			letter-spacing: 0.25em;
-			color: var(--white);
 			transition: var(--mainTransition);
 			place-items: center;
 

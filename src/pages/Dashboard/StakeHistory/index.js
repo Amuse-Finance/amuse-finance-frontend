@@ -7,16 +7,10 @@ import { StakeTransactionWrapper } from "./styles";
 const StakeHistory = () => {
 	const { networkType, stakeHistory } = useContext(web3Context);
 
-	let _index = stakeHistory.length;
-	const _txnItems = stakeHistory.map((item) => {
+	const _txnItems = stakeHistory.map((item, index) => {
 		const { ethValue, amount, tokenValue, hash, timestamp } = item;
-		const _currentIndex = _index;
-		_index--;
 		return (
-			<div className="grid card" key={_currentIndex}>
-				<div className="grid">
-					<h2>{_currentIndex}</h2>
-				</div>
+			<div className="grid card" key={index}>
 				<div className="grid">
 					<h2>
 						<a
@@ -79,9 +73,9 @@ const StakeHistory = () => {
 	return (
 		<StakeTransactionWrapper className="grid">
 			<header className="grid header">
-				<div className="grid">
+				{/* <div className="grid">
 					<h2>#</h2>
-				</div>
+				</div> */}
 				<div className="grid">
 					<h2>Hash</h2>
 				</div>
