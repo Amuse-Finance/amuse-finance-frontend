@@ -109,7 +109,7 @@ const Dashboard = () => {
 						</div>
 					</section>
 
-					<section className="grid card five">
+					<section className="grid card">
 						<div className="grid">
 							<h3>Daily Rewards</h3>
 						</div>
@@ -132,7 +132,7 @@ const Dashboard = () => {
 						</div>
 					</section>
 
-					<section className="grid card six">
+					<section className="grid card">
 						<div className="grid">
 							<h3>Weekly Rewards</h3>
 						</div>
@@ -155,7 +155,7 @@ const Dashboard = () => {
 						</div>
 					</section>
 
-					<section className="grid card seven">
+					<section className="grid card">
 						<div className="grid">
 							<h3>Estimated AMD Rewards</h3>
 						</div>
@@ -178,7 +178,7 @@ const Dashboard = () => {
 						</div>
 					</section>
 
-					<section className="grid card eight">
+					<section className="grid card">
 						<div className="grid">
 							<h3>Estimated ETH Rewards</h3>
 						</div>
