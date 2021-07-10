@@ -219,11 +219,13 @@ const Dashboard = () => {
 
 					<div
 						className={
-							activeTab === "Staked History" ? "grid tabs active" : "grid tabs"
+							activeTab === "Unstaked History"
+								? "grid tabs active"
+								: "grid tabs"
 						}
-						onClick={() => setActiveTab("Staked History")}
+						onClick={() => setActiveTab("Unstaked History")}
 					>
-						<h2>Staked History</h2>
+						<h2>Unstaked History</h2>
 					</div>
 				</section>
 				<section className="grid transaction-body">
