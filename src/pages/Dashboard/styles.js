@@ -42,16 +42,10 @@ export const DashboardContainer = styled.div`
 					grid-gap: 0 0.75em;
 					font-size: 0.75em;
 					font-weight: 900;
-					width: 100%;
 
 					.text {
-						border: 1px solid rgba(14, 60, 98, 0.56);
-						padding: 0.5em;
-						border-radius: 0.75em;
-						font-weight: 600;
-						width: 150px;
-						/* font-size: 1.1em; */
-						place-items: center;
+						font-size: 1.1em;
+						font-weight: 900;
 					}
 
 					.icon {
@@ -112,29 +106,23 @@ export const DashboardContainer = styled.div`
 		display: none;
 	}
 
-	@media (max-width: 1591px) {
-		& {
-			.dashboard-wrapper {
-				grid-template-columns: 1fr;
-				padding: 2.5em 3em;
-			}
-		}
-
-		@media (max-width: 767px) {
+	@media (max-width: 1023px) {
+		@media (max-width: 361px) {
 			& {
 				.dashboard-wrapper {
-					padding: 2.5em 0;
-					grid-gap: 0 2em;
+					padding: 3em 0;
 
 					.card-container {
 						grid-template-columns: 1fr;
-						padding: 2.5em 0.5em;
+						padding: 0 0.25em;
+						.card {
+							width: 100%;
 
-						.sub-card {
-							.text {
-								padding: 0.5em 0.75em;
-								font-size: 1em;
-								width: 120px;
+							.sub-card {
+								.text {
+									font-size: 1em;
+									font-weight: 900;
+								}
 							}
 						}
 					}
