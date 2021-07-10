@@ -24,6 +24,7 @@ export const ContactWrapper = styled.div`
 			font-size: 2em;
 			font-weight: 600;
 			margin: 0 0 0;
+			text-align: center;
 		}
 
 		input,
@@ -55,9 +56,9 @@ export const ContactWrapper = styled.div`
 			}
 
 			&:hover {
-				color: var(--mainGreen);
+				color: var(--mainBlue);
 				background: transparent;
-				border: 0.05em solid var(--mainGreen);
+				border: 0.05em solid var(--mainBlue);
 			}
 		}
 	}
