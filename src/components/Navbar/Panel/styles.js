@@ -38,6 +38,7 @@ export const PanelWrapper = styled.div`
 				grid-column: 8/12;
 				background: var(--mainBlue);
 				color: var(--white);
+				opacity: 0.75;
 				width: 100%;
 				text-align: center;
 				padding: 0.25em 0.75em;
@@ -83,17 +84,17 @@ export const PanelWrapper = styled.div`
 
 				button {
 					padding: 0.25em 0.75em;
-					background: var(--mainBlue);
-					color: var(--white);
+					background: transparent;
+					color: var(--mainBlue);
+					border: 0.1em solid var(--mainBlue);
 					border-radius: 0.5em;
 					font-weight: 600;
 					width: 100%;
 					transition: var(--mainTransition);
 
 					&:hover {
-						background: transparent;
-						color: var(--mainBlue);
-						border: 1px solid gray;
+						background: var(--mainBlue);
+						color: var(--white);
 					}
 				}
 			}

@@ -18,12 +18,13 @@ export const FaucetContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--mainBlue);
-			color: var(--white);
+			background: var(--white);
+			color: var(--mainBlue);
 			place-items: center;
 			padding: 2em 2em 3em;
 			grid-gap: 1.25em 0;
 			border-radius: 0.75em;
+			line-height: 2;
 
 			input {
 				width: 100%;
@@ -35,18 +36,19 @@ export const FaucetContainer = styled.div`
 			}
 
 			button {
-				background: var(--mainGreen);
+				background: var(--mainBlue);
 				width: 100%;
 				height: 60px;
 				border-radius: 0.5em;
 				letter-spacing: 0.25em;
 				color: var(--white);
 				transition: var(--mainTransition);
+				border: 0.1em solid var(--white);
 
 				&:hover {
-					color: var(--mainGreen);
 					background: transparent;
-					border: 0.05em solid var(--mainGreen);
+					color: var(--mainBlue);
+					border: 0.1em solid var(--mainBlue);
 				}
 			}
 		}

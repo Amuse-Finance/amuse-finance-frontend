@@ -7,7 +7,7 @@ const Footer = () => {
 	const [email, setEmail] = useState("");
 	const getYear = new Date().getFullYear();
 
-	let socialIcon = [
+	const socialLinks = [
 		{ icon: <FaGithub />, to: "https://github.com/abdillahzakkie" },
 		{ icon: <FaTelegram />, to: "https://t.me/DragonTrybe" },
 		{
@@ -16,7 +16,7 @@ const Footer = () => {
 		},
 		{ icon: <FaTwitter />, to: "https://twitter.com/Dev_DragonLord" },
 	];
-	socialIcon = socialIcon.map((item, i) => {
+	const socialIcon = socialLinks.map((item, i) => {
 		return (
 			<a
 				href={item.to}
