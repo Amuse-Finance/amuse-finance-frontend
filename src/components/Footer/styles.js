@@ -62,4 +62,13 @@ export const FooterContainer = styled.div`
 			}
 		}
 	}
+
+	@media (max-width: 767px) {
+		& {
+			.wrapper {
+				grid-template-columns: 1fr;
+				grid-gap: 2em 0;
+			}
+		}
+	}
 `;

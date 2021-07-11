@@ -1,41 +1,117 @@
 import styled from "styled-components";
 
-export const ChartWrapper = styled.div`
-	grid-template-columns: repeat(2, 1fr);
-	width: 100vw;
-	padding: 1.5em 0;
-	grid-gap: 2em;
-
-	.fusion-chart {
-		width: 100%;
-		grid-gap: 2em 0;
+export const HomeWrapper = styled.div`
+	.features-container {
+		background: var(--mainBlue);
 		place-items: center;
-		text-align: center;
-		line-height: 2;
+		padding: 2em 0;
+		width: 100%;
+		border-top: 0.1em solid var(--white);
 
-		h1 {
-			font-size: 2em;
+		header {
+			letter-spacing: var(--mainSpacing);
+			line-height: 1.75;
+			place-items: center;
+			color: var(--white);
+			padding: 2em;
+			width: 60%;
+			text-align: center;
+
+			h1 {
+				font-size: 2em;
+				text-transform: capitalize;
+			}
 		}
 
-		input {
-			margin: 1em 0;
-			padding: 0.5em 1em;
-			border: 0.05em solid var(--darkGrey);
-			background: transparent;
-			border-radius: 0.5em;
+		.card-container {
+			width: 100%;
+			place-items: center;
+			padding: 0 1em 0 0;
+
+			.wrapper {
+				grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+				grid-gap: 2em;
+				width: 100%;
+				padding: 2em;
+				margin: 0 auto;
+
+				.card {
+					width: 100%;
+					/* height: 270px; */
+					background: var(--white);
+					color: var(--darkGrey);
+					border-radius: 1em;
+					padding: 2em;
+					grid-gap: 1em 0;
+
+					.header {
+						width: 100%;
+						text-transform: capitalize;
+						font-size: 1.5em;
+						letter-spacing: var(--mainSpacing);
+						font-weight: 800;
+						place-items: start;
+					}
+
+					.detail {
+						width: 100%;
+						font-size: 1em;
+						font-weight: 500;
+						letter-spacing: var(--mainSpacing);
+					}
+				}
+			}
 		}
 	}
 
-	@media (max-width: 1023px) {
-		& {
-			grid-template-columns: 1fr;
-		}
+	.chart-container {
+		width: 100vw;
+		padding: 1.5em 0;
+		grid-gap: 2em;
 
-		@media (max-width: 767px) {
-			& {
-				.fusion-chart {
-					display: none;
+		.wrapper {
+			width: 100%;
+			grid-gap: 2em 0;
+			place-items: center;
+			text-align: center;
+			line-height: 2;
+
+			header {
+				h1 {
+					font-size: 2em;
 				}
+			}
+
+			form {
+				input {
+					margin: 1em 0;
+					padding: 0.5em 1em;
+					border: 0.05em solid var(--darkGrey);
+					background: transparent;
+					border-radius: 0.5em;
+				}
+			}
+
+			.fusion-chart {
+				width: 100%;
+				place-items: center;
+			}
+		}
+	}
+
+	@media (max-width: 767px) {
+		& {
+			.features-container {
+				header {
+					width: 100%;
+				}
+				.card-container {
+					padding: 0 0em 0 0;
+				}
+			}
+
+			.chart-container {
+				display: none;
 			}
 		}
 	}

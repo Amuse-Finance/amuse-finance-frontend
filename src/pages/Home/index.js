@@ -1,18 +1,16 @@
 import React, { useContext, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
-// import { IoMdSwap } from "react-icons/io";
 import CustomButton from "../../components/CustomButton";
-import logo1 from "../../images/logo1.jpg";
 import Particles from "react-particles-js";
 import particlesoptions from "../particleOptions";
 import ethLogo from "../../assets/ethereum-logo.png";
 import FisionDoughnut from "./FisionDoughnut";
-import { ChartWrapper } from "./styles";
+import { HomeWrapper } from "./styles";
 import { cashbackCalculator } from "../../components/Helper";
 import { web3Context } from "../../components/Context";
 
-function Home() {
+const Home = () => {
 	const [inputAmount, setInputAmount] = useState("");
 	const [cashbackCalculatorInput, setCashbackCalculatorInput] = useState(
 		cashbackCalculator()
@@ -35,7 +33,7 @@ function Home() {
 	};
 
 	return (
-		<div className="grid white">
+		<HomeWrapper className="grid white">
 			<section
 				style={{ height: "75vh" }}
 				className="relative blue flex justify-center items-center "
@@ -87,63 +85,94 @@ function Home() {
 					</section>
 				</div>
 			</section>
-			<section className="text-center py-10">
-				<h1 className="text-4xl md:text-5xl font-semibold pb-5">FEATURES</h1>
-				<p className="px-3 text-lg md:text-xl lg:mx-32 md:mx-10 sm:mx-2 leading-relaxed">
-					Duo no sed et elitr tempor dolor et ipsum. Et amet clita invidunt sit
-					magna sed ut ut. Sit eos. Elitr et vero elitr diam et voluptua justo
-					at accusam, vero eos sit sadipscing dolor lorem amet consetetur diam.
-					Ipsum.
-				</p>
-				<div className="flex flex-wrap justify-center items-center overflow-hidden m-5">
-					<div className="w-52 bg-gray-100 pb-2/3 rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-						<img src={logo1} alt="" className="object-cover w-full" />
-						<div className="p-2 text-sm font-medium text-gray-500">
-							Elitr et vero elitr diam et voluptua justo at accusam, vero eos
-							sit sadipscing dolor lorem amet consetetur diam.
+
+			<section className="grid features-container">
+				<header className="grid">
+					<h1>features</h1>
+					<p>
+						Nostrud irure id consequat officia. Tempor velit mollit veniam
+						occaecat sit dolore ex quis laborum est. Duis fugiat amet labore ad
+						nisi duis commodo ullamco ad laboris. Minim cillum consectetur sit
+						amet ad ad id eiusmod Lorem pariatur. Et id laboris ullamco deserunt
+						non incididunt excepteur ipsum nostrud ipsum mollit.
+					</p>
+				</header>
+				<div className="grid card-container">
+					<div className="grid wrapper">
+						<div className="grid card">
+							<div className="grid block-container">
+								<div className="block"></div>
+								<div className="block"></div>
+							</div>
+							<div className="grid header">
+								<h1>hodl</h1>
+							</div>
+							<div className="grid detail">
+								<p>2% rewards at every 24hours for all holders</p>
+							</div>
 						</div>
-					</div>
-					<div className="w-52 bg-gray-100 pb-2/3 rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-						<img src={logo1} alt="" className="object-cover w-full" />
-						<div className="p-2 text-sm font-medium text-gray-500">
-							Elitr et vero elitr diam et voluptua justo at accusam, vero eos
-							sit sadipscing dolor lorem amet consetetur diam.
+
+						<div className="grid card">
+							<div className="grid block-container">
+								<div className="block"></div>
+								<div className="block"></div>
+							</div>
+							<div className="grid header">
+								<h1>trade</h1>
+							</div>
+							<div className="grid detail">
+								<p>Earn back 100% gas fees for all buy actions</p>
+							</div>
 						</div>
-					</div>
-					<div className="w-52 bg-gray-100 pb-2/3 rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-						<img src={logo1} alt="" className="object-cover w-full" />
-						<div className="p-2 text-sm font-medium text-gray-500">
-							Elitr et vero elitr diam et voluptua justo at accusam, vero eos
-							sit sadipscing dolor lorem amet consetetur diam.
+
+						<div className="grid card">
+							<div className="grid block-container">
+								<div className="block"></div>
+								<div className="block"></div>
+							</div>
+							<div className="grid header">
+								<h1>stake</h1>
+							</div>
+							<div className="grid detail">
+								<p>Earn 1% ETHER rewards for all staked AMD per 24hours</p>
+							</div>
 						</div>
-					</div>
-					<div className="w-52 bg-gray-100 pb-2/3 rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-						<img src={logo1} alt="" className="object-cover w-full" />
-						<div className="p-2 text-sm font-medium text-gray-500">
-							Elitr et vero elitr diam et voluptua justo at accusam, vero eos
-							sit sadipscing dolor lorem amet consetetur diam.
-						</div>
-					</div>
-					<div className="w-52 bg-gray-100 pb-2/3 rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-						<img src={logo1} alt="" className="object-cover w-full" />
-						<div className="p-2 text-sm font-medium text-gray-500">
-							Elitr et vero elitr diam et voluptua justo at accusam, vero eos
-							sit sadipscing dolor lorem amet consetetur diam.
+
+						<div className="grid card">
+							<div className="grid block-container">
+								<div className="block"></div>
+								<div className="block"></div>
+							</div>
+							<div className="grid header">
+								<h1>referral</h1>
+							</div>
+							<div className="grid detail">
+								<p>
+									Earn as much as 25% of the transaction fees paid by referree
+									during buy actions
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<ChartWrapper className="grid chart-container">
-				<div className="grid fusion-chart">
+			<div className="grid chart-container">
+				<div className="grid wrapper">
 					<header className="grid">
 						<h4>TOKEN DISTRIBUTION</h4>
 						<h1>Initial Distibution</h1>
 					</header>
-					<FisionDoughnut type="doughnut3d" showPercentValues={true} />
+					<div className="grid fusion-chart">
+						<FisionDoughnut
+							type="doughnut3d"
+							className="chart"
+							showPercentValues={true}
+						/>
+					</div>
 				</div>
 
-				<div className="grid fusion-chart">
+				<div className="grid wrapper">
 					<div className="grid">
 						<header className="grid">
 							<h1>Cashback Calculator</h1>
@@ -155,16 +184,18 @@ function Home() {
 								onChange={handleInput}
 							/>
 						</form>
-						<FisionDoughnut
-							type="doughnut2d"
-							data={cashbackCalculatorInput}
-							numberPrefix="$"
-						/>
+						<div className="grid fusion-chart">
+							<FisionDoughnut
+								type="doughnut2d"
+								data={cashbackCalculatorInput}
+								numberPrefix="$"
+							/>
+						</div>
 					</div>
 				</div>
-			</ChartWrapper>
-		</div>
+			</div>
+		</HomeWrapper>
 	);
-}
+};
 
 export default Home;

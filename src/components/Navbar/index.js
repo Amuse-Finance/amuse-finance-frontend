@@ -23,7 +23,6 @@ const Navbar = ({ theme }) => {
 			{ name: "Dashboard", path: "dashboard" },
 			{ name: "Vault", path: "vault" },
 			{ name: "Team", path: "team" },
-			{ name: "Contact", path: "contact" },
 			{ name: "Referral", path: "referral" },
 			{ name: "Faucet", path: "faucet" },
 			{ name: "FAQ", path: "faq" },
@@ -35,7 +34,6 @@ const Navbar = ({ theme }) => {
 			{ name: "Dashboard", path: "dashboard" },
 			{ name: "Vault", path: "vault" },
 			{ name: "Team", path: "team" },
-			{ name: "Contact", path: "contact" },
 			{ name: "FAQ", path: "faq" },
 		];
 	}
@@ -57,9 +55,14 @@ const Navbar = ({ theme }) => {
 	return (
 		<NavbarContainer className="grid navbar" theme={theme}>
 			<div className="grid nav-brand">
-				<Link to="/">
-					<img src={amuseLogo} alt="Amuse.Finance" />
-				</Link>
+				<div className="grid logo">
+					<Link to="/">
+						<img src={amuseLogo} alt="Amuse.Finance" />
+					</Link>
+				</div>
+				<div className="grid brand-name">
+					<h1>amuse</h1>
+				</div>
 			</div>
 			<div
 				className={navOpen ? "grid nav-list nav-list-mobile" : "grid nav-list"}

@@ -17,12 +17,11 @@ const Footer = () => {
 		},
 		{ icon: <FaTwitter />, to: "https://twitter.com/Dev_DragonLord" },
 	];
-	const socialIcon = socialLinks.map((item, i) => {
+	const socialIcon = socialLinks.map((item, index) => {
 		return (
-			<div className="grid">
+			<div className="grid" key={index}>
 				<a
 					href={item.to}
-					key={i}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="icon"

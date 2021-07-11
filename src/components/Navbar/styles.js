@@ -18,22 +18,38 @@ export const NavbarContainer = styled.div`
 	}
 
 	.nav-brand {
-		grid-column: 1/2;
+		grid-column: 1/3;
+		grid-template-columns: repeat(3, 1fr);
 		width: 100%;
 		height: 100%;
 		letter-spacing: var(--mainSpacing);
 		align-items: center;
 
-		img {
-			width: 50px;
-			height: 50px;
-			/* border-radius: 100%; */
+		.logo {
+			width: 100%;
+			grid-column: 1/2;
+			place-items: center;
+
+			img {
+				width: 50px;
+				height: 50px;
+			}
+		}
+
+		.brand-name {
+			grid-column: 2/4;
+			width: 100%;
+			height: 100%;
+			align-items: center;
+			font-size: 2.5em;
 		}
 	}
 
 	.nav-list {
-		grid-column: 2/12;
+		grid-column: 3/12;
 		text-transform: capitalize;
+		place-items: center;
+		width: 100%;
 
 		ul {
 			a {
@@ -61,7 +77,7 @@ export const NavbarContainer = styled.div`
 		}
 
 		.online {
-			border: 2px solid green;
+			border: 0.15em solid var(--mainGreen);
 		}
 	}
 
@@ -77,12 +93,13 @@ export const NavbarContainer = styled.div`
 				padding: 2rem 0;
 				display: grid;
 				grid-column: 13;
-				font-size: 1.25rem;
+				font-size: 1.5rem;
 				cursor: pointer;
+				width: 100%;
 			}
 
 			.nav-brand {
-				grid-column: 1/10;
+				grid-column: 1/7;
 				margin-left: 0;
 				padding: 0.5em 0;
 			}
@@ -114,9 +131,10 @@ export const NavbarContainer = styled.div`
 				grid-template-columns: 1fr;
 				grid-template-rows: auto;
 				padding-bottom: 1rem;
+				width: 100%;
 
 				a {
-					padding: 0.5rem 1.25rem !important;
+					padding: 0.5rem 1.25rem;
 					letter-spacing: var(--mainSpacing);
 				}
 			}
