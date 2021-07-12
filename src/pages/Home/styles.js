@@ -37,7 +37,6 @@ export const HomeWrapper = styled.div`
 
 				.card {
 					width: 100%;
-					/* height: 270px; */
 					background: var(--white);
 					color: var(--darkGrey);
 					border-radius: 1em;
@@ -65,6 +64,7 @@ export const HomeWrapper = styled.div`
 	}
 
 	.chart-container {
+		grid-template-columns: repeat(2, 1fr);
 		width: 100vw;
 		padding: 1.5em 0;
 		grid-gap: 2em;
@@ -99,19 +99,27 @@ export const HomeWrapper = styled.div`
 		}
 	}
 
-	@media (max-width: 767px) {
+	@media (max-width: 1439px) {
 		& {
-			.features-container {
-				header {
-					width: 100%;
-				}
-				.card-container {
-					padding: 0 0em 0 0;
-				}
-			}
-
 			.chart-container {
-				display: none;
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 767px) {
+			& {
+				.features-container {
+					header {
+						width: 100%;
+					}
+					.card-container {
+						padding: 0 0em 0 0;
+					}
+				}
+
+				.chart-container {
+					display: none;
+				}
 			}
 		}
 	}
