@@ -67,14 +67,10 @@ class Web3Provider extends Component {
 	loadWeb3 = async () => {
 		try {
 			const ethereum = window.ethereum;
-			if (ethereum === undefined) {
-				alert(
-					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
-				);
+			if (ethereum === undefined)
 				throw new Error(
 					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
 				);
-			}
 			// initiate metamask pop
 			await ethereum.enable();
 

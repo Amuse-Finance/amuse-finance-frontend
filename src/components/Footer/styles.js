@@ -68,6 +68,18 @@ export const FooterContainer = styled.div`
 			.wrapper {
 				grid-template-columns: 1fr;
 				grid-gap: 2em 0;
+
+				section {
+					form {
+						input {
+							width: 95%;
+						}
+
+						button {
+							right: 10%;
+						}
+					}
+				}
 			}
 		}
 	}
