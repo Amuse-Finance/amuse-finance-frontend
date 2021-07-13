@@ -31,10 +31,10 @@ const Team = () => {
 						<small>DragonLord</small>
 
 						<div className="grid social-handles">
-							<FaDiscord />
-							<FiTwitter />
-							<FaLinkedin />
-							<FaGithub />
+							<FaDiscord className="icon" />
+							<FiTwitter className="icon" />
+							<FaLinkedin className="icon" />
+							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">
@@ -51,10 +51,10 @@ const Team = () => {
 						<small>SoftDev</small>
 
 						<div className="grid social-handles">
-							<FaDiscord />
-							<FiTwitter />
-							<FaLinkedin />
-							<FaGithub />
+							<FaDiscord className="icon" />
+							<FiTwitter className="icon" />
+							<FaLinkedin className="icon" />
+							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">
@@ -71,10 +71,10 @@ const Team = () => {
 						<small>Javamind</small>
 
 						<div className="grid social-handles">
-							<FaDiscord />
-							<FiTwitter />
-							<FaLinkedin />
-							<FaGithub />
+							<FaDiscord className="icon" />
+							<FiTwitter className="icon" />
+							<FaLinkedin className="icon" />
+							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">
@@ -91,10 +91,10 @@ const Team = () => {
 						<small>Zenesk</small>
 
 						<div className="grid social-handles">
-							<FaDiscord />
-							<FiTwitter />
-							<FaLinkedin />
-							<FaGithub />
+							<FaDiscord className="icon" />
+							<FiTwitter className="icon" />
+							<FaLinkedin className="icon" />
+							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">

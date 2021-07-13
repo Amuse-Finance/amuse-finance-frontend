@@ -1,27 +1,33 @@
-import React, { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { web3Context } from "../../components/Context";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
+import Error from "../../components/Error";
 import { FaucetContainer } from "./styles";
 
 const Faucet = () => {
 	const [faucetAmount, setFaucetAmount] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 	const { user, requestFaucet } = useContext(web3Context);
 
-	const validateInput = (_elem, _func, _excluded) => {
-		_elem.preventDefault();
-		if (!_excluded && isNaN(_elem.target.value)) return;
-		_func(
-			_excluded
-				? _elem.target.value
-				: _elem.target.value <= 1000
-				? _elem.target.value
-				: 1000
-		);
+	useEffect(() => {
+		if (errorMessage.length > 0)
+			setTimeout(() => {
+				setErrorMessage("");
+			}, 5000);
+	}, [errorMessage]);
+
+	const setFaucet = (e) => {
+		e.preventDefault();
+		if (isNaN(e.target.value)) return;
+		setFaucetAmount(e.target.value <= 1000 ? e.target.value : 1000);
 	};
 
 	const _handleSubmit = async (e) => {
 		e.preventDefault();
-		await requestFaucet(user, faucetAmount);
+		const _response = await requestFaucet(faucetAmount);
+		if (_response.error) {
+			setErrorMessage(() => _response.error);
+		}
 	};
 
 	return (
@@ -39,9 +45,10 @@ const Faucet = () => {
 						type="text"
 						value={faucetAmount}
 						placeholder="Enter amount (max is 1000 AMD)"
-						onChange={(e) => validateInput(e, setFaucetAmount)}
+						onChange={setFaucet}
 					/>
-					<button>Request</button>
+					<button type="submit">Request</button>
+					{errorMessage.length > 0 && <Error error={errorMessage} />}
 				</form>
 			</div>
 		</FaucetContainer>

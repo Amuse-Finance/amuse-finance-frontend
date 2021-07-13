@@ -136,9 +136,7 @@ class Web3Provider extends Component {
 	};
 
 	// load blockchain data
-	loadBlockchainData = async (
-		{ loading, web3, user, amusedToken, amusedVault } = this.state
-	) => {
+	loadBlockchainData = async ({ loading, web3, user } = this.state) => {
 		try {
 			if (loading || !web3) return;
 			const amdPrice = 0.25;
@@ -409,7 +407,6 @@ class Web3Provider extends Component {
 	};
 
 	requestFaucet = async (
-		_account = this.state.user,
 		amount,
 		{ loading, ethereum, user, amusedFaucet } = this.state
 	) => {
@@ -426,7 +423,7 @@ class Web3Provider extends Component {
 					name: "Amused.Finance",
 					version: "1",
 				},
-				message: { title, user: _account, amount },
+				message: { title, user, amount },
 				primaryType: "FaucetRequest",
 				types: {
 					EIP712Domain: [
@@ -444,18 +441,20 @@ class Web3Provider extends Component {
 
 			const signature = await ethereum.request({
 				method: "eth_signTypedData_v4",
-				params: [_account, msgParams],
+				params: [user, msgParams],
 				from: user,
 			});
-			await amusedFaucet.methods.lastWithdrawTime(_account).call();
+
 			const _data = { user, signature, chainId, amount };
 			const _url =
 				"https://amused-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
 			const _result = await postData(_data, _url);
-			console.log(_result);
+			if (!_result.data.receipt.status) {
+				return { error: "Please wait for 24hours to request another faucet" };
+			}
+			return _result;
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { error };
 		}
 	};
 

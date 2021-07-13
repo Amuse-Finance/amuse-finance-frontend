@@ -22,13 +22,14 @@ export const DashboardContainer = styled.div`
 				border-radius: 1em;
 				cursor: pointer;
 				border: 1.5px solid var(--lightGrey);
-				transition: all 2s ease-in-out;
+				transition: var(--mainTransition);
 				place-items: center;
 				letter-spacing: var(--mainSpacing);
 				font-size: 1.1em;
 
 				&:hover {
-					box-shadow: 5px 5px 25px var(--lightGrey);
+					box-shadow: 5px 5px 15px #2ec5ce;
+					opacity: 0.85;
 					cursor: pointer;
 				}
 

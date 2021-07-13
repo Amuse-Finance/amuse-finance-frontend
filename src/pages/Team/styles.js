@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TeamWrapper = styled.div`
 	width: 100vw;
 	padding: 2em 0;
+	/* color: var(--mainBlue); */
 
 	header {
 		width: 50%;
@@ -35,19 +36,28 @@ export const TeamWrapper = styled.div`
 
 		.card {
 			width: 100%;
-			background: grey;
-			border-radius: 0.25em;
+			color: var(--white);
+			border-radius: 0.45em;
 			transition: var(--mainTransition);
 			cursor: pointer;
 			position: relative;
 
+			&:hover {
+				.details {
+					background: transparent;
+					border: 0.1em solid var(--mainBlue);
+					color: var(--mainBlue);
+					border-top: none;
+				}
+			}
+
 			.role {
-				background: gray;
+				background: var(--mainBlue);
 				position: absolute;
 				top: 0;
 				left: 0;
 				padding: 0.2em 1em;
-				border-radius: 0.25em 0 0.25em 0;
+				border-radius: 0.45em 0 0.45em 0;
 				color: var(--white);
 				letter-spacing: var(--mainSpacing);
 				text-transform: uppercase;
@@ -77,7 +87,11 @@ export const TeamWrapper = styled.div`
 				padding: 0.5em 1em;
 				letter-spacing: var(--mainSpacing);
 				line-height: 1.5;
-				color: var(--white);
+				background: var(--mainBlue);
+				border-radius: inherit;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+				transition: var(--mainTransition);
 
 				h1 {
 					font-size: 1.25em;
@@ -92,7 +106,14 @@ export const TeamWrapper = styled.div`
 					width: 80%;
 					place-items: center;
 					padding: 0.5em 0;
-					font-size: 1.2em;
+
+					.icon {
+						font-size: 1.3em;
+
+						&:hover {
+							color: var(--mainBlue);
+						}
+					}
 				}
 			}
 		}
