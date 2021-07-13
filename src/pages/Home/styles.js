@@ -46,6 +46,32 @@ export const HomeWrapper = styled.div`
 						background: var(--hoverBlue);
 					}
 
+					.block-container {
+						width: 100%;
+						grid-template-columns: 3% 97%;
+
+						.blocks {
+							width: 100%;
+							height: 30px;
+							grid-gap: 0 0.09em;
+							grid-template-columns: repeat(2, 1fr);
+							place-items: start;
+							margin: 0;
+							.block {
+								width: 100%;
+								height: 100%;
+								background: #3db3e2;
+								text-align: left;
+							}
+						}
+						.sorted-arrow {
+							width: 100%;
+							align-items: center;
+							color: #d6b1ff;
+							font-size: 1.35em;
+						}
+					}
+
 					.header {
 						width: 100%;
 						text-transform: capitalize;
@@ -112,6 +138,8 @@ export const HomeWrapper = styled.div`
 		@media (max-width: 767px) {
 			& {
 				.features-container {
+					border-bottom: 0.1em solid var(--white);
+
 					header {
 						width: 100%;
 					}
