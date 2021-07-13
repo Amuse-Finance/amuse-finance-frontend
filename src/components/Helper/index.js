@@ -120,7 +120,7 @@ const getRefferalHistory = async (web3, user, amusedToken) => {
 	}
 };
 
-const getStakedHistory = async (web3, user, amusedVault) => {
+const getUstakedHistory = async (web3, user, amusedVault) => {
 	try {
 		let _tempData = [];
 
@@ -186,7 +186,7 @@ export {
 	doughnutChartConfig,
 	fixedDataArray,
 	getRefferalHistory,
-	getStakedHistory,
+	getUstakedHistory,
 	cashbackCalculator,
 	postData,
 };

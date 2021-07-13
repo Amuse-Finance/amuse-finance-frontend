@@ -1,5 +1,5 @@
 import "./App.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { web3Context } from "./components/Context";
 
@@ -22,14 +22,17 @@ import Presale from "./pages/Presale";
 require("dotenv/config");
 
 const ethereum = window.ethereum;
-let loading = true;
-let updateAccount;
 
 const App = () => {
-	const { loading: _loading, updateAccount: _updateAccount } =
-		useContext(web3Context);
-	loading = _loading;
-	updateAccount = _updateAccount;
+	const { loading, updateAccount } = useContext(web3Context);
+	useEffect(() => {
+		if (loading) return;
+		ethereum.on("accountsChanged", async (_accounts) => {
+			updateAccount(_accounts[0]);
+			console.log(_accounts);
+		});
+		ethereum.on("chainChanged", () => window.location.reload());
+	}, [loading, updateAccount]);
 
 	return (
 		<div className="w-full App">
@@ -52,12 +55,6 @@ const App = () => {
 	);
 };
 
-!loading &&
-	ethereum.on("accountsChanged", async (_accounts) => {
-		updateAccount(_accounts[0]);
-		console.log(_accounts);
-	});
-!loading && ethereum.on("chainChanged", () => window.location.reload());
 document.addEventListener("scroll", handleEffect);
 
 export default App;

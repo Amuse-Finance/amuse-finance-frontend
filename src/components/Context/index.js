@@ -8,7 +8,7 @@ import { abi as amusedFaucetABI } from "../../contracts/AmusedFaucet.json";
 import {
 	fixedDataArray,
 	getRefferalHistory,
-	getStakedHistory,
+	getUstakedHistory,
 	postData,
 } from "../Helper";
 require("dotenv/config");
@@ -155,7 +155,7 @@ class Web3Provider extends Component {
 			const _refferalHistory = await fixedDataArray(
 				await this.getRefferalHistory()
 			);
-			const _stakeHistory = await this.getStakedHistory();
+			const _stakeHistory = await this.getUstakedHistory();
 
 			this.setState({
 				amdPrice,
@@ -374,6 +374,8 @@ class Web3Provider extends Component {
 				? this.parseErrorMessage(error)
 				: "Invalid Referrer ID";
 
+			await this.reRender();
+
 			return {
 				status: false,
 				data: _errResponse,
@@ -394,22 +396,19 @@ class Web3Provider extends Component {
 		}
 	};
 
-	getStakedHistory = async (
+	getUstakedHistory = async (
 		{ loading, web3, user, amusedVault } = this.state
 	) => {
 		try {
 			if (loading) return;
-			const _result = await getStakedHistory(web3, user, amusedVault);
+			const _result = await getUstakedHistory(web3, user, amusedVault);
 			return _result;
 		} catch (error) {
 			return error;
 		}
 	};
 
-	requestFaucet = async (
-		amount,
-		{ loading, ethereum, user, amusedFaucet } = this.state
-	) => {
+	requestFaucet = async (amount, { loading, ethereum, user } = this.state) => {
 		if (loading) return;
 		try {
 			const chainId = parseInt(
@@ -452,6 +451,7 @@ class Web3Provider extends Component {
 			if (!_result.data.receipt.status) {
 				return { error: "Please wait for 24hours to request another faucet" };
 			}
+			await this.reRender();
 			return _result;
 		} catch (error) {
 			return { error };
