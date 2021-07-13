@@ -4,8 +4,6 @@ import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { TeamWrapper } from "./styles";
-import user1 from "../../assets/team/team-1.jpg";
-import user2 from "../../assets/team/team-2.jpg";
 import ceoImage from "../../assets/team/ceo.jpg";
 import amdLogo from "../../assets/team/unknown.webp";
 
@@ -88,7 +86,7 @@ const Team = () => {
 						<img alt="team-member" src={amdLogo} />
 					</div>
 					<div className="grid details">
-						<h1>Abdullah Zakariyya</h1>
+						<h1>Zenesk</h1>
 						<small>Zenesk</small>
 
 						<div className="grid social-handles">

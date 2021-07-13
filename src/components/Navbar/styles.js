@@ -102,6 +102,7 @@ export const NavbarContainer = styled.div`
 				grid-column: 1/7;
 				margin-left: 0;
 				padding: 0.5em 0;
+				grid-gap: 0 0.75em;
 			}
 
 			.nav-list,
