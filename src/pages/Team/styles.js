@@ -65,6 +65,7 @@ export const TeamWrapper = styled.div`
 			}
 
 			.image {
+				width: 100%;
 				border-radius: inherit;
 				border-bottom-left-radius: 0;
 				border-bottom-right-radius: 0;
@@ -150,7 +151,16 @@ export const TeamWrapper = styled.div`
 					grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
 					width: 100%;
 					grid-gap: 3em;
-					padding: 2em 0.75em;
+					padding: 2em 0.25em;
+				}
+			}
+
+			@media (max-width: 350px) {
+				& {
+					.team-card-container {
+						padding: 2em 0;
+						overflow-x: hidden;
+					}
 				}
 			}
 		}
