@@ -7,6 +7,7 @@ import { TeamWrapper } from "./styles";
 import user1 from "../../assets/team/team-1.jpg";
 import user2 from "../../assets/team/team-2.jpg";
 import ceoImage from "../../assets/team/ceo.jpg";
+import amdLogo from "../../assets/team/unknown.webp";
 
 const Team = () => {
 	return (
@@ -44,7 +45,7 @@ const Team = () => {
 
 				<div className="grid card">
 					<div className="grid image">
-						<img alt="team-member" src={user1} />
+						<img alt="team-member" src={amdLogo} />
 					</div>
 					<div className="grid details">
 						<h1>AbdulLateef Raji</h1>
@@ -64,7 +65,7 @@ const Team = () => {
 
 				<div className="grid card">
 					<div className="grid image">
-						<img alt="team-member" src={user2} />
+						<img alt="team-member" src={amdLogo} />
 					</div>
 					<div className="grid details">
 						<h1>Uthmaan Zakariyya</h1>
@@ -84,7 +85,7 @@ const Team = () => {
 
 				<div className="grid card">
 					<div className="grid image">
-						<img alt="team-member" src={user1} />
+						<img alt="team-member" src={amdLogo} />
 					</div>
 					<div className="grid details">
 						<h1>Abdullah Zakariyya</h1>

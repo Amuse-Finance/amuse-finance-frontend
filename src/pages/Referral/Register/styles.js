@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import background from "../../../assets/background.jpeg";
 
 export const RegisterReferralContainer = styled.div`
 	width: 100vw;
+	background: url(${background}) center/cover no-repeat;
 
 	.wrapper {
 		width: 70%;
@@ -17,11 +19,11 @@ export const RegisterReferralContainer = styled.div`
 
 		form {
 			width: 50%;
-			background: var(--mainBlue);
-			color: var(--white);
+			background: var(--white);
+			color: var(--mainBlue);
 			place-items: center;
 			padding: 2em;
-			grid-gap: 1.25em 0;
+			grid-gap: 1em 0;
 			border-radius: 0.75em;
 
 			input {
@@ -33,7 +35,7 @@ export const RegisterReferralContainer = styled.div`
 			}
 
 			button {
-				background: var(--mainGreen);
+				background: var(--mainBlue);
 				width: 100%;
 				height: 60px;
 				border-radius: 0.5em;
@@ -42,9 +44,9 @@ export const RegisterReferralContainer = styled.div`
 				transition: var(--mainTransition);
 
 				&:hover {
-					color: var(--mainGreen);
+					color: var(--mainBlue);
 					background: transparent;
-					border: 0.05em solid var(--mainGreen);
+					border: 0.05em solid var(--mainBlue);
 				}
 			}
 		}
@@ -61,8 +63,11 @@ export const RegisterReferralContainer = styled.div`
 		@media (max-width: 767px) {
 			& {
 				.wrapper {
+					width: 100%;
+					padding: 4em 1em 4em 0.1em;
 					form {
 						width: 90%;
+						padding: 2em;
 					}
 				}
 			}
