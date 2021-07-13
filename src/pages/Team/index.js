@@ -4,7 +4,6 @@ import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { TeamWrapper } from "./styles";
-// import ceoImage from "../../assets/team/ceo.jpg";
 import amdLogo from "../../assets/team/unknown.webp";
 
 const Team = () => {
