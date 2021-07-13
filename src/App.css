@@ -3,103 +3,121 @@
 *,
 ::before,
 ::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-	--mainWhite: #f1f5f8;
-	--white: #fff;
-	--red: #e73a3a;
-	--yellow: #fdc00f;
-	--orange: #fe8c39;
-	--darkGrey: #333;
-	--lightGrey: #e2dddd;
-	--mainGreen: #29ca8e;
-	--mainBlue: #0a3b63;
-	--mainSpacing: 0.1rem;
-	--wordSpacing: 0.25rem;
-	--mainTransition: all 2s ease-in-out;
+  --mainWhite: #f1f5f8;
+  --white: #fff;
+  --red: #e73a3a;
+  --yellow: #fdc00f;
+  --orange: #fe8c39;
+  --darkGrey: #333;
+  --lightGrey: #e2dddd;
+  --mainGreen: #29ca8e;
+  --mainBlue: #0a3b63;
+  --hoverBlue: #bfdbfe;
+  --mainSpacing: 0.1rem;
+  --wordSpacing: 0.25rem;
+  --mainTransition: all 2s ease-in-out;
 }
 
 li {
-	list-style: none;
-	display: inline;
+  list-style: none;
+  display: inline;
 }
 
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 input,
 button,
 textarea {
-	border: none;
-	outline: none;
+  border: none;
+  outline: none;
 }
 
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 body {
-	background: var(--mainWhite);
-	line-height: 1.8rem;
-	overflow-x: hidden;
+  background: var(--mainWhite);
+  line-height: 1.8rem;
+  overflow-x: hidden;
 }
 
 .App {
-	font-family: inter;
+  font-family: inter;
 }
 
 .grid {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto;
-	margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  margin: 0 auto;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .white {
-	background: var(--white);
+  background: var(--white);
 }
 
 .blue {
-	background: var(--mainBlue);
+  background: var(--mainBlue);
 }
 
 .fixed-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .skeyArt {
-	clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
 }
 
 .content {
-	text-align: initial !important;
-	font-family: inherit !important;
-	font-size: 16px !important;
-	line-height: inherit !important;
-	letter-spacing: inherit !important;
-	color: #7b8697;
+  text-align: initial !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  color: #7b8697;
+}
+
+.btn-color {
+  background-color: var(--mainBlue);
+}
+.btn-border {
+  border: 3px solid var(--mainBlue);
+  color: var(--mainBlue);
+}
+
+.main-color {
+  color: var(--mainBlue);
+}
+
+.navbar {
+  box-shadow: 0 6px 6px -6px #aaa;
+  padding: 1.2rem !important;
 }
 
 .react-accordion-collapsible-container {
-	margin: 0 !important;
+  margin: 0 !important;
 }
 .react-accordion-collapsible-title-container {
-	padding: 15px !important;
+  padding: 15px !important;
 }
 
 @media (max-width: 768px) {
-	.ethLogo {
-		display: none !important;
-	}
+  .ethLogo {
+    display: none !important;
+  }
 }
