@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const TeamWrapper = styled.div`
 	width: 100vw;
 	padding: 2em 0;
-	/* color: var(--mainBlue); */
 
 	header {
 		width: 50%;
 		text-align: center;
 		line-height: 1.25;
+		padding: 0 0 1em;
 
 		.icon {
 			font-size: 4em;
@@ -23,6 +23,7 @@ export const TeamWrapper = styled.div`
 
 		h5 {
 			text-transform: capitalize;
+			font-size: 1.2em;
 		}
 	}
 
@@ -121,6 +122,23 @@ export const TeamWrapper = styled.div`
 
 	@media (max-width: 767px) {
 		& {
+			header {
+				width: 100%;
+				text-align: center;
+				line-height: 1.25;
+
+				h1 {
+					font-size: 2.25em;
+					font-family: atmospheric;
+					font-weight: 700;
+				}
+
+				h5 {
+					font-size: 1.25em;
+					font-weight: 300;
+				}
+			}
+
 			.team-card-container {
 				width: 100%;
 			}

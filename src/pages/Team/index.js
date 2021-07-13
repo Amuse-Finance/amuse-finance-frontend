@@ -98,10 +98,6 @@ const Team = () => {
 					<div className="grid role">
 						<small>Strategist</small>
 					</div>
-
-
-
-					
 				</div>
 			</div>
 		</TeamWrapper>
