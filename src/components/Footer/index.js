@@ -36,16 +36,13 @@ const Footer = () => {
 		<FooterContainer className="grid footer">
 			<div className="grid wrapper">
 				<section>
-					<h1>About me</h1>
+					<h1>About Amuse</h1>
 					<p>
-						We have tested a number of registry fix and clean utilities and
-						present our top 3 list on our site for your convenience.
-					</p>
-					<p>
-						copyright &copy; {getYear} all rights reserved | Designed & built
-						with 💖 by DragonLord
+						Amuse is a protocol that gives cashback for the gas fees spent by
+						its users. Cut down on your gas cost when you choose Amuse.
 					</p>
 				</section>
+				<section />
 				<section className="grid form">
 					<h1>Stay up to date</h1>
 					<form className="form-control">

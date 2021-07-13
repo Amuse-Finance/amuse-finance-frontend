@@ -8,7 +8,7 @@ export const FooterContainer = styled.div`
 
 	.wrapper {
 		width: 100%;
-		grid-template-columns: 2fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 
 		section {
 			place-items: start;
