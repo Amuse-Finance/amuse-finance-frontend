@@ -7,11 +7,14 @@ export const PanelWrapper = styled.div`
 	background: var(--mainWhite);
 	transition: var(--mainTransition);
 	position: absolute;
-	top: 6.65em;
+	top: 5.585em;
 	right: 0;
 	border-bottom-left-radius: 0.25em;
 	color: var(--mainBlue);
 	z-index: 100;
+	border: 0.1em solid var(--mainBlue);
+	border-top: none;
+	border-right: none;
 
 	header {
 		width: 100%;
