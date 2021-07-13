@@ -109,33 +109,25 @@ export const NavbarContainer = styled.div`
 				display: none;
 			}
 
+			/* Nav list */
 			.nav-list-mobile {
 				display: grid;
 				grid-column: 1/14;
 				grid-row: 2;
 				margin: 0.5rem 0 0;
 				color: var(--darkGrey);
-			}
-		}
 
-		/* Nav list */
-		.nav-list-mobile {
-			display: grid;
-			grid-column: 1/14;
-			grid-row: 2;
-			margin: 0.5rem 0 0;
-			color: var(--darkGrey);
+				ul {
+					display: grid;
+					grid-template-columns: 1fr;
+					grid-template-rows: auto;
+					padding-bottom: 1rem;
+					width: 100%;
 
-			ul {
-				display: grid;
-				grid-template-columns: 1fr;
-				grid-template-rows: auto;
-				padding-bottom: 1rem;
-				width: 100%;
-
-				a {
-					padding: 0.5rem 1.25rem;
-					letter-spacing: var(--mainSpacing);
+					a {
+						padding: 0.5rem 1.25rem;
+						letter-spacing: var(--mainSpacing);
+					}
 				}
 			}
 		}
