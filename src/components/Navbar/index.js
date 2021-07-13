@@ -68,7 +68,9 @@ const Navbar = ({ theme }) => {
 					</Link>
 				</div>
 				<div className="grid brand-name">
-					<h1>amuse</h1>
+					<Link to="/">
+						<h1>amuse</h1>
+					</Link>
 				</div>
 			</div>
 			<div
