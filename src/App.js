@@ -24,7 +24,7 @@ require("dotenv/config");
 const ethereum = window.ethereum;
 
 const App = () => {
-	const { loading, updateAccount } = useContext(web3Context);
+	const { loading, web3, updateAccount, reRender } = useContext(web3Context);
 	useEffect(() => {
 		if (loading) return;
 		ethereum.on("accountsChanged", async (_accounts) => {
@@ -32,7 +32,14 @@ const App = () => {
 			console.log(_accounts);
 		});
 		ethereum.on("chainChanged", () => window.location.reload());
-	}, [loading, updateAccount]);
+
+		web3.eth
+			.subscribe("newBlockHeaders")
+			.on("data", async () => await reRender())
+			.on("error", async (error) => {
+				console.log(error);
+			});
+	}, [loading, web3, updateAccount, reRender]);
 
 	return (
 		<div className="w-full App">

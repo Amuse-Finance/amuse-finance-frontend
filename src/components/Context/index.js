@@ -486,6 +486,7 @@ class Web3Provider extends Component {
 					fromWei: this.fromWei,
 					toWei: this.toWei,
 					connectDapp: this.connectDapp,
+					reRender: this.reRender,
 					updateAccount: this.updateAccount,
 					allowance: this.allowance,
 					approve: this.approve,
