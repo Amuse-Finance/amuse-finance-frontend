@@ -73,7 +73,7 @@ export const ReferralWrapper = styled.div`
 				&:hover {
 					background: transparent;
 					color: var(--darkGrey);
-					border: 0.1em solid var(--mainGreen);
+					border: 0.1em solid var(--mainBlue);
 				}
 			}
 		}

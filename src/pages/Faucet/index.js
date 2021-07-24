@@ -19,7 +19,7 @@ const Faucet = () => {
 	const setFaucet = (e) => {
 		e.preventDefault();
 		if (isNaN(e.target.value)) return;
-		setFaucetAmount(e.target.value <= 1000 ? e.target.value : 1000);
+		setFaucetAmount(e.target.value <= 2000 ? e.target.value : 2000);
 	};
 
 	const _handleSubmit = async (e) => {
@@ -44,7 +44,7 @@ const Faucet = () => {
 					<input
 						type="text"
 						value={faucetAmount}
-						placeholder="Enter amount (max is 1000 AMD)"
+						placeholder="Enter amount (max is 2000 AMD)"
 						onChange={setFaucet}
 					/>
 					<button type="submit">Request</button>

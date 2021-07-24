@@ -27,10 +27,9 @@ const App = () => {
 	const { loading, web3, updateAccount, reRender } = useContext(web3Context);
 	useEffect(() => {
 		if (loading) return;
-		ethereum.on("accountsChanged", async (_accounts) => {
-			updateAccount(_accounts[0]);
-			console.log(_accounts);
-		});
+		ethereum.on("accountsChanged", async (_accounts) =>
+			updateAccount(_accounts[0])
+		);
 		ethereum.on("chainChanged", () => window.location.reload());
 
 		web3.eth

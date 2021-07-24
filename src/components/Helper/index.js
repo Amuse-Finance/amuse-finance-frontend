@@ -31,6 +31,19 @@ const getPath = (_networkType) => {
 	return path;
 };
 
+const getEthPrice = async () => {
+	try {
+		let result = await (
+			await fetch(
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=USD`
+			)
+		).json();
+		return result.ethereum.usd;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 const doughnutChartConfig = (data, _type, numberPrefix, showPercentValues) => {
 	const _chart = {
 		type: _type ? _type : "doughnut2d",
@@ -183,6 +196,7 @@ export {
 	formatNumber,
 	shortener,
 	getPath,
+	getEthPrice,
 	doughnutChartConfig,
 	fixedDataArray,
 	getRefferalHistory,

@@ -3,44 +3,13 @@
 		{
 			"inputs": [
 				{
-					"internalType": "contract IAmused",
+					"internalType": "contract IAmuse",
 					"name": "_amusedToken",
 					"type": "address"
 				}
 			],
 			"stateMutability": "nonpayable",
 			"type": "constructor"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "amountToken",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "amountETH",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "liquidity",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "timestamp",
-					"type": "uint256"
-				}
-			],
-			"name": "LiquidityInjected",
-			"type": "event"
 		},
 		{
 			"anonymous": false,
@@ -125,10 +94,23 @@
 		},
 		{
 			"inputs": [],
-			"name": "AmusedToken",
+			"name": "AmuseToken",
 			"outputs": [
 				{
-					"internalType": "contract IAmused",
+					"internalType": "contract IAmuse",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "WETH",
+			"outputs": [
+				{
+					"internalType": "address",
 					"name": "",
 					"type": "address"
 				}
@@ -155,40 +137,6 @@
 					"internalType": "uint256",
 					"name": "_tokenValueEarned",
 					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "_ethValueEarned",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "token1",
-					"type": "address"
-				},
-				{
-					"internalType": "address",
-					"name": "token2",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "_amount",
-					"type": "uint256"
-				}
-			],
-			"name": "getAmountsOut",
-			"outputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
 				}
 			],
 			"stateMutability": "view",
@@ -215,40 +163,24 @@
 			"type": "function"
 		},
 		{
-			"inputs": [],
-			"name": "rewardsInterval",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
 			"inputs": [
 				{
 					"internalType": "uint256",
-					"name": "_interval",
+					"name": "_stakeTaxPercentage",
 					"type": "uint256"
-				}
-			],
-			"name": "setRewardsInterval",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
+				},
 				{
 					"internalType": "uint256",
-					"name": "_amount",
+					"name": "_unstakeTaxPercentage",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_stakeDivisor",
 					"type": "uint256"
 				}
 			],
-			"name": "setTaxPercentage",
+			"name": "setTax",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -259,9 +191,19 @@
 					"internalType": "uint256",
 					"name": "_percentage",
 					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_divisor",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_interval",
+					"type": "uint256"
 				}
 			],
-			"name": "setValutRewardPercentage",
+			"name": "setValutReward",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -277,6 +219,32 @@
 			"name": "stake",
 			"outputs": [],
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "stakeDivisor",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "stakeTaxPercentage",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -302,19 +270,6 @@
 				{
 					"internalType": "uint256",
 					"name": "timestamp",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "taxPercentage",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
 					"type": "uint256"
 				}
 			],
@@ -349,23 +304,10 @@
 		},
 		{
 			"inputs": [],
-			"name": "uniswapV2Factory",
+			"name": "uniswapV3Router",
 			"outputs": [
 				{
-					"internalType": "contract IUniswapV2Factory",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "uniswapV2Router",
-			"outputs": [
-				{
-					"internalType": "contract IUniswapV2Router02",
+					"internalType": "contract ISwapRouter",
 					"name": "",
 					"type": "address"
 				}
@@ -388,6 +330,32 @@
 		},
 		{
 			"inputs": [],
+			"name": "unstakeTaxPercentage",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "valutRewardDivisor",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "valutRewardPercentage",
 			"outputs": [
 				{
@@ -400,8 +368,41 @@
 			"type": "function"
 		},
 		{
+			"inputs": [],
+			"name": "vaultRewardInterval",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "contract IERC20",
+					"name": "_token",
+					"type": "address"
+				}
+			],
+			"name": "withdrawETH",
+			"outputs": [
+				{
+					"internalType": "uint8",
+					"name": "",
+					"type": "uint8"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
 			"stateMutability": "payable",
 			"type": "receive"
 		}
-	]
+	],
+	"address": "0x75F16DAc236c18E4880fC2433be52dD0A789CfB1"
 }

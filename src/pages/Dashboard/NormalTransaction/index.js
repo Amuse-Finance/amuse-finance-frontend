@@ -7,7 +7,6 @@ require("dotenv/config");
 
 const NormalTransaction = () => {
 	const { fromWei, transactionHistory } = useContext(web3Context);
-
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;
 		const gasFee = fromWei(gasPrice) * gasUsed * 2400;

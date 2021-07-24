@@ -2,11 +2,21 @@ import { createContext, Component } from "react";
 import Web3 from "web3";
 import axios from "axios";
 import { AES, enc } from "crypto-js";
-import { abi as amusedTokenABI } from "../../contracts/AmusedTokenABI.json";
-import { abi as amusedVaultABI } from "../../contracts/AmusedVaultABI.json";
-import { abi as amusedFaucetABI } from "../../contracts/AmusedFaucet.json";
+import {
+	abi as amusedTokenABI,
+	address as amuseTokenAddress,
+} from "../../contracts/AmuseTokenABI.json";
+import {
+	abi as amusedVaultABI,
+	address as amuseVaultAddress,
+} from "../../contracts/AmuseVaultABI.json";
+import {
+	abi as amusedFaucetABI,
+	address as amuseFaucetAddress,
+} from "../../contracts/AmuseFaucet.json";
 import {
 	fixedDataArray,
+	getEthPrice,
 	getRefferalHistory,
 	getUstakedHistory,
 	postData,
@@ -28,12 +38,13 @@ class Web3Provider extends Component {
 			networkType: "NONE",
 			INIT_REFERRAL_HASH: "",
 			amuseTokenAddress: "",
-			amusedVaultAddress: "",
+			amuseVaultAddress: "",
+			amuseFaucetAddress: "",
 			USDT: "",
 			WETH: "",
-			amusedToken: null,
-			amusedVault: null,
-			amusedFaucet: null,
+			amuseToken: null,
+			amuseVault: null,
+			amuseFaucet: null,
 			balance: 0,
 			cashbackPercentage: 0,
 			stakes: {
@@ -45,6 +56,7 @@ class Web3Provider extends Component {
 			},
 			dailyCashback: 0,
 			amdPrice: 0,
+			etherPrice: 0,
 			transactionHistory: [],
 			referralHistory: [],
 			stakeHistory: [],
@@ -74,9 +86,6 @@ class Web3Provider extends Component {
 			// initiate metamask pop
 			await ethereum.enable();
 
-			const amuseTokenAddress = process.env.REACT_APP_AmusedToken;
-			const amusedVaultAddress = process.env.REACT_APP_AmusedVault;
-			const amusedFaucetAddress = process.env.REACT_APP_AmusedFaucet;
 			const USDT = process.env.REACT_APP_USDT;
 			const WETH = process.env.REACT_APP_WETH;
 
@@ -96,17 +105,17 @@ class Web3Provider extends Component {
 			const user = web3.utils.toChecksumAddress(_accounts[0]);
 			const INIT_REFERRAL_HASH = process.env.REACT_APP_REFERRAL_HASH;
 
-			const amusedToken = new web3.eth.Contract(
+			const amuseToken = new web3.eth.Contract(
 				amusedTokenABI,
 				amuseTokenAddress
 			);
-			const amusedVault = new web3.eth.Contract(
+			const amuseVault = new web3.eth.Contract(
 				amusedVaultABI,
-				amusedVaultAddress
+				amuseVaultAddress
 			);
-			const amusedFaucet = new web3.eth.Contract(
+			const amuseFaucet = new web3.eth.Contract(
 				amusedFaucetABI,
-				amusedFaucetAddress
+				amuseFaucetAddress
 			);
 
 			this.setState({
@@ -118,12 +127,12 @@ class Web3Provider extends Component {
 				networkType: _networkType === "main" ? "Mainnet" : _networkType,
 				INIT_REFERRAL_HASH,
 				amuseTokenAddress,
-				amusedVaultAddress,
+				amuseVaultAddress,
 				USDT,
 				WETH,
-				amusedToken,
-				amusedVault,
-				amusedFaucet,
+				amuseToken,
+				amuseVault,
+				amuseFaucet,
 			});
 		} catch (error) {
 			console.log(error);
@@ -133,9 +142,10 @@ class Web3Provider extends Component {
 
 	// load blockchain data
 	loadBlockchainData = async ({ loading, web3, user } = this.state) => {
+		if (loading || !web3) return;
 		try {
-			if (loading || !web3) return;
 			const amdPrice = 0.25;
+			const etherPrice = await getEthPrice();
 			const _cashbackPercentage = await this.cashbackPercentage();
 
 			const balance = await this.balanceOf();
@@ -155,6 +165,7 @@ class Web3Provider extends Component {
 
 			this.setState({
 				amdPrice,
+				etherPrice,
 				balance,
 				dailyCashback,
 				cashbackPercentage: _cashbackPercentage,
@@ -191,10 +202,10 @@ class Web3Provider extends Component {
 	toChecksumAddress = (_account, { web3 } = this.state) =>
 		web3.utils.toChecksumAddress(_account);
 
-	balanceOf = async (_account, { loading, user, amusedToken } = this.state) => {
+	balanceOf = async (_account, { loading, user, amuseToken } = this.state) => {
 		try {
 			if (loading) return;
-			const _balance = await amusedToken.methods
+			const _balance = await amuseToken.methods
 				.balanceOf(_account ? _account : user)
 				.call();
 			return this.fromWei(_balance);
@@ -203,13 +214,13 @@ class Web3Provider extends Component {
 		}
 	};
 
-	cashbackPercentage = async ({ loading, amusedToken } = this.state) =>
-		!loading && (await amusedToken.methods.cashbackPercentage().call());
+	cashbackPercentage = async ({ loading, amuseToken } = this.state) =>
+		!loading && (await amuseToken.methods.cashbackPercentage().call());
 
-	stakes = async ({ loading, user, amusedVault } = this.state) => {
+	stakes = async ({ loading, user, amuseVault } = this.state) => {
 		try {
 			if (loading) return;
-			const { stakes: _stakes, timestamp } = await amusedVault.methods
+			const { stakes: _stakes, timestamp } = await amuseVault.methods
 				.stakes(user)
 				.call();
 			const stakes = this.fromWei(_stakes);
@@ -223,11 +234,11 @@ class Web3Provider extends Component {
 	};
 
 	allowance = async (
-		{ loading, user, amuseTokenAddress, amusedToken } = this.state
+		{ loading, user, amuseTokenAddress, amuseToken } = this.state
 	) => {
 		try {
 			if (loading) return;
-			const _allowance = await amusedToken.methods
+			const _allowance = await amuseToken.methods
 				.allowance(user, amuseTokenAddress)
 				.call();
 			return this.fromWei(_allowance);
@@ -249,9 +260,9 @@ class Web3Provider extends Component {
 		}
 	};
 
-	getDailyCashback = async ({ user, amusedToken } = this.state) => {
+	getDailyCashback = async ({ user, amuseToken } = this.state) => {
 		try {
-			const _dailyCashback = await amusedToken.methods
+			const _dailyCashback = await amuseToken.methods
 				.calculateDailyCashback(user)
 				.call();
 			return this.fromWei(_dailyCashback);
@@ -262,21 +273,24 @@ class Web3Provider extends Component {
 
 	getStakeRewards = async (
 		_stakes,
-		{ loading, user, amusedVault } = this.state
+		{ loading, user, amuseVault, amdPrice, etherPrice } = this.state
 	) => {
-		try {
-			let tokenValueEarned = 0;
-			let ethValueEarned = 0;
+		if (loading || parseFloat(_stakes) <= 0)
+			return {
+				tokenValueEarned: 0,
+				ethValueEarned: 0,
+			};
 
-			if (loading || parseFloat(_stakes) < 1)
-				return { tokenValueEarned, ethValueEarned };
-			const { _tokenValueEarned, _ethValueEarned } = await amusedVault.methods
+		try {
+			const _tokenValueEarned = await amuseVault.methods
 				.calculateStakeRewards(user, _stakes)
 				.call();
-			tokenValueEarned = this.fromWei(_tokenValueEarned);
-			ethValueEarned = this.fromWei(_ethValueEarned);
 
-			return { tokenValueEarned, ethValueEarned };
+			const _ethValueEarned = (_tokenValueEarned * amdPrice) / etherPrice;
+			return {
+				tokenValueEarned: this.fromWei(_tokenValueEarned),
+				ethValueEarned: this.fromWei(_ethValueEarned),
+			};
 		} catch (error) {
 			return error;
 		}
@@ -284,14 +298,14 @@ class Web3Provider extends Component {
 
 	approve = async (
 		_amount,
-		{ loading, web3, user, amusedVaultAddress, amusedToken } = this.state
+		{ loading, web3, user, amuseVaultAddress, amuseToken } = this.state
 	) => {
 		try {
 			if (loading || _amount < 0) return;
 			// const gasPrice = await web3.eth.getGasPrice();
 			const _formattedStakeAmount = this.toWei(_amount);
-			const _response = await amusedToken.methods
-				.approve(amusedVaultAddress, _formattedStakeAmount)
+			const _response = await amuseToken.methods
+				.approve(amuseVaultAddress, _formattedStakeAmount)
 				.send({
 					from: user,
 					// gasPrice,
@@ -303,18 +317,15 @@ class Web3Provider extends Component {
 		}
 	};
 
-	stake = async (
-		_amount,
-		{ loading, web3, user, amuseTokenAddress, amusedVault } = this.state
-	) => {
+	stake = async (_amount, { loading, web3, user, amuseVault } = this.state) => {
 		try {
 			if (loading || _amount < 0) return;
 			// const gasPrice = await web3.eth.getGasPrice();
 			const _formattedStakeAmount = this.toWei(_amount);
-			await amusedVault.methods
+			await amuseVault.methods
 				.stake(_formattedStakeAmount)
 				.call({ from: user });
-			const _response = await amusedVault.methods
+			const _response = await amuseVault.methods
 				.stake(_formattedStakeAmount)
 				.send({
 					from: user,
@@ -330,13 +341,13 @@ class Web3Provider extends Component {
 		}
 	};
 
-	unstake = async (_amount, { loading, user, amusedVault } = this.state) => {
+	unstake = async (_amount, { loading, user, amuseVault } = this.state) => {
 		try {
 			if (loading) return;
-			await amusedVault.methods
+			await amuseVault.methods
 				.unstake(this.toWei(_amount))
 				.call({ from: user });
-			const _response = await amusedVault.methods
+			const _response = await amuseVault.methods
 				.unstake(this.toWei(_amount))
 				.send({
 					from: user,
@@ -353,13 +364,13 @@ class Web3Provider extends Component {
 
 	registerReferrer = async (
 		_account,
-		{ loading, web3, user, amusedToken } = this.state
+		{ loading, web3, user, amuseToken } = this.state
 	) => {
 		if (loading) return;
 		try {
 			const _referrer = this.toChecksumAddress(_account);
-			await amusedToken.methods.addReferrer(_referrer).call({ from: user });
-			const _response = await amusedToken.methods.addReferrer(_referrer).send({
+			await amuseToken.methods.addReferrer(_referrer).call({ from: user });
+			const _response = await amuseToken.methods.addReferrer(_referrer).send({
 				from: user,
 			});
 			return { ..._response };
@@ -380,11 +391,11 @@ class Web3Provider extends Component {
 	};
 
 	getRefferalHistory = async (
-		{ loading, web3, user, amusedToken } = this.state
+		{ loading, web3, user, amuseToken } = this.state
 	) => {
 		try {
 			if (loading) return;
-			const _result = await getRefferalHistory(web3, user, amusedToken);
+			const _result = await getRefferalHistory(web3, user, amuseToken);
 			return _result;
 		} catch (error) {
 			console.log(error);
@@ -393,11 +404,11 @@ class Web3Provider extends Component {
 	};
 
 	getUstakedHistory = async (
-		{ loading, web3, user, amusedVault } = this.state
+		{ loading, web3, user, amuseVault } = this.state
 	) => {
 		try {
 			if (loading) return;
-			const _result = await getUstakedHistory(web3, user, amusedVault);
+			const _result = await getUstakedHistory(web3, user, amuseVault);
 			return _result;
 		} catch (error) {
 			return error;
@@ -505,3 +516,5 @@ class Web3Provider extends Component {
 }
 
 export { web3Context, Web3Provider };
+
+// traffic tool rich lamp reunion offer plastic remember wool accuse rally swim
