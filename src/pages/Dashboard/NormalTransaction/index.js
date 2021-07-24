@@ -6,7 +6,7 @@ import { ErrorBoundary } from "../../../components/ErrorBoundary";
 require("dotenv/config");
 
 const NormalTransaction = () => {
-	const { fromWei, transactionHistory } = useContext(web3Context);
+	const { loading, fromWei, transactionHistory } = useContext(web3Context);
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;
 		const gasFee = fromWei(gasPrice) * gasUsed * 2400;
@@ -99,7 +99,11 @@ const NormalTransaction = () => {
 				</div>
 			</header>
 
-			<div className="grid card-container">{_txnItems}</div>
+			{!loading ? (
+				<div className="grid card-container">{_txnItems}</div>
+			) : (
+				<></>
+			)}
 		</NormalTransactionWrapper>
 	);
 };
