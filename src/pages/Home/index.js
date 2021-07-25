@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import Typewriter from "typewriter-effect";
-import { TiArrowUnsorted } from "react-icons/ti";
-import CustomButton from "../../components/CustomButton";
-// import Particles from "react-particles-js";
-// import particlesoptions from "../particleOptions";
-import ethLogo from "../../assets/ethereum-logo.png";
 import FisionDoughnut from "./FisionDoughnut";
 import { HomeWrapper } from "./styles";
 import { cashbackCalculator } from "../../components/Helper";
 import { web3Context } from "../../components/Context";
+import img1 from "../../assets/others/Amuse icon 1.png";
+import img2 from "../../assets/others/Amuse icon 2.png";
+import img3 from "../../assets/others/Amuse icon 3.png";
+import img4 from "../../assets/others/Amuse icon 4.png";
+import dashboardPreview from "../../assets/others/Amuse SS.jpg";
 
 const Home = () => {
 	const [inputAmount, setInputAmount] = useState("");
@@ -34,54 +34,36 @@ const Home = () => {
 
 	return (
 		<HomeWrapper className="grid white">
-			<section
-				style={{ height: "75vh" }}
-				className="relative flex justify-center items-center"
-			>
-				<div className="container mx-auto px-0 md:px-10">
-					{/* <Particles
-            style={{ position: "absolute", top: 0, right: 0 }}
-            params={particlesoptions}
-          /> */}
-					<section className="flex flex-col md:flex-row justify-between items-center ">
-						<div className="w-full mx-auto md:mx-0 lg:w-1/2 z-50 text-center md:text-left leading-4">
-							<h1 className="main-color text-2xl md:text-5xl font-semibold mb-1">
-								100% Cashbacks On
-							</h1>
-							<h1 className="main-color text-2xl md:text-5xl font-semibold">
-								<Typewriter
-									options={{
-										strings: ["Ethereum Gas Spends", "Rewards for trading"],
-										autoStart: true,
-										loop: true,
-									}}
-								/>
-							</h1>
-							<p className="main-color md:text-2xl my-5">
-								From the Dev of TweetsZone.com
-							</p>
-							<div className="px-5 sm:px-0">
-								<div className="sm:w-1/2 mx-auto md:ml-0 rounded-full p-4 btn-color">
-									<CustomButton styles="w-full text-lg text-white">
-										Launch App
-									</CustomButton>
-								</div>
-								<div className="sm:w-1/2 mx-auto md:ml-0 mt-4 p-4 rounded-full btn-border">
-									<CustomButton styles="w-full text-lg">
-										Download Whitepaper
-									</CustomButton>
-								</div>
-							</div>
-						</div>
-						<div className="w-1/6 z-50 ethLogo">
-							<img
-								className="w-full h-full object-cover"
-								src={ethLogo}
-								alt="Ethereum logo"
+			<section className="grid banner">
+				<section className="grid typewritter-effect">
+					<div>
+						<h1>100% Cashbacks On</h1>
+						<h1>
+							<Typewriter
+								options={{
+									strings: ["Ethereum Gas Spends", "Rewards for trading"],
+									autoStart: true,
+									loop: true,
+								}}
 							/>
+						</h1>
+						<p>From the Dev of TweetsZone.com</p>
+						<div className="grid btns">
+							<button type="button" className="active">
+								Launch App
+							</button>
+							<button type="button">Download Whitepaper</button>
 						</div>
-					</section>
-				</div>
+					</div>
+				</section>
+				<section className="grid custom">
+					<div className="grid circle" />
+					<div className="dashboard-preview">
+						<div className="grid image">
+							<img src={dashboardPreview} alt="dashboard previewer" />
+						</div>
+					</div>
+				</section>
 			</section>
 
 			<section className="grid features-container">
@@ -98,14 +80,8 @@ const Home = () => {
 				<div className="grid card-container">
 					<div className="grid wrapper">
 						<div className="grid card rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-							<div className="grid block-container">
-								<div className="grid blocks">
-									<div className="block" />
-									<div className="block" />
-								</div>
-								<div className="grid sorted-arrow">
-									<TiArrowUnsorted className="icon" />
-								</div>
+							<div className="grid img">
+								<img src={img1} alt="description" />
 							</div>
 							<div className="grid header">
 								<h1>hodl</h1>
@@ -116,14 +92,8 @@ const Home = () => {
 						</div>
 
 						<div className="grid card rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3 text-blue-600">
-							<div className="grid block-container">
-								<div className="grid blocks">
-									<div className="block" />
-									<div className="block" />
-								</div>
-								<div className="grid sorted-arrow">
-									<TiArrowUnsorted className="icon" />
-								</div>
+							<div className="grid img">
+								<img src={img2} alt="description" />
 							</div>
 							<div className="grid header">
 								<h1>trade</h1>
@@ -134,32 +104,20 @@ const Home = () => {
 						</div>
 
 						<div className="grid card rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-							<div className="grid block-container">
-								<div className="grid blocks">
-									<div className="block" />
-									<div className="block" />
-								</div>
-								<div className="grid sorted-arrow">
-									<TiArrowUnsorted className="icon" />
-								</div>
+							<div className="grid img">
+								<img src={img3} alt="description" />
 							</div>
 							<div className="grid header">
 								<h1>stake</h1>
 							</div>
 							<div className="grid detail">
-								<p>Earn 1% ETHER rewards for all staked AMD per 24hours</p>
+								<p>Earn 1.5% ETHER rewards for all staked AMD per 24hours</p>
 							</div>
 						</div>
 
 						<div className="grid card rounded shadow-lg m-3 transition transform duration-200 ease-in hover:-translate-y-3">
-							<div className="grid block-container">
-								<div className="grid blocks">
-									<div className="block" />
-									<div className="block" />
-								</div>
-								<div className="grid sorted-arrow">
-									<TiArrowUnsorted className="icon" />
-								</div>
+							<div className="grid img">
+								<img src={img4} alt="description" />
 							</div>
 							<div className="grid header">
 								<h1>referral</h1>

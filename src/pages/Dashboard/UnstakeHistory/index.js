@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { web3Context } from "../../../components/Context";
-import ErrorBoundary from "../../../components/ErrorBoundary/";
+import ErrorBoundary from "../../../components/ErrorBoundary";
 import { getPath, shortener } from "../../../components/Helper";
 import { StakeTransactionWrapper } from "./styles";
 
-const StakeHistory = () => {
-	const { networkType, stakeHistory } = useContext(web3Context);
+const UnstakeHistory = () => {
+	const { networkType, unstakeHistory } = useContext(web3Context);
 
-	const _txnItems = stakeHistory.map((item, index) => {
+	const _txnItems = unstakeHistory.map((item, index) => {
 		const { ethValue, amount, tokenValue, hash, timestamp } = item;
 		return (
 			<div className="grid card" key={index}>
@@ -98,4 +98,4 @@ const StakeHistory = () => {
 	);
 };
 
-export default ErrorBoundary(StakeHistory);
+export default ErrorBoundary(UnstakeHistory);

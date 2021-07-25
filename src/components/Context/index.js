@@ -59,7 +59,7 @@ class Web3Provider extends Component {
 			etherPrice: 0,
 			transactionHistory: [],
 			referralHistory: [],
-			stakeHistory: [],
+			unstakeHistory: [],
 		};
 	}
 
@@ -161,7 +161,7 @@ class Web3Provider extends Component {
 			const _refferalHistory = await fixedDataArray(
 				await this.getRefferalHistory()
 			);
-			const _stakeHistory = await this.getUstakedHistory();
+			const _unstakeHistory = await this.getUstakedHistory();
 
 			this.setState({
 				amdPrice,
@@ -172,7 +172,7 @@ class Web3Provider extends Component {
 				stakes,
 				transactionHistory: _transactionHistory,
 				referralHistory: _refferalHistory,
-				stakeHistory: _stakeHistory,
+				unstakeHistory: _unstakeHistory,
 			});
 		} catch (error) {
 			console.log(error);

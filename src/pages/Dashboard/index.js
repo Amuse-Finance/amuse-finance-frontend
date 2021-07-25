@@ -3,7 +3,7 @@ import { IoMdSwap } from "react-icons/io";
 import { web3Context } from "../../components/Context";
 import { DashboardContainer } from "./styles.js";
 import NormalTransaction from "./NormalTransaction";
-import StakeHistory from "./StakeHistory";
+import UnstakeHistory from "./UnstakeHistory";
 
 const Dashboard = () => {
 	const [activeTab, setActiveTab] = useState("Transaction History");
@@ -232,7 +232,7 @@ const Dashboard = () => {
 					{activeTab === "Transaction History" ? (
 						<NormalTransaction />
 					) : (
-						<StakeHistory />
+						<UnstakeHistory />
 					)}
 				</section>
 			</div>
