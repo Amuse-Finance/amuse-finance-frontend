@@ -5,14 +5,6 @@ import logo from "../../assets/Amuse-logo-icon.png";
 const Presale = () => {
 	return (
 		<PresaleWrapper className="grid">
-			<div className="grid banner">
-				<div className="grid">
-					<h1>Presale Information</h1>
-				</div>
-				<div className="grid image">
-					<img src={logo} alt="logo" />
-				</div>
-			</div>
 			<div className="grid card-container">
 				<div className="grid card">
 					<h1>Token name - Amuse</h1>
@@ -28,7 +20,38 @@ const Presale = () => {
 				</div>
 			</div>
 
-			<form className="grid"></form>
+			<div className="grid presale-form">
+				<form className="grid">
+					<header className="grid">
+						<h1>Amuse Presale</h1>
+					</header>
+					<div className="grid currencies">
+						<section className="grid currency">
+							<div className="image">
+								<img src={logo} alt="logo" />
+							</div>
+							<div className="grid">
+								<h1>Ethereum</h1>
+								<p>1.00 ETH</p>
+							</div>
+						</section>
+
+						<section className="grid currency">
+							<div className="image">
+								<img src={logo} alt="logo" />
+							</div>
+							<div className="grid">
+								<h1>Ethereum</h1>
+								<p>1.00 ETH</p>
+							</div>
+						</section>
+					</div>
+
+					<div className="grid prices">
+						<section className="grid"></section>
+					</div>
+				</form>
+			</div>
 		</PresaleWrapper>
 	);
 };

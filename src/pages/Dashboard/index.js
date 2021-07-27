@@ -11,9 +11,21 @@ const Dashboard = () => {
 	const [weeklyCashback, setWeeklyCashback] = useState(0);
 	const [estimatedEthRewards, setEstimatedEthRewards] = useState(0);
 	const [estimatedAmdRewards, setEstimatedAmdRewards] = useState(0);
+	const [totalEarnedRewards, setTotalEarnedRewards] = useState({
+		tokenValue: 0,
+		ethValue: 0,
+	});
 
 	const context = useContext(web3Context);
-	const { loading, amdPrice, balance, stakes, dailyCashback } = context;
+	const {
+		loading,
+		amdPrice,
+		etherPrice,
+		balance,
+		stakes,
+		dailyCashback,
+		unstakeHistory,
+	} = context;
 
 	useEffect(() => {
 		if (loading) return;
@@ -24,10 +36,27 @@ const Dashboard = () => {
 			setStakedBalance(() => _stakes);
 			setEstimatedEthRewards(() => ethValueEarned);
 			setEstimatedAmdRewards(() => tokenValueEarned);
+			setTotalEarnedRewards(() => {
+				const _totalStakedAMDEarned = unstakeHistory.reduce((prev, next) => {
+					prev += parseFloat(next.tokenValue);
+					return prev;
+				}, 0);
+
+				const _totalStakedETHEarned = unstakeHistory.reduce((prev, next) => {
+					prev += parseFloat(next.ethValue);
+					return prev;
+				}, 0);
+
+				return {
+					tokenValue: _totalStakedAMDEarned,
+					ethValue: _totalStakedETHEarned,
+				};
+			});
 		})();
-	}, [loading, stakes, dailyCashback]);
+	}, [loading, stakes, dailyCashback, unstakeHistory]);
 
 	const isValidWidth = parseFloat(window.innerWidth) >= 1024;
+
 	return (
 		<DashboardContainer className="grid">
 			<div className="grid dashboard-wrapper">
@@ -93,18 +122,21 @@ const Dashboard = () => {
 
 					<section className="grid card four">
 						<div className="grid">
-							<h3>Total claimed Rewards</h3>
+							<h3>Total Earned Rewards</h3>
 						</div>
 						<div className="grid sub-card">
 							<div className="grid text">
-								<h1>100 AMD</h1>
+								{/* <h1>{totalEarnedRewards.tokenValue.toFixed(2)} AMD</h1> */}
+								<h1>{totalEarnedRewards.ethValue.toFixed(7)} ETH</h1>
 							</div>
 
 							<div className="icon">
 								<IoMdSwap />
 							</div>
 							<div className="grid text">
-								<h1>$25</h1>
+								<h1>
+									${(totalEarnedRewards.ethValue * etherPrice).toFixed(4)}
+								</h1>
 							</div>
 						</div>
 					</section>

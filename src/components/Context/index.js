@@ -149,7 +149,7 @@ class Web3Provider extends Component {
 			const _cashbackPercentage = await this.cashbackPercentage();
 
 			const balance = await this.balanceOf();
-			const stakes = await this.stakes();
+			const stakes = await this.stakes(amdPrice, etherPrice);
 			const dailyCashback = await this.getDailyCashback();
 			const _transactionHistory = await fixedDataArray(
 				(
@@ -194,10 +194,10 @@ class Web3Provider extends Component {
 	closeModal = () => this.setState({ modalState: false });
 
 	fromWei = (_amount, { web3 } = this.state) =>
-		web3.utils.fromWei(_amount.toString(), "ether");
+		web3.utils.fromWei(_amount, "ether");
 
 	toWei = (_amount, { web3 } = this.state) =>
-		web3.utils.toWei(_amount.toString(), "ether");
+		web3.utils.toWei(_amount, "ether");
 
 	toChecksumAddress = (_account, { web3 } = this.state) =>
 		web3.utils.toChecksumAddress(_account);
@@ -217,15 +217,22 @@ class Web3Provider extends Component {
 	cashbackPercentage = async ({ loading, amuseToken } = this.state) =>
 		!loading && (await amuseToken.methods.cashbackPercentage().call());
 
-	stakes = async ({ loading, user, amuseVault } = this.state) => {
+	stakes = async (
+		amdPrice,
+		etherPrice,
+		{ loading, user, amuseVault } = this.state
+	) => {
 		try {
 			if (loading) return;
 			const { stakes: _stakes, timestamp } = await amuseVault.methods
 				.stakes(user)
 				.call();
 			const stakes = this.fromWei(_stakes);
-			const stakesRewads = await this.getStakeRewards(_stakes);
-
+			const stakesRewads = await this.getStakeRewards(
+				amdPrice,
+				etherPrice,
+				_stakes
+			);
 			return { user, stakes, timestamp, ...stakesRewads };
 		} catch (error) {
 			console.log(error);
@@ -272,26 +279,30 @@ class Web3Provider extends Component {
 	};
 
 	getStakeRewards = async (
+		amdPrice,
+		etherPrice,
 		_stakes,
-		{ loading, user, amuseVault, amdPrice, etherPrice } = this.state
+		{ loading, user, amuseVault } = this.state
 	) => {
-		if (loading || parseFloat(_stakes) <= 0)
+		if (loading || parseFloat(_stakes) <= 0) {
 			return {
 				tokenValueEarned: 0,
 				ethValueEarned: 0,
 			};
-
+		}
 		try {
-			const _tokenValueEarned = await amuseVault.methods
-				.calculateStakeRewards(user, _stakes)
-				.call();
+			const _tokenValueEarned = this.fromWei(
+				await amuseVault.methods.calculateStakeRewards(user, _stakes).call()
+			);
+			const _ethValueEarned =
+				(parseFloat(_tokenValueEarned) * amdPrice) / etherPrice;
 
-			const _ethValueEarned = (_tokenValueEarned * amdPrice) / etherPrice;
 			return {
-				tokenValueEarned: this.fromWei(_tokenValueEarned),
-				ethValueEarned: this.fromWei(_ethValueEarned),
+				tokenValueEarned: _tokenValueEarned,
+				ethValueEarned: _ethValueEarned,
 			};
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};
@@ -516,5 +527,3 @@ class Web3Provider extends Component {
 }
 
 export { web3Context, Web3Provider };
-
-// traffic tool rich lamp reunion offer plastic remember wool accuse rally swim

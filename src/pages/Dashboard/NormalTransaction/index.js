@@ -6,10 +6,13 @@ import { ErrorBoundary } from "../../../components/ErrorBoundary";
 require("dotenv/config");
 
 const NormalTransaction = () => {
-	const { loading, fromWei, transactionHistory } = useContext(web3Context);
+	const { loading, fromWei, etherPrice, transactionHistory } =
+		useContext(web3Context);
+
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;
-		const gasFee = fromWei(gasPrice) * gasUsed * 2400;
+		// console.log(fromWei(gasPrice) * gasUsed * etherPrice);
+		const gasFee = fromWei(gasPrice) * gasUsed * etherPrice;
 		return (
 			<div className="grid card" key={index}>
 				<div className="grid">
