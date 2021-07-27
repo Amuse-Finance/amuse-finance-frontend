@@ -81,7 +81,7 @@ class Web3Provider extends Component {
 			const ethereum = window.ethereum;
 			if (ethereum === undefined)
 				throw new Error(
-					"Non-Ethereum browser deteected. Please install metamask and relaod the page"
+					"Non-Ethereum browser detected. Please install metamask and relaod the page"
 				);
 			// initiate metamask pop
 			await ethereum.enable();
@@ -95,10 +95,10 @@ class Web3Provider extends Component {
 			const _networkType = await web3.eth.net.getNetworkType();
 			const _accounts = await web3.eth.getAccounts();
 
-			if (parseInt(_chainId) !== 4) {
+			if (parseInt(_chainId) !== 1 || parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
 				return alert(
-					`Amused: Invalid network detected. Please switch from ${_networkType} to Rinkeby`
+					`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`
 				);
 			}
 
@@ -437,7 +437,7 @@ class Web3Provider extends Component {
 			const msgParams = JSON.stringify({
 				domain: {
 					chainId,
-					name: "Amused.Finance",
+					name: "Amuse.Finance",
 					version: "1",
 				},
 				message: { title, user, amount },

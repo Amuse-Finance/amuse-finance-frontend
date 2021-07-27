@@ -87,7 +87,7 @@ const Home = () => {
 								<h1>hodl</h1>
 							</div>
 							<div className="grid detail">
-								<p>1% rewards at every 24hours for all holders</p>
+								<p>1% rewards every 24hours for all holders</p>
 							</div>
 						</div>
 
@@ -111,7 +111,7 @@ const Home = () => {
 								<h1>stake</h1>
 							</div>
 							<div className="grid detail">
-								<p>Earn 1.5% ETHER rewards for all staked AMD per 24hours</p>
+								<p>Earn 1% in ETHER for all staked AMD per 24hours</p>
 							</div>
 						</div>
 
