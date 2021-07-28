@@ -40,7 +40,6 @@ export const HomeWrapper = styled.div`
 						button {
 							background: var(--mainBlue);
 							outline: none;
-
 							width: 40%;
 							margin: 0 0 1em;
 							border-radius: 5em;
@@ -50,7 +49,7 @@ export const HomeWrapper = styled.div`
 							padding: 1em;
 							border: 0.1em solid var(--mainBlue);
 							transition: var(--mainTransition);
-							font-family: cursive;
+							font-family: Georgia, "Times New Roman", Times, serif;
 
 							&:hover {
 								background: transparent;

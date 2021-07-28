@@ -45,7 +45,7 @@ const Referral = () => {
 				<form className="grid">
 					<input
 						value={referralLink}
-						placeholder="http://127.0.0.1:3000/refferal/create?user=0xf610"
+						placeholder={`${window.location.href}/create?referrerID=0x000`}
 						disabled={true}
 					/>
 
