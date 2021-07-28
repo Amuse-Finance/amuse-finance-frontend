@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HomeWrapper = styled.div`
 	position: relative;
+	overflow-x: hidden;
 
 	.banner {
 		height: 75vh;
@@ -34,19 +35,22 @@ export const HomeWrapper = styled.div`
 					margin: 2em 0;
 
 					a {
+						width: 100%;
+
 						button {
 							background: var(--mainBlue);
 							outline: none;
 
 							width: 40%;
 							margin: 0 0 1em;
-							border-radius: 11em;
+							border-radius: 5em;
 							color: var(--white);
 							text-align: center;
-							font-size: 1.25em;
-							padding: 0.75em 1em;
+							font-size: 1.05em;
+							padding: 1em;
 							border: 0.1em solid var(--mainBlue);
 							transition: var(--mainTransition);
+							font-family: cursive;
 
 							&:hover {
 								background: transparent;
@@ -243,15 +247,18 @@ export const HomeWrapper = styled.div`
 
 						div {
 							.btns {
-								button {
-									width: 70%;
-									padding: 1.25em 0.5em;
+								a {
+									button {
+										width: 70%;
+										padding: 1.25em 0.5em;
+									}
 								}
 							}
 						}
 					}
 				}
 			}
+
 			@media (max-width: 767px) {
 				& {
 					.banner {
@@ -261,7 +268,7 @@ export const HomeWrapper = styled.div`
 							grid-template-columns: repeat(12, 1fr);
 
 							div {
-								grid-column: 3/11;
+								grid-column: 1/13;
 
 								.btns {
 									width: 100%;
@@ -269,22 +276,10 @@ export const HomeWrapper = styled.div`
 									margin: 2em auto;
 									padding: auto;
 
-									button {
-										background: var(--mainBlue);
-										width: 80%;
-										margin: 0 0 1em;
-										border-radius: 11em;
-										color: var(--white);
-										text-align: center;
-										font-size: 1.25em;
-										padding: 0.75em 1em;
-										border: 0.1em solid var(--mainBlue);
-										transition: var(--mainTransition);
-
-										&:hover {
-											background: transparent;
-											color: var(--mainBlue);
-											border: 0.1em solid var(--mainBlue);
+									a {
+										width: 70%;
+										button {
+											width: 100%;
 										}
 									}
 								}
