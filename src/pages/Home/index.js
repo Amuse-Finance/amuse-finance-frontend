@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import FisionDoughnut from "./FisionDoughnut";
 import { HomeWrapper } from "./styles";
@@ -49,10 +50,18 @@ const Home = () => {
 						</h1>
 						<p>From the Dev of TweetsZone.com</p>
 						<div className="grid btns">
-							<button type="button" className="active">
-								Launch App
-							</button>
-							<button type="button">Download Whitepaper</button>
+							<Link to="/presale">
+								<button type="button" className="active">
+									Presale
+								</button>
+							</Link>
+							<a
+								href="https://drive.google.com/file/d/1Q8ERfvLJCM-ZzG4APFnwu_McyfXZRsTI/view?usp=sharing"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<button type="button">Download Whitepaper</button>
+							</a>
 						</div>
 					</div>
 				</section>

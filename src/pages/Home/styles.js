@@ -33,32 +33,36 @@ export const HomeWrapper = styled.div`
 				.btns {
 					margin: 2em 0;
 
-					button {
-						background: var(--mainBlue);
-						width: 40%;
-						margin: 0 0 1em;
-						border-radius: 11em;
-						color: var(--white);
-						text-align: center;
-						font-size: 1.25em;
-						padding: 0.75em 1em;
-						border: 0.1em solid var(--mainBlue);
-						transition: var(--mainTransition);
+					a {
+						button {
+							background: var(--mainBlue);
+							outline: none;
 
-						&:hover {
+							width: 40%;
+							margin: 0 0 1em;
+							border-radius: 11em;
+							color: var(--white);
+							text-align: center;
+							font-size: 1.25em;
+							padding: 0.75em 1em;
+							border: 0.1em solid var(--mainBlue);
+							transition: var(--mainTransition);
+
+							&:hover {
+								background: transparent;
+								color: var(--mainBlue);
+								border: 0.1em solid var(--mainBlue);
+							}
+						}
+
+						.active {
 							background: transparent;
 							color: var(--mainBlue);
-							border: 0.1em solid var(--mainBlue);
-						}
-					}
 
-					.active {
-						background: transparent;
-						color: var(--mainBlue);
-
-						&:hover {
-							background: var(--mainBlue);
-							color: var(--white);
+							&:hover {
+								background: var(--mainBlue);
+								color: var(--white);
+							}
 						}
 					}
 				}

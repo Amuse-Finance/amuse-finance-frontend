@@ -83,19 +83,19 @@ class Web3Provider extends Component {
 				throw new Error(
 					"Non-Ethereum browser detected. Please install metamask and relaod the page"
 				);
-			// initiate metamask pop
-			await ethereum.enable();
 
 			const USDT = process.env.REACT_APP_USDT;
 			const WETH = process.env.REACT_APP_WETH;
 
 			const web3 = new Web3(ethereum);
 
+			const _accounts = await ethereum.request({
+				method: "eth_requestAccounts",
+			});
 			const _chainId = await web3.eth.getChainId();
 			const _networkType = await web3.eth.net.getNetworkType();
-			const _accounts = await web3.eth.getAccounts();
 
-			if (parseInt(_chainId) !== 1 || parseInt(_chainId) !== 4) {
+			if (parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
 				return alert(
 					`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`
