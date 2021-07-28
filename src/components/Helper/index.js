@@ -92,7 +92,7 @@ const getRefferalHistory = async (web3, user, amusedToken) => {
 	try {
 		const startBlock = await (
 			await axios.get(
-				"https://amused-finance-backend.herokuapp.com/api/v1/startBlock"
+				"https://amuse-finance-backend.herokuapp.com/api/v1/startBlock"
 			)
 		).data;
 		const _endBlock = parseInt(await web3.eth.getBlockNumber());
@@ -139,7 +139,7 @@ const getUstakedHistory = async (web3, user, amusedVault) => {
 
 		const startBlock = await (
 			await axios.get(
-				"https://amused-finance-backend.herokuapp.com/api/v1/startBlock"
+				"https://amuse-finance-backend.herokuapp.com/api/v1/startBlock"
 			)
 		).data;
 		const _endBlock = await web3.eth.getBlockNumber();

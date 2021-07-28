@@ -154,7 +154,7 @@ class Web3Provider extends Component {
 			const _transactionHistory = await fixedDataArray(
 				(
 					await axios.get(
-						`https://amused-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`
+						`https://amuse-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`
 					)
 				).data
 			);
@@ -464,7 +464,7 @@ class Web3Provider extends Component {
 
 			const _data = { user, signature, chainId, amount };
 			const _url =
-				"https://amused-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
+				"https://amuse-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
 			const _result = await postData(_data, _url);
 			if (!_result.data.receipt.status) {
 				return { error: "Please wait for 24hours to request another faucet" };
