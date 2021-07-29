@@ -33,12 +33,12 @@ const App = () => {
 			);
 			ethereum.on("chainChanged", () => window.location.reload());
 
-			await web3.eth
-				.subscribe("newBlockHeaders")
-				.on("data", async () => await reRender())
-				.on("error", async (error) => {
-					console.log(error);
-				});
+			// await web3.eth
+			// 	.subscribe("newBlockHeaders")
+			// 	.on("data", async () => await reRender())
+			// 	.on("error", async (error) => {
+			// 		console.log(error);
+			// 	});
 		})();
 	}, [loading, web3, updateAccount, reRender]);
 
