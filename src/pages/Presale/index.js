@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PresaleWrapper } from "./styles";
-import logo from "../../assets/Amuse-logo-icon.png";
+import logo from "../../assets/Amuse icon.png";
 import ethLogo from "../../assets/others/ethereum-logo.jfif";
 require("dotenv/config");
 

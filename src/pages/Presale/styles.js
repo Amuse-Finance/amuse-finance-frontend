@@ -79,11 +79,11 @@ export const PresaleWrapper = styled.div`
 						place-items: center;
 
 						img {
-							width: 100px;
+							width: 50px;
 							height: 50px;
 							border-radius: 50%;
-							border: 0.1em solid var(--white);
-							background: var(--white);
+							/* border: 0.1em solid var(--white);
+							background: var(--white); */
 						}
 					}
 					.ticker {

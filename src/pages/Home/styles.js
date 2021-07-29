@@ -49,7 +49,7 @@ export const HomeWrapper = styled.div`
 							padding: 1em;
 							border: 0.1em solid var(--mainBlue);
 							transition: var(--mainTransition);
-							font-family: Georgia, "Times New Roman", Times, serif;
+							font-family: Inter, Georgia, "Times New Roman", Times, serif;
 
 							&:hover {
 								background: transparent;

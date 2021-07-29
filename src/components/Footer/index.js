@@ -3,6 +3,7 @@ import { FaLinkedin, FaGithub, FaTelegram, FaTwitter } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import { FooterContainer } from "./styles";
 import { ErrorBoundary } from "../ErrorBoundary";
+import logo from "../../assets/Amuse icon.png";
 
 const Footer = () => {
 	const [email, setEmail] = useState("");
@@ -35,8 +36,15 @@ const Footer = () => {
 	return (
 		<FooterContainer className="grid footer">
 			<div className="grid wrapper">
-				<section>
-					<h1>About Amuse</h1>
+				<section className="grid">
+					<div className="grid brand">
+						<div className="grid logo">
+							<img src={logo} alt="amuse" />
+						</div>
+						<div className="grid">
+							<h1>Amuse</h1>
+						</div>
+					</div>
 					<p>
 						Amuse is a protocol that gives cashback for the gas fees spent by
 						its users. Cut down on your gas cost when you choose Amuse.

@@ -5,6 +5,7 @@ export const FooterContainer = styled.div`
 	color: var(--white);
 	padding: 2em;
 	width: 100vw;
+	font-family: Inter, Georgia, "Times New Roman", Times, serif;
 
 	.wrapper {
 		width: 100%;
@@ -16,12 +17,37 @@ export const FooterContainer = styled.div`
 			line-height: 2;
 			grid-gap: 0.5em 0;
 
-			h1 {
-				font-size: 1.5em;
+			.brand {
+				place-items: start;
+				width: 100%;
+				grid-template-columns: 10% 90%;
+				align-items: center;
+
+				.grid {
+					width: 100%;
+					h1 {
+						grid-column: 1/5;
+						place-self: start;
+						width: 100%;
+						margin-left: 1em;
+						font-size: 1.5em;
+					}
+				}
+
+				.logo {
+					width: 50px;
+					height: 100%;
+					align-self: center;
+					place-items: center;
+
+					img {
+						height: 50px;
+					}
+				}
 			}
 
 			p {
-				font-size: 0.9em;
+				font-size: 1em;
 			}
 
 			form {
