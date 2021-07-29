@@ -79,11 +79,10 @@ const Home = () => {
 				<header className="grid">
 					<h1 className="text-4xl md:text-5xl font-semibold pb-5">Features</h1>
 					<p>
-						Nostrud irure id consequat officia. Tempor velit mollit veniam
-						occaecat sit dolore ex quis laborum est. Duis fugiat amet labore ad
-						nisi duis commodo ullamco ad laboris. Minim cillum consectetur sit
-						amet ad ad id eiusmod Lorem pariatur. Et id laboris ullamco deserunt
-						non incididunt excepteur ipsum nostrud ipsum mollit.
+						Amuse is a sustainable cashback protocol, fully decentralised which
+						is made to augment spent gas on transactions for Ethereum users.
+						Hodlers Amuse token will also benefit from numerous incentives that
+						has been algorithmically written in the contract.
 					</p>
 				</header>
 				<div className="grid card-container">
@@ -96,7 +95,7 @@ const Home = () => {
 								<h1>hodl</h1>
 							</div>
 							<div className="grid detail">
-								<p>1% rewards every 24hours for all holders</p>
+								<p>Earn 1% AMD rewards every 24hours for all holding</p>
 							</div>
 						</div>
 
@@ -108,7 +107,7 @@ const Home = () => {
 								<h1>trade</h1>
 							</div>
 							<div className="grid detail">
-								<p>Earn back 100% gas fees for all buy actions</p>
+								<p>Earn passive cashback for holding and trading AMD</p>
 							</div>
 						</div>
 

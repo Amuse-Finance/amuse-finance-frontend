@@ -68,7 +68,7 @@ export const DashboardContainer = styled.div`
 
 		.transaction-header {
 			grid-template-columns: repeat(2, 1fr);
-			width: 27.5%;
+			width: 35%;
 			height: 55px;
 			place-items: start;
 			margin: 0 0 1em;
@@ -88,12 +88,15 @@ export const DashboardContainer = styled.div`
 				letter-spacing: var(--mainSpacing);
 				word-spacing: var(--wordSpacing);
 				outline: none;
-				border-radius: 0.25em;
+				border-radius: 2em;
+				/* box-shadow: 2.5px 2.5px 5px var(--mainBlue); */
 			}
 
 			.active {
 				background: var(--mainBlue);
 				color: var(--white);
+				/* box-shadow: 2.5px 2.5px 5px var(--mainWhite); */
+				box-shadow: 2.5px 2.5px 10px var(--mainBlue);
 			}
 		}
 

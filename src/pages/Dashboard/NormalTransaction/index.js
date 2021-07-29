@@ -11,7 +11,7 @@ const NormalTransaction = () => {
 
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;
-		// console.log(fromWei(gasPrice) * gasUsed * etherPrice);
+		if (typeof gasPrice !== "string") return <></>;
 		const gasFee = fromWei(gasPrice) * gasUsed * etherPrice;
 		return (
 			<div className="grid card" key={index}>

@@ -27,17 +27,19 @@ const App = () => {
 	const { loading, web3, updateAccount, reRender } = useContext(web3Context);
 	useEffect(() => {
 		if (loading) return;
-		ethereum.on("accountsChanged", async (_accounts) =>
-			updateAccount(_accounts[0])
-		);
-		ethereum.on("chainChanged", () => window.location.reload());
+		(async () => {
+			ethereum.on("accountsChanged", async (_accounts) =>
+				updateAccount(_accounts[0])
+			);
+			ethereum.on("chainChanged", () => window.location.reload());
 
-		web3.eth
-			.subscribe("newBlockHeaders")
-			.on("data", async () => await reRender())
-			.on("error", async (error) => {
-				console.log(error);
-			});
+			await web3.eth
+				.subscribe("newBlockHeaders")
+				.on("data", async () => await reRender())
+				.on("error", async (error) => {
+					console.log(error);
+				});
+		})();
 	}, [loading, web3, updateAccount, reRender]);
 
 	return (
