@@ -95,7 +95,7 @@ const Home = () => {
 								<h1>hodl</h1>
 							</div>
 							<div className="grid detail">
-								<p>Earn 1% AMD rewards every 24hours for all holding</p>
+								<p>Earn 1% AMD rewards every 24hours for holding</p>
 							</div>
 						</div>
 

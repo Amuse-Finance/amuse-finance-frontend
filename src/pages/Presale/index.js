@@ -10,17 +10,15 @@ const Presale = () => {
 
 	const _validateInputAmount = (e) => {
 		e.preventDefault();
-		if (isNaN(e.target.value) || e.target.value === "") {
-			setEthAmount(() => "0.00");
-			setAmdEthRate(() => "0.00");
-			return;
+		if (!isNaN(e.target.value) || e.target.value !== "") {
+			const _amdEthRate = parseFloat(process.env.REACT_APP_amdEthRate);
+
+			setEthAmount(() => e.target.value);
+			setAmdEthRate(() => parseFloat(e.target.value) * _amdEthRate);
 		}
-
-		const _amdEthRate = process.env.REACT_APP_amdEthRate;
-
-		setEthAmount(() => e.target.value);
-		setAmdEthRate(() => parseFloat(ethAmount) / parseFloat(_amdEthRate));
 	};
+
+	const amdValue = isNaN(amdEthRate) ? "0" : parseFloat(amdEthRate).toFixed(2);
 
 	return (
 		<PresaleWrapper className="grid">
@@ -63,7 +61,7 @@ const Presale = () => {
 							<div className="grid image">
 								<img src={ethLogo} alt="logo" />
 							</div>
-							<div className="grid">
+							<div className="grid ticker">
 								<h1>Ethereum</h1>
 								<p>1.00 ETH</p>
 							</div>
@@ -73,9 +71,12 @@ const Presale = () => {
 							<div className="grid image">
 								<img src={logo} alt="logo" />
 							</div>
-							<div className="grid">
-								<h1>Ethereum</h1>
-								<p>1.00 ETH</p>
+							<div className="grid ticker">
+								<h1>Amuse</h1>
+								<p>
+									{amdEthRate}
+									AMD
+								</p>
 							</div>
 						</section>
 					</div>
@@ -97,7 +98,7 @@ const Presale = () => {
 								<h1>AMD Amount:</h1>
 							</div>
 							<div className="grid second">
-								<h2>{amdEthRate} AMD</h2>
+								<h2>{amdValue} AMD</h2>
 							</div>
 						</section>
 					</div>
@@ -108,7 +109,7 @@ const Presale = () => {
 								type="text"
 								value={ethAmount}
 								placeholder="1.00"
-								onChange={(e) => _validateInputAmount(e)}
+								onChange={_validateInputAmount}
 							/>
 							<div className="coin">
 								<p>ETH</p>

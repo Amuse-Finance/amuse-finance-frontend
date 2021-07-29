@@ -184,7 +184,7 @@ class Web3Provider extends Component {
 
 	updateAccount = async (_newAddress) => {
 		try {
-			this.setState({ user: _newAddress });
+			this.setState({ user: this.toChecksumAddress(_newAddress) });
 			await this.reRender();
 		} catch (error) {
 			return error;

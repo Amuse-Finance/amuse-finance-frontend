@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PresaleWrapper = styled.div`
 	width: 100vw;
 	color: var(--white);
+	overflow-x: hidden;
 
 	.wrapper {
 		grid-gap: 0 2em;
@@ -78,10 +79,23 @@ export const PresaleWrapper = styled.div`
 						place-items: center;
 
 						img {
-							width: 100%;
+							width: 100px;
 							height: 50px;
 							border-radius: 50%;
 							border: 0.1em solid var(--white);
+							background: var(--white);
+						}
+					}
+					.ticker {
+						grid-column: 4/13;
+						width: 100%;
+
+						h1 {
+							font-weight: 800;
+						}
+
+						p {
+							font-size: 0.9em;
 						}
 					}
 				}
@@ -198,11 +212,8 @@ export const PresaleWrapper = styled.div`
 			& {
 				.wrapper {
 					.card-container {
-						padding: 2em 1em;
-
 						.card {
 							border: none;
-							background: red;
 						}
 					}
 				}
