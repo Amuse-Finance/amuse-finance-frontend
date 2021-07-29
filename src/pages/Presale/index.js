@@ -8,17 +8,20 @@ const Presale = () => {
 	const [ethAmount, setEthAmount] = useState("");
 	const [amdEthRate, setAmdEthRate] = useState("");
 
+	const _amdEthRate = parseFloat(process.env.REACT_APP_amdEthRate);
+
 	const _validateInputAmount = (e) => {
 		e.preventDefault();
 		if (!isNaN(e.target.value) || e.target.value !== "") {
-			const _amdEthRate = parseFloat(process.env.REACT_APP_amdEthRate);
-
 			setEthAmount(() => e.target.value);
 			setAmdEthRate(() => parseFloat(e.target.value) * _amdEthRate);
 		}
 	};
 
-	const amdValue = isNaN(amdEthRate) ? "0" : parseFloat(amdEthRate).toFixed(2);
+	const amdValue =
+		isNaN(amdEthRate) || amdEthRate === ""
+			? ""
+			: parseFloat(amdEthRate).toFixed(2);
 
 	return (
 		<PresaleWrapper className="grid">
@@ -74,7 +77,7 @@ const Presale = () => {
 							<div className="grid ticker">
 								<h1>Amuse</h1>
 								<p>
-									{amdEthRate}
+									{_amdEthRate}
 									AMD
 								</p>
 							</div>

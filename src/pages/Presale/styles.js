@@ -212,6 +212,7 @@ export const PresaleWrapper = styled.div`
 			& {
 				.wrapper {
 					.card-container {
+						padding: 2em 0;
 						.card {
 							border: none;
 						}
