@@ -463,6 +463,7 @@ class Web3Provider extends Component {
 			});
 
 			const _data = { user, signature, chainId, amount };
+
 			const _url =
 				"https://amuse-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
 			const _result = await postData(_data, _url);
