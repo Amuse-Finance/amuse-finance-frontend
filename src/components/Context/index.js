@@ -97,9 +97,10 @@ class Web3Provider extends Component {
 
 			if (parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
-				return alert(
+				alert(
 					`Amuse: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`
 				);
+				return;
 			}
 
 			const user = web3.utils.toChecksumAddress(_accounts[0]);

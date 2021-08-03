@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-	FaLinkedin,
-	FaGithub,
-	FaTelegram,
-	FaTwitter,
-	FaMediumM,
-} from "react-icons/fa";
+import { FaGithub, FaTelegram, FaTwitter, FaMediumM } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import { FooterContainer } from "./styles";
 import { ErrorBoundary } from "../ErrorBoundary";
