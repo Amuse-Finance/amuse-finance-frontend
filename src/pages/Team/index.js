@@ -25,6 +25,7 @@ const Team = () => {
 					<div className="grid image">
 						<img alt="team-member" src={ceo} />
 					</div>
+
 					<div className="grid details">
 						<h1>Abdullah Zakariyya</h1>
 						<small>Excessive Overlord</small>
@@ -68,11 +69,23 @@ const Team = () => {
 						<small>SoftDev</small>
 
 						<div className="grid social-handles">
-							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
-								<FaDiscord className="icon" />
+							<a href="https://t.me/r2llive" target="_blank" rel="noreferrer">
+								<FaTelegram className="icon" />
 							</a>
-							<FiTwitter className="icon" />
-							<FaLinkedin className="icon" />
+							<a
+								href="https://twitter.com/abdillahzakkie?s=09"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FiTwitter className="icon" />
+							</a>
+							<a
+								href="https://github.com/Lanre039"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FaGithub className="icon" />
+							</a>
 						</div>
 					</div>
 					<div className="grid role">
@@ -92,8 +105,17 @@ const Team = () => {
 							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
 								<FaDiscord className="icon" />
 							</a>
-							<FiTwitter className="icon" />
-							<FaLinkedin className="icon" />
+							<a
+								href="https://twitter.com/abdillahzakkie?s=09"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FiTwitter className="icon" />
+							</a>
+
+							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
+								<FaLinkedin className="icon" />
+							</a>
 						</div>
 					</div>
 					<div className="grid role">
