@@ -98,7 +98,7 @@ class Web3Provider extends Component {
 			if (parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
 				return alert(
-					`Amused: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`
+					`Amuse: Invalid network detected. Please switch from ${_networkType} to Mainnet / Rinkeby`
 				);
 			}
 
