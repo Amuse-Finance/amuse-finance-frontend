@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FaLinkedin, FaGithub, FaTelegram, FaTwitter } from "react-icons/fa";
+import {
+	FaLinkedin,
+	FaGithub,
+	FaTelegram,
+	FaTwitter,
+	FaMediumM,
+} from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import { FooterContainer } from "./styles";
 import { ErrorBoundary } from "../ErrorBoundary";
@@ -10,13 +16,13 @@ const Footer = () => {
 	const getYear = new Date().getFullYear();
 
 	const socialLinks = [
-		{ icon: <FaGithub />, to: "https://github.com/abdillahzakkie" },
-		{ icon: <FaTelegram />, to: "https://t.me/DragonTrybe" },
+		{ icon: <FaGithub />, to: "https://github.com/Amuse-Finance" },
+		{ icon: <FaTelegram />, to: "https://t.me/amuse_finance_channel" },
 		{
-			icon: <FaLinkedin />,
-			to: "https://www.linkedin.com/in/abdullah-zakarriya-ba58961aa",
+			icon: <FaMediumM />,
+			to: "https://medium.com/@amusefinance",
 		},
-		{ icon: <FaTwitter />, to: "https://twitter.com/Dev_DragonLord" },
+		{ icon: <FaTwitter />, to: "https://twitter.com/AmuseFinance" },
 	];
 	const socialIcon = socialLinks.map((item, index) => {
 		return (

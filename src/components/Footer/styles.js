@@ -84,7 +84,7 @@ export const FooterContainer = styled.div`
 				place-items: start;
 				margin: auto 0;
 				padding: 1em 0;
-				font-size: 1.25em;
+				font-size: 1.5em;
 			}
 		}
 	}
