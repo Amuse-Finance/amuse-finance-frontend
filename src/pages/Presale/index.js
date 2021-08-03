@@ -12,9 +12,12 @@ const Presale = () => {
 
 	const _validateInputAmount = (e) => {
 		e.preventDefault();
-		if (!isNaN(e.target.value) || e.target.value !== "") {
+		if (!isNaN(e.target.value) && e.target.value !== "") {
 			setEthAmount(() => e.target.value);
 			setAmdEthRate(() => parseFloat(e.target.value) * _amdEthRate);
+		} else {
+			setEthAmount(() => "");
+			setAmdEthRate(() => "");
 		}
 	};
 
