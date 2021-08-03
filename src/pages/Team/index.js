@@ -1,9 +1,10 @@
 import React from "react";
 import { IoRocketOutline } from "react-icons/io5";
-import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaDiscord, FaLinkedin, FaGithub, FaTelegram } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { TeamWrapper } from "./styles";
+import ceo from "../../assets/team/ceo.jpg";
 import amdLogo from "../../assets/team/unknown.webp";
 
 const Team = () => {
@@ -22,17 +23,35 @@ const Team = () => {
 			<div className="grid team-card-container">
 				<div className="card">
 					<div className="grid image">
-						<img alt="team-member" src={amdLogo} />
+						<img alt="team-member" src={ceo} />
 					</div>
 					<div className="grid details">
 						<h1>Abdullah Zakariyya</h1>
-						<small>DragonLord</small>
+						<small>Excessive Overlord</small>
 
 						<div className="grid social-handles">
-							<FaDiscord className="icon" />
-							<FiTwitter className="icon" />
-							<FaLinkedin className="icon" />
-							<FaGithub className="icon" />
+							<a
+								href="https://t.me/ExcessiveOverlord"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FaTelegram className="icon" />
+							</a>
+							<a
+								href="https://twitter.com/abdillahzakkie?s=09"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FiTwitter className="icon" />
+							</a>
+
+							<a
+								href="https://github.com/abdillahzakkie"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FaGithub className="icon" />
+							</a>
 						</div>
 					</div>
 					<div className="grid role">
@@ -49,10 +68,11 @@ const Team = () => {
 						<small>SoftDev</small>
 
 						<div className="grid social-handles">
-							<FaDiscord className="icon" />
+							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
+								<FaDiscord className="icon" />
+							</a>
 							<FiTwitter className="icon" />
 							<FaLinkedin className="icon" />
-							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">
@@ -69,10 +89,11 @@ const Team = () => {
 						<small>Javamind</small>
 
 						<div className="grid social-handles">
-							<FaDiscord className="icon" />
+							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
+								<FaDiscord className="icon" />
+							</a>
 							<FiTwitter className="icon" />
 							<FaLinkedin className="icon" />
-							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">
@@ -89,10 +110,11 @@ const Team = () => {
 						<small>Zenesk</small>
 
 						<div className="grid social-handles">
-							<FaDiscord className="icon" />
+							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
+								<FaDiscord className="icon" />
+							</a>
 							<FiTwitter className="icon" />
 							<FaLinkedin className="icon" />
-							<FaGithub className="icon" />
 						</div>
 					</div>
 					<div className="grid role">

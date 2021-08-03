@@ -104,7 +104,7 @@ export const TeamWrapper = styled.div`
 				}
 
 				.social-handles {
-					grid-template-columns: repeat(4, 1fr);
+					grid-template-columns: repeat(3, 1fr);
 					width: 80%;
 					place-items: center;
 					padding: 0.5em 0;
