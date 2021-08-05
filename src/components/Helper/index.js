@@ -44,6 +44,7 @@ const getEthPrice = async () => {
 	}
 };
 
+//  _doc = new jsPDF
 const doughnutChartConfig = (data, _type, numberPrefix, showPercentValues) => {
 	const _chart = {
 		type: _type ? _type : "doughnut2d",

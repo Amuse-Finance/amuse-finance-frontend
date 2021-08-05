@@ -127,7 +127,7 @@ const Dashboard = () => {
 						<div className="grid sub-card">
 							<div className="grid text">
 								{/* <h1>{totalEarnedRewards.tokenValue.toFixed(2)} AMD</h1> */}
-								<h1>{totalEarnedRewards.ethValue.toFixed(7)} ETH</h1>
+								<h1>{totalEarnedRewards.ethValue.toFixed(4)} ETH</h1>
 							</div>
 
 							<div className="icon">

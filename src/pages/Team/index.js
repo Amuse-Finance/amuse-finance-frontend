@@ -143,6 +143,27 @@ const Team = () => {
 						<small>Strategist</small>
 					</div>
 				</div>
+
+				<div className="grid card">
+					<div className="grid image">
+						<img alt="team-member" src={amdLogo} />
+					</div>
+					<div className="grid details">
+						<h1>Bilhameen Kioki</h1>
+						<small>Untagged</small>
+
+						<div className="grid social-handles">
+							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
+								<FaDiscord className="icon" />
+							</a>
+							<FiTwitter className="icon" />
+							<FaLinkedin className="icon" />
+						</div>
+					</div>
+					<div className="grid role">
+						<small>Designer</small>
+					</div>
+				</div>
 			</div>
 		</TeamWrapper>
 	);

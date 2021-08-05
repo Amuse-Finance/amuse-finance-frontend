@@ -55,11 +55,8 @@ const Home = () => {
 									Presale
 								</button>
 							</Link>
-							<a
-								href="https://drive.google.com/file/d/1qtlIhcv1ci0jZ287ChbZn6opsEhp_LUF/view?usp=sharing"
-								target="_blank"
-								rel="noreferrer"
-							>
+							{/* eslint-disable-next-line */}
+							<a href="https://drive.google.com/file/d/1qtlIhcv1ci0jZ287ChbZn6opsEhp_LUF/view">
 								<button type="button">Download Whitepaper</button>
 							</a>
 						</div>
