@@ -5,6 +5,7 @@ import { FiTwitter } from "react-icons/fi";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { TeamWrapper } from "./styles";
 import ceo from "../../assets/team/ceo.jpg";
+import designer from "../../assets/team/designer.jpg";
 import amdLogo from "../../assets/team/unknown.webp";
 
 const Team = () => {
@@ -146,18 +147,30 @@ const Team = () => {
 
 				<div className="grid card">
 					<div className="grid image">
-						<img alt="team-member" src={amdLogo} />
+						<img alt="team-member" src={designer} />
 					</div>
 					<div className="grid details">
 						<h1>Bilhameen Kioki</h1>
-						<small>Untagged</small>
+						<small>Meen</small>
 
 						<div className="grid social-handles">
 							<a href="https://amuse.finance" target="_blank" rel="noreferrer">
-								<FaDiscord className="icon" />
+								<FaTelegram className="icon" />
 							</a>
-							<FiTwitter className="icon" />
-							<FaLinkedin className="icon" />
+							<a
+								href="https://mobile.twitter.com/meen_designs"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FiTwitter className="icon" />
+							</a>
+							<a
+								href="https://www.linkedin.com/in/koiki-biliameen-54655b16a"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FaLinkedin className="icon" />
+							</a>
 						</div>
 					</div>
 					<div className="grid role">

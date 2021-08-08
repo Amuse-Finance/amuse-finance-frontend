@@ -57,7 +57,7 @@ const Home = () => {
 							</Link>
 							{/* eslint-disable-next-line */}
 							<a href="https://drive.google.com/file/d/1qtlIhcv1ci0jZ287ChbZn6opsEhp_LUF/view">
-								<button type="button">Download Whitepaper</button>
+								<button type="button">Whitepaper</button>
 							</a>
 						</div>
 					</div>

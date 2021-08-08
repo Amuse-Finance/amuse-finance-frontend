@@ -30,7 +30,7 @@ export const TeamWrapper = styled.div`
 	.team-card-container {
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 		width: 70%;
-		grid-gap: 3em;
+		grid-gap: 4em 3em;
 		padding: 2em 4em;
 		position: relative;
 		border: none;
