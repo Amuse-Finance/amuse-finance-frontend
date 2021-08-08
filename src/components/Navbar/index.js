@@ -18,7 +18,7 @@ const Navbar = ({ theme }) => {
 		if (!panelState) return;
 		setTimeout(() => {
 			setPanelState(() => !panelState);
-		}, 3000);
+		}, 5000);
 	}, [panelState]);
 
 	let pages = [];
