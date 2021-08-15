@@ -57,7 +57,7 @@ const App = () => {
 				<Route exact path="/referral/create" component={RegisterReferral} />
 				<Route exact path="/presale" component={Presale} />
 			</Switch>
-			<ScrollTop />
+
 			<Footer />
 		</div>
 	);
