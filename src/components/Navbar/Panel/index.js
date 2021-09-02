@@ -53,6 +53,12 @@ const Panel = () => {
 			<div className="grid list-container">
 				<div className="grid list-item">
 					<h3 className="grid">
+						<Link to="/account">My Account</Link>
+					</h3>
+				</div>
+
+				<div className="grid list-item">
+					<h3 className="grid">
 						<Link to="/referral">Referral</Link>
 					</h3>
 				</div>

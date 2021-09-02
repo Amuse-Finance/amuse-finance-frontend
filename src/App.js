@@ -18,6 +18,7 @@ import Referral from "./pages/Referral";
 import RegisterReferral from "./pages/Referral/Register";
 import Contact from "./pages/Contact";
 import Presale from "./pages/Presale";
+import Account from "./pages/Account";
 
 require("dotenv/config");
 
@@ -32,13 +33,6 @@ const App = () => {
 				updateAccount(_accounts[0])
 			);
 			ethereum.on("chainChanged", () => window.location.reload());
-
-			// await web3.eth
-			// 	.subscribe("newBlockHeaders")
-			// 	.on("data", async () => await reRender())
-			// 	.on("error", async (error) => {
-			// 		console.log(error);
-			// 	});
 		})();
 	}, [loading, web3, updateAccount, reRender]);
 
@@ -56,8 +50,9 @@ const App = () => {
 				<Route exact path="/referral" component={Referral} />
 				<Route exact path="/referral/create" component={RegisterReferral} />
 				<Route exact path="/presale" component={Presale} />
+				<Route exact path="/account" component={Account} />
 			</Switch>
-
+			<ScrollTop />
 			<Footer />
 		</div>
 	);

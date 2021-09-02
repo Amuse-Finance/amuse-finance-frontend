@@ -57,6 +57,7 @@ const Footer = () => {
 						<input
 							type="email"
 							value={email}
+							name="email"
 							onChange={(e) => setEmail(e.target.value)}
 							placeholder="example@mail.com"
 						/>

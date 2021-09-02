@@ -27,6 +27,7 @@ const Navbar = ({ theme }) => {
 	if (parseFloat(window.innerWidth) <= 767) {
 		pages = [
 			{ name: "Home", path: "" },
+			{ name: "My Account", path: "account" },
 			{ name: "Dashboard", path: "dashboard" },
 			{ name: "Vault", path: "vault" },
 			{ name: "Team", path: "team" },
