@@ -3,7 +3,7 @@
 		{
 			"inputs": [
 				{
-					"internalType": "contract IAmuse",
+					"internalType": "contract IAmused",
 					"name": "_amusedToken",
 					"type": "address"
 				}
@@ -97,20 +97,7 @@
 			"name": "AmuseToken",
 			"outputs": [
 				{
-					"internalType": "contract IAmuse",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "WETH",
-			"outputs": [
-				{
-					"internalType": "address",
+					"internalType": "contract IAmused",
 					"name": "",
 					"type": "address"
 				}
@@ -278,6 +265,19 @@
 		},
 		{
 			"inputs": [],
+			"name": "swapRouter",
+			"outputs": [
+				{
+					"internalType": "contract ISwapRouter",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "totalTokenLocked",
 			"outputs": [
 				{
@@ -300,19 +300,6 @@
 			"name": "transferOwnership",
 			"outputs": [],
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "uniswapV3Router",
-			"outputs": [
-				{
-					"internalType": "contract ISwapRouter",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -381,28 +368,9 @@
 			"type": "function"
 		},
 		{
-			"inputs": [
-				{
-					"internalType": "contract IERC20",
-					"name": "_token",
-					"type": "address"
-				}
-			],
-			"name": "withdrawETH",
-			"outputs": [
-				{
-					"internalType": "uint8",
-					"name": "",
-					"type": "uint8"
-				}
-			],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
 			"stateMutability": "payable",
 			"type": "receive"
 		}
 	],
-	"address": "0xb4c64e93C8cfADdeA0D92E9c974D73E4E563C6aC"
+	"address": "0x0d4AF70523B7505a4b6AFE87BE3A6263638d45Aa"
 }

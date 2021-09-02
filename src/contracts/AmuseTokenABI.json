@@ -321,19 +321,6 @@
 			"type": "function"
 		},
 		{
-			"inputs": [],
-			"name": "admin",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
 			"inputs": [
 				{
 					"internalType": "address",
@@ -767,19 +754,6 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "_newAdmin",
-					"type": "address"
-				}
-			],
-			"name": "setAdmin",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
 					"name": "_amuseVault",
 					"type": "address"
 				}
@@ -997,5 +971,5 @@
 			"type": "receive"
 		}
 	],
-	"address": "0xA693fa30C518896058107EfC9e883033B3CA4d2E"
+	"address": "0xBc2dD10788DE6079F9Eb9Bc5d3A837a85Ff76DE3"
 }

@@ -6,22 +6,22 @@ import { ErrorBoundary } from "../../../components/ErrorBoundary";
 require("dotenv/config");
 
 const NormalTransaction = () => {
-	const { loading, fromWei, etherPrice, transactionHistory } =
+	const { loading, fromWei, etherPrice, networkType, transactionHistory } =
 		useContext(web3Context);
-
 	const _txnItems = transactionHistory.map((item, index) => {
 		const { hash, from, to, value, gasPrice, gasUsed, timestamp } = item;
-		if (typeof gasPrice !== "string") return <></>;
+		// if (typeof gasPrice !== "string") return <></>;
 		const gasFee = fromWei(gasPrice) * gasUsed * etherPrice;
+		const _prefix =
+			networkType === "Mainnet"
+				? "https://etherscan.io"
+				: `https://${networkType}.etherscan.io`;
+
 		return (
 			<div className="grid card" key={index}>
 				<div className="grid">
 					<h2>
-						<a
-							href={`https://etherscan.io/tx/${hash}`}
-							target="_blank"
-							rel="noreferrer"
-						>
+						<a href={`${_prefix}/tx/${hash}`} target="_blank" rel="noreferrer">
 							{shortener(hash)}
 						</a>
 					</h2>
@@ -29,7 +29,7 @@ const NormalTransaction = () => {
 				<div className="grid">
 					<h2>
 						<a
-							href={`https://etherscan.io/address/${from}`}
+							href={`${_prefix}/address/${from}`}
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -40,39 +40,33 @@ const NormalTransaction = () => {
 				<div className="grid">
 					<h2>
 						<a
-							href={`https://etherscan.io/address/${to}`}
+							href={
+								to !== "" ? `${_prefix}/address/${to}` : `${_prefix}/tx/${hash}`
+							}
 							target="_blank"
 							rel="noreferrer"
 						>
-							{shortener(to)}
+							{to !== "" ? shortener(to) : "Contract Creation"}
 						</a>
 					</h2>
 				</div>
 				<div className="grid">
 					<h2>
-						<a
-							href={`https://etherscan.io/tx/${hash}`}
-							target="_blank"
-							rel="noreferrer"
-						>
+						<a href={`${_prefix}/tx/${hash}`} target="_blank" rel="noreferrer">
 							{parseFloat(value).toFixed(3)} ETH
 						</a>
 					</h2>
 				</div>
 				<div className="grid">
 					<h2>
-						<a
-							href={`https://etherscan.io/tx/${hash}`}
-							target="_blank"
-							rel="noreferrer"
-						>
+						<a href={`${_prefix}/tx/${hash}`} target="_blank" rel="noreferrer">
 							${parseFloat(gasFee).toFixed(3)}
 						</a>
 					</h2>
 				</div>
 				<div className="grid">
 					<h2>
-						<a href={`https://etherscan.io/tx/${hash}`}>{timestamp}</a>
+						<a href={`${_prefix}/tx/${hash}`}>{timestamp}</a>
 					</h2>
 				</div>
 			</div>

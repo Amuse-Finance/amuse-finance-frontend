@@ -142,7 +142,9 @@ class Web3Provider extends Component {
 	};
 
 	// load blockchain data
-	loadBlockchainData = async ({ loading, web3, user } = this.state) => {
+	loadBlockchainData = async (
+		{ loading, web3, user, networkType } = this.state
+	) => {
 		if (loading || !web3) return;
 		try {
 			const amdPrice = 0.25;
@@ -155,14 +157,16 @@ class Web3Provider extends Component {
 			const _transactionHistory = await fixedDataArray(
 				(
 					await axios.get(
-						`https://amuse-finance-backend.herokuapp.com/api/v1/transactions?user=${user}`
+						`https://amuse-finance-backend.herokuapp.com/api/v1/transactions?network=${
+							networkType === "Mainnet" ? null : networkType
+						}&user=${user}`
 					)
 				).data
 			);
 			const _refferalHistory = await fixedDataArray(
 				await this.getRefferalHistory()
 			);
-			const _unstakeHistory = await this.getUstakedHistory();
+			const _unstakeHistory = await this.getUnstakedHistory();
 
 			this.setState({
 				amdPrice,
@@ -415,7 +419,7 @@ class Web3Provider extends Component {
 		}
 	};
 
-	getUstakedHistory = async (
+	getUnstakedHistory = async (
 		{ loading, web3, user, amuseVault } = this.state
 	) => {
 		try {
