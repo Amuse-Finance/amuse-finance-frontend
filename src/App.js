@@ -18,7 +18,7 @@ import Referral from "./pages/Referral";
 import RegisterReferral from "./pages/Referral/Register";
 import Contact from "./pages/Contact";
 import Presale from "./pages/Presale";
-import Account from "./pages/Account";
+// import Account from "./pages/Account";
 
 require("dotenv/config");
 
@@ -50,7 +50,7 @@ const App = () => {
 				<Route exact path="/referral" component={Referral} />
 				<Route exact path="/referral/create" component={RegisterReferral} />
 				<Route exact path="/presale" component={Presale} />
-				<Route exact path="/account" component={Account} />
+				{/* <Route exact path="/account" component={Account} /> */}
 			</Switch>
 			<ScrollTop />
 			<Footer />
