@@ -19,7 +19,6 @@ import {
 	getEthPrice,
 	getRefferalHistory,
 	getUstakedHistory,
-	postData,
 } from "../Helper";
 require("dotenv/config");
 
@@ -471,7 +470,13 @@ class Web3Provider extends Component {
 
 			const _url =
 				"https://amuse-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
-			const _result = await postData(_data, _url);
+
+			const _result = await axios({
+				method: "post",
+				url: _url,
+				data: _data,
+			});
+
 			if (!_result.data.receipt.status) {
 				return { error: "Please wait for 24hours to request another faucet" };
 			}
