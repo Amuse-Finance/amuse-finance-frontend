@@ -96,9 +96,7 @@ class Web3Provider extends Component {
 
 			if (parseInt(_chainId) !== 4) {
 				this.setState({ loading: true });
-				alert(
-					`Amuse: Invalid network detected. Please switch from ${_networkType} to Ethereum Rinkeby`
-				);
+				alert(`Amuse: Please switch to Ethereum Rinkeby`);
 				return;
 			}
 
