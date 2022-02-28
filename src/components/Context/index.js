@@ -14,12 +14,7 @@ import {
 	abi as amusedFaucetABI,
 	address as amuseFaucetAddress,
 } from "../../contracts/AmuseFaucet.json";
-import {
-	fixedDataArray,
-	getEthPrice,
-	getRefferalHistory,
-	getUstakedHistory,
-} from "../Helper";
+import { getEthPrice, getRefferalHistory, getUstakedHistory } from "../Helper";
 require("dotenv/config");
 
 const web3Context = createContext();
@@ -131,6 +126,8 @@ class Web3Provider extends Component {
 				amuseToken,
 				amuseVault,
 				amuseFaucet,
+				// BASE_URL: "https://amuse-finance-backend.herokuapp.com/api/v1"
+				BASE_URL: "http://localhost:8080/api/v1",
 			});
 		} catch (error) {
 			console.log(error);
@@ -151,18 +148,16 @@ class Web3Provider extends Component {
 			const balance = await this.balanceOf();
 			const stakes = await this.stakes(amdPrice, etherPrice);
 			const dailyCashback = await this.getDailyCashback();
-			const _transactionHistory = await fixedDataArray(
-				(
-					await axios.get(
-						`https://amuse-finance-backend.herokuapp.com/api/v1/transactions?network=${
-							networkType === "Mainnet" ? null : networkType
-						}&user=${user}`
-					)
-				).data
-			);
-			const _refferalHistory = await fixedDataArray(
-				await this.getRefferalHistory()
-			);
+
+			const _transactionHistory = (
+				await axios.get(
+					`${this.state.BASE_URL}/transactions?network=${
+						networkType === "Mainnet" ? null : networkType
+					}&user=${user}`
+				)
+			).data.splice(0, 10);
+
+			const _refferalHistory = (await this.getRefferalHistory()).splice(0, 10);
 			const _unstakeHistory = await this.getUnstakedHistory();
 
 			this.setState({
@@ -466,8 +461,7 @@ class Web3Provider extends Component {
 
 			const _data = { user, signature, chainId, amount };
 
-			const _url =
-				"https://amuse-finance-backend.herokuapp.com/api/v1/faucets/requestFaucet";
+			const _url = `${this.state.BASE_URL}/faucets/requestFaucet`;
 
 			const _result = await axios({
 				method: "post",
