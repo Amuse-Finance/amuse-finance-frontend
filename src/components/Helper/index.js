@@ -91,43 +91,30 @@ const fixedDataArray = async (_data) => {
 
 const getRefferalHistory = async (web3, user, amusedToken) => {
 	try {
-		const startBlock = await (
-			await axios.get(
-				"https://amuse-finance-backend.herokuapp.com/api/v1/startBlock"
-			)
-		).data;
-		const _endBlock = parseInt(await web3.eth.getBlockNumber());
-		let _tempData = [];
+		const _tempData = [
+			...(await amusedToken.getPastEvents("ReferralReward", {
+				filter: {
+					referrer: web3.utils.toChecksumAddress(user),
+				},
+				fromBlock: 0,
+				toBlock: "latest",
+			})),
+		];
 
-		for (let i = startBlock; i <= _endBlock; i = i + 10000) {
-			const _step = i + 10000;
-			const _result = await amusedToken.getPastEvents("ReferralReward", {
-				fromBlock: i,
-				toBlock: _step,
-			});
-			_tempData = [..._tempData, ..._result];
-		}
-		_tempData = _tempData.filter(
-			(item) =>
-				web3.utils.toChecksumAddress(item.returnValues.referrer) ===
-				web3.utils.toChecksumAddress(user)
-		);
-
-		_tempData = _tempData.map((item) => {
+		const _filteredData = _tempData.map((item) => {
 			const { blockNumber, returnValues, transactionHash: hash } = item;
 			const { user, referrer, purchased, reward, timestamp } = returnValues;
 			return {
 				user,
 				referrer,
 				blockNumber,
-				purchased: web3.utils.fromWei(purchased, "ether"),
-				reward: web3.utils.fromWei(reward, "ether"),
+				purchased: web3.utils.fromWei(purchased),
+				reward: web3.utils.fromWei(reward),
 				hash,
 				timestamp: moment(new Date(parseInt(timestamp * 1000))).fromNow(),
 			};
 		});
-		_tempData = _tempData.reverse();
-		return _tempData;
+		return _filteredData.reverse();
 	} catch (error) {
 		console.log(error);
 		return error.message;
