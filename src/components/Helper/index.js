@@ -9,18 +9,17 @@ const formatNumber = (_amount) =>
 		Number(_amount)
 	);
 
-const shortener = (_data) => {
-	if (_data === undefined) return;
-	const _splited = _data.split("");
-	const _length = _splited.length;
+const shortener = (_data = "") => {
+	_data = _data.split("");
+	const _step = 6;
+	let _shortenedAddress = [];
 
-	const firstPart = `${_splited[0]}${_splited[1]}${_splited[2]}${_splited[3]}${_splited[4]}${_splited[5]}${_splited[6]}`;
-	const secondPart = `${_splited[_length - 7]}${_splited[_length - 6]}${
-		_splited[_length - 5]
-	}${_splited[_length - 4]}${_splited[_length - 3]}${_splited[_length - 2]}${
-		_splited[_length - 1]
-	}`;
-	return `${firstPart}...${secondPart}`;
+	for (let i = 0; i < _step; i++)
+		_shortenedAddress = [..._shortenedAddress, _data[i]];
+	_shortenedAddress = [..._shortenedAddress, "..."];
+	for (let i = _data.length - _step; i < _data.length; i++)
+		_shortenedAddress = [..._shortenedAddress, _data[i]];
+	return _shortenedAddress.join("");
 };
 
 const getPath = (_networkType) => {
