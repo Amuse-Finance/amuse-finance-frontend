@@ -27,6 +27,7 @@ const getPath = (_networkType) => {
 		_networkType === "Mainnet"
 			? `https://etherscan.io`
 			: `https://${_networkType}.etherscan.io`;
+
 	return path;
 };
 
