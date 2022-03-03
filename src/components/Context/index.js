@@ -126,8 +126,8 @@ class Web3Provider extends Component {
 				amuseToken,
 				amuseVault,
 				amuseFaucet,
-				// BASE_URL: "https://amuse-finance-backend.herokuapp.com/api/v1"
-				BASE_URL: "http://localhost:8080/api/v1",
+				BASE_URL: "https://amuse-finance-backend.herokuapp.com/api/v1",
+				// BASE_URL: "http://localhost:8080/api/v1",
 			});
 		} catch (error) {
 			console.log(error);
@@ -159,6 +159,7 @@ class Web3Provider extends Component {
 
 			const _refferalHistory = (await this.getRefferalHistory()).splice(0, 10);
 			const _unstakeHistory = await this.getUnstakedHistory();
+			const _faucetHistory = await this.getFaucetHistory();
 
 			this.setState({
 				amdPrice,
@@ -170,6 +171,7 @@ class Web3Provider extends Component {
 				transactionHistory: _transactionHistory,
 				referralHistory: _refferalHistory,
 				unstakeHistory: _unstakeHistory,
+				faucetHistory: _faucetHistory,
 			});
 		} catch (error) {
 			console.log(error);
@@ -177,19 +179,7 @@ class Web3Provider extends Component {
 		}
 	};
 
-	reRender = async () => await this.loadBlockchainData();
-
-	updateAccount = async (_newAddress) => {
-		try {
-			this.setState({ user: this.toChecksumAddress(_newAddress) });
-			await this.reRender();
-		} catch (error) {
-			return error;
-		}
-	};
-
-	closeModal = () => this.setState({ modalState: false });
-
+	// HELPERS FUNCTIONS
 	fromWei = (_amount, { web3 } = this.state) =>
 		web3.utils.fromWei(_amount, "ether");
 
@@ -199,20 +189,93 @@ class Web3Provider extends Component {
 	toChecksumAddress = (_account, { web3 } = this.state) =>
 		web3.utils.toChecksumAddress(_account);
 
+	closeModal = () => this.setState({ modalState: false });
+
+	reRender = async () => await this.loadBlockchainData();
+
+	updateAccount = async (_newAddress) => {
+		this.setState({ user: this.toChecksumAddress(_newAddress) });
+		await this.reRender();
+	};
+
+	addAmdToMetamask = async (e, { amuseTokenAddress } = this.state) => {
+		e.preventDefault();
+
+		try {
+			// wasAdded is a boolean. Like any RPC method, an error may be thrown.
+			const wasAdded = await this.state.ethereum.request({
+				method: "wallet_watchAsset",
+				params: {
+					type: "ERC20", // Initially only supports ERC20, but eventually more!
+					options: {
+						address: amuseTokenAddress, // The address that the token is at.
+						symbol: "AMD", // A ticker symbol or shorthand, up to 5 chars.
+						decimals: 18, // The number of decimals in the token
+						// image: "", // A string url of the token logo
+					},
+				},
+			});
+
+			if (wasAdded) console.log("Thanks for your interest!");
+			else console.log("Your loss!");
+		} catch (error) {
+			console.log(error);
+			return error;
+		}
+	};
+
+	parseErrorMessage = (_error) => {
+		try {
+			const _unparsed =
+				"while converting number to string, invalid number value '', should be a number matching (^-?[0-9.]+).";
+			const _errArr = _error.message.split(":");
+			const _errorMessage = _errArr[_errArr.length - 1].split(`"`)[0];
+			if (_errorMessage === _unparsed) return `Unable to parse arguments`;
+			return _errorMessage;
+		} catch (error) {
+			return error;
+		}
+	};
+
 	balanceOf = async (_account, { loading, user, amuseToken } = this.state) => {
 		try {
 			if (loading) return;
-			const _balance = await amuseToken.methods
-				.balanceOf(_account ? _account : user)
-				.call();
-			return this.fromWei(_balance);
+			return this.fromWei(await amuseToken.methods.balanceOf(user).call());
 		} catch (error) {
 			return error.message;
 		}
 	};
 
-	cashbackPercentage = async ({ loading, amuseToken } = this.state) =>
-		!loading && (await amuseToken.methods.cashbackPercentage().call());
+	allowance = async (
+		{ loading, user, amuseTokenAddress, amuseToken } = this.state
+	) => {
+		try {
+			if (loading) return;
+			return this.fromWei(
+				await amuseToken.methods.allowance(user, amuseTokenAddress).call()
+			);
+		} catch (error) {
+			return error;
+		}
+	};
+
+	approve = async (
+		_amount,
+		{ loading, user, amuseVaultAddress, amuseToken } = this.state
+	) => {
+		try {
+			if (loading || _amount < 0) return;
+			const _receipt = await amuseToken.methods
+				.approve(amuseVaultAddress, this.toWei(_amount))
+				.send({
+					from: user,
+				});
+			await this.reRender();
+			return _receipt;
+		} catch (error) {
+			return { status: false, data: this.parseErrorMessage(error) };
+		}
+	};
 
 	stakes = async (
 		amdPrice,
@@ -233,44 +296,6 @@ class Web3Provider extends Component {
 			return { user, stakes, timestamp, ...stakesRewads };
 		} catch (error) {
 			console.log(error);
-			return error;
-		}
-	};
-
-	allowance = async (
-		{ loading, user, amuseTokenAddress, amuseToken } = this.state
-	) => {
-		try {
-			if (loading) return;
-			const _allowance = await amuseToken.methods
-				.allowance(user, amuseTokenAddress)
-				.call();
-			return this.fromWei(_allowance);
-		} catch (error) {
-			return error;
-		}
-	};
-
-	parseErrorMessage = (_error) => {
-		try {
-			const _unparsed =
-				"while converting number to string, invalid number value '', should be a number matching (^-?[0-9.]+).";
-			const _errArr = _error.message.split(":");
-			const _errorMessage = _errArr[_errArr.length - 1].split(`"`)[0];
-			if (_errorMessage === _unparsed) return `Unable to parse arguments`;
-			return _errorMessage;
-		} catch (error) {
-			return error;
-		}
-	};
-
-	getDailyCashback = async ({ user, amuseToken } = this.state) => {
-		try {
-			const _dailyCashback = await amuseToken.methods
-				.calculateDailyCashback(user)
-				.call();
-			return this.fromWei(_dailyCashback);
-		} catch (error) {
 			return error;
 		}
 	};
@@ -304,43 +329,22 @@ class Web3Provider extends Component {
 		}
 	};
 
-	approve = async (
-		_amount,
-		{ loading, web3, user, amuseVaultAddress, amuseToken } = this.state
-	) => {
+	stake = async (_amount, { loading, user, amuseVault } = this.state) => {
 		try {
 			if (loading || _amount < 0) return;
-			// const gasPrice = await web3.eth.getGasPrice();
 			const _formattedStakeAmount = this.toWei(_amount);
-			const _response = await amuseToken.methods
-				.approve(amuseVaultAddress, _formattedStakeAmount)
-				.send({
-					from: user,
-					// gasPrice,
-				});
-			await this.reRender();
-			return { ..._response };
-		} catch (error) {
-			return { status: false, data: this.parseErrorMessage(error) };
-		}
-	};
 
-	stake = async (_amount, { loading, web3, user, amuseVault } = this.state) => {
-		try {
-			if (loading || _amount < 0) return;
-			// const gasPrice = await web3.eth.getGasPrice();
-			const _formattedStakeAmount = this.toWei(_amount);
 			await amuseVault.methods
 				.stake(_formattedStakeAmount)
 				.call({ from: user });
-			const _response = await amuseVault.methods
+
+			const _receipt = await amuseVault.methods
 				.stake(_formattedStakeAmount)
 				.send({
 					from: user,
-					// gasPrice,
 				});
 			await this.reRender();
-			return { ..._response };
+			return _receipt;
 		} catch (error) {
 			return {
 				status: false,
@@ -352,21 +356,44 @@ class Web3Provider extends Component {
 	unstake = async (_amount, { loading, user, amuseVault } = this.state) => {
 		try {
 			if (loading) return;
-			await amuseVault.methods
-				.unstake(this.toWei(_amount))
-				.call({ from: user });
-			const _response = await amuseVault.methods
-				.unstake(this.toWei(_amount))
-				.send({
-					from: user,
-				});
+			const _formattedAmount = this.toWei(_amount);
+			await amuseVault.methods.unstake(_formattedAmount).call({ from: user });
+			const _receipt = await amuseVault.methods.unstake(_formattedAmount).send({
+				from: user,
+			});
 			await this.reRender();
-			return { ..._response };
+			return _receipt;
 		} catch (error) {
 			return {
 				status: false,
 				data: this.parseErrorMessage(error),
 			};
+		}
+	};
+
+	getUnstakedHistory = async (
+		{ loading, web3, user, amuseVault } = this.state
+	) => {
+		try {
+			if (loading) return;
+			const _result = await getUstakedHistory(web3, user, amuseVault);
+			return _result;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	cashbackPercentage = async ({ loading, amuseToken } = this.state) =>
+		!loading && (await amuseToken.methods.cashbackPercentage().call());
+
+	getDailyCashback = async ({ user, amuseToken } = this.state) => {
+		try {
+			const _dailyCashback = await amuseToken.methods
+				.calculateDailyCashback(user)
+				.call();
+			return this.fromWei(_dailyCashback);
+		} catch (error) {
+			return error;
 		}
 	};
 
@@ -411,13 +438,24 @@ class Web3Provider extends Component {
 		}
 	};
 
-	getUnstakedHistory = async (
-		{ loading, web3, user, amuseVault } = this.state
+	generateReferralLink = async (
+		{ loading, user, INIT_REFERRAL_HASH } = this.state
 	) => {
+		if (loading) return;
 		try {
-			if (loading) return;
-			const _result = await getUstakedHistory(web3, user, amuseVault);
+			const referralID = AES.encrypt(user, INIT_REFERRAL_HASH).toString();
+			const _result = referralID.replaceAll("=", "");
 			return _result;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	decryptReferrerHash = (_data, { INIT_REFERRAL_HASH } = this.state) => {
+		try {
+			const _result = AES.decrypt(_data, INIT_REFERRAL_HASH);
+			const _referrer = _result.toString(enc.Utf8);
+			return _referrer;
 		} catch (error) {
 			return error;
 		}
@@ -479,25 +517,33 @@ class Web3Provider extends Component {
 		}
 	};
 
-	generateReferralLink = async (
-		{ loading, user, INIT_REFERRAL_HASH } = this.state
-	) => {
-		if (loading) return;
+	getFaucetHistory = async ({ web3, amuseFaucet } = this.state) => {
 		try {
-			const referralID = AES.encrypt(user, INIT_REFERRAL_HASH).toString();
-			const _result = referralID.replaceAll("=", "");
-			return _result;
-		} catch (error) {
-			return error;
-		}
-	};
+			let _faucetHistory = [];
+			const _endBlock = parseInt(await web3.eth.getBlockNumber());
+			const _step = 5_000_000;
 
-	decryptReferrerHash = (_data, { INIT_REFERRAL_HASH } = this.state) => {
-		try {
-			const _result = AES.decrypt(_data, INIT_REFERRAL_HASH);
-			const _referrer = _result.toString(enc.Utf8);
-			return _referrer;
+			for (let i = 0; i <= _endBlock; i = i + _step) {
+				const _result = await amuseFaucet.getPastEvents("Faucet", {
+					fromBlock: 0,
+					toBlock: i + _step,
+				});
+
+				const _filteredEvents = _result.map((item) => {
+					const { returnValues, transactionHash: hash } = item;
+					const { account, amount } = returnValues;
+					return {
+						hash,
+						account,
+						amount: this.fromWei(amount),
+					};
+				});
+				_faucetHistory = [..._faucetHistory, ...(await _filteredEvents)];
+			}
+
+			return _faucetHistory.reverse();
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};
@@ -507,18 +553,24 @@ class Web3Provider extends Component {
 			<web3Context.Provider
 				value={{
 					...this.state,
-					closeModal: this.closeModal,
-					fromWei: this.fromWei,
-					toWei: this.toWei,
 					connectDapp: this.connectDapp,
+					closeModal: this.closeModal,
 					reRender: this.reRender,
 					updateAccount: this.updateAccount,
+					addAmdToMetamask: this.addAmdToMetamask,
+
+					fromWei: this.fromWei,
+					toWei: this.toWei,
+
 					allowance: this.allowance,
 					approve: this.approve,
+
 					stake: this.stake,
 					unstake: this.unstake,
+
 					registerReferrer: this.registerReferrer,
 					requestFaucet: this.requestFaucet,
+
 					generateReferralLink: this.generateReferralLink,
 					decryptReferrerHash: this.decryptReferrerHash,
 				}}
