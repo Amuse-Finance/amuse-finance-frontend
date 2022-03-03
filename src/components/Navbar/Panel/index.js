@@ -9,7 +9,7 @@ import { PanelWrapper } from "./styles";
 
 const Panel = () => {
 	const [isCopied, setCopied] = useState(false);
-	const { user, networkType } = useContext(web3Context);
+	const { user, networkType, addAmdToMetamask } = useContext(web3Context);
 
 	return reactDom.createPortal(
 		<PanelWrapper className="grid">
@@ -70,6 +70,11 @@ const Panel = () => {
 				<div className="grid list-item">
 					<h3 className="grid">
 						<Link to="/contact">Get Support</Link>
+					</h3>
+				</div>
+				<div className="grid list-item">
+					<h3 className="grid" onClick={addAmdToMetamask}>
+						Add AMD to Metamask
 					</h3>
 				</div>
 			</div>

@@ -113,8 +113,7 @@ export const PanelWrapper = styled.div`
 
 		.list-item {
 			text-align: left;
-			/* color: va; */
-			width: 94%;
+			width: 100%;
 			padding: 0.5em;
 			border-radius: inherit;
 			transition: all 1s ease-in-out;
@@ -128,6 +127,7 @@ export const PanelWrapper = styled.div`
 
 			h3 {
 				width: 100%;
+				place-items: start;
 			}
 		}
 	}

@@ -20,19 +20,19 @@ export const NavbarContainer = styled.div`
 	.nav-brand {
 		grid-column: 1/3;
 		grid-template-columns: repeat(3, 1fr);
-		width: 100%;
 		height: 100%;
 		letter-spacing: var(--mainSpacing);
 		align-items: center;
 
 		.logo {
 			width: 100%;
-			grid-column: 1/2;
+			grid-column: 1;
 			place-items: center;
 
 			img {
 				width: 50px;
 				height: 50px;
+				border-radius: 100%;
 			}
 		}
 
@@ -41,7 +41,8 @@ export const NavbarContainer = styled.div`
 			width: 100%;
 			height: 100%;
 			align-items: center;
-			font-size: 2.5em;
+			font-size: 2.1em;
+			margin-left: 5px;
 		}
 	}
 
@@ -103,6 +104,10 @@ export const NavbarContainer = styled.div`
 				margin-left: 0;
 				padding: 0.5em 0;
 				grid-gap: 0 0.75em;
+
+				.brand-name {
+					margin-left: 0;
+				}
 			}
 
 			.nav-list,

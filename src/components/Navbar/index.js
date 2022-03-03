@@ -18,7 +18,7 @@ const Navbar = ({ theme }) => {
 		if (!panelState) return;
 		setTimeout(() => {
 			setPanelState(() => !panelState);
-		}, 5000);
+		}, 7_000);
 	}, [panelState]);
 
 	let pages = [];
@@ -46,7 +46,7 @@ const Navbar = ({ theme }) => {
 		];
 	}
 
-	const Navlist = pages.map((item, i) => {
+	const NavList = pages.map((item, i) => {
 		const { name, path } = item;
 		return (
 			<NavLink
@@ -65,7 +65,7 @@ const Navbar = ({ theme }) => {
 			<div className="grid nav-brand">
 				<div className="grid logo">
 					<Link to="/">
-						<img src={amuseLogo} alt="Amuse.Finance" />
+						<img src={amuseLogo} alt="Amuse Finance" />
 					</Link>
 				</div>
 				<div className="grid brand-name">
@@ -77,7 +77,7 @@ const Navbar = ({ theme }) => {
 			<div
 				className={navOpen ? "grid nav-list nav-list-mobile" : "grid nav-list"}
 			>
-				<ul>{Navlist}</ul>
+				<ul>{NavList}</ul>
 			</div>
 			<div
 				className="grid nav-icons"
