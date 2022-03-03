@@ -2,13 +2,19 @@ import styled from "styled-components";
 import background from "../../assets/background.jpeg";
 
 export const FaucetContainer = styled.div`
+	grid-template-columns: repeat(3, 1fr);
 	background: url(${background}) center/cover no-repeat;
-	width: 100vw;
+	/* width: 100vw; */
+	padding: 4em;
+	grid-gap: 4em;
+	place-items: center;
 
 	.wrapper {
-		width: 70%;
+		grid-column: 1/2;
+		width: 100%;
+		max-height: 400px;
 		grid-gap: 2em 4em;
-		padding: 4rem 0;
+		/* padding: 4rem 0; */
 
 		h2 {
 			font-size: 1.5em;
@@ -17,7 +23,7 @@ export const FaucetContainer = styled.div`
 		}
 
 		form {
-			width: 50%;
+			width: 100%;
 			background: var(--white);
 			color: var(--mainBlue);
 			place-items: center;
@@ -52,6 +58,12 @@ export const FaucetContainer = styled.div`
 				}
 			}
 		}
+	}
+
+	.claimed-faucets {
+		grid-column: 2/4;
+		width: 100%;
+		height: 100%;
 	}
 
 	@media (max-width: 1023px) {

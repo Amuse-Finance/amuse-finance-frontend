@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { web3Context } from "../../components/Context";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import Error from "../../components/Error";
+import FaucetHistory from "./FaucetHistory";
 import { FaucetContainer } from "./styles";
 
 const Faucet = () => {
 	const [faucetAmount, setFaucetAmount] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
-	const { user, requestFaucet } = useContext(web3Context);
+	const { user, networkType, requestFaucet, faucetHistory } =
+		useContext(web3Context);
 
 	useEffect(() => {
 		if (errorMessage.length > 0)
@@ -50,6 +52,13 @@ const Faucet = () => {
 					<button type="submit">Request</button>
 					{errorMessage.length > 0 && <Error error={errorMessage} />}
 				</form>
+			</div>
+			<div className="grid claimed-faucets">
+				<FaucetHistory
+					className="grid"
+					networkType={networkType}
+					faucetHistory={faucetHistory}
+				/>
 			</div>
 		</FaucetContainer>
 	);
