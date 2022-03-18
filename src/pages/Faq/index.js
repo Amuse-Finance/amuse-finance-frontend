@@ -47,7 +47,7 @@ function Faq() {
 				<div className="w-full sm:w-1/2 mx-auto text-center p-8 md:p-12 text-white">
 					<h4 className="text-xl mb-5 font-normal">Get In Touch</h4>
 					<h2 className="font-bold text-xl md:text-3xl mb-8 leading-tight text-gray-50 opacity-">
-						If You Have A Question Which Is Not Written Here, Kindly Contact Us.
+						If You Have A Question Which Is Not Listed Here, Kindly Contact Us.
 					</h2>
 					<Link to="/contact">
 						<CustomButton styles="shadow bg-gradient-to-r from-blue-600 to-green-500 p-5 text-white rounded">
